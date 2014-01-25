@@ -1,0 +1,31 @@
+<div class="menu-cont">
+	<div class="menu" style="width: 144px;">
+		
+		
+	{%for object in objects%}
+		{%if object.title|upper != 'SPACER'%}
+			<div class="menu-element">
+				<a href="{{path('proyecto_front_page',{'id': object.id, 'friendlyname' : object.friendlyName})}}">{{object.title|upper}}</a>
+				{%if idpage == object.id%}
+					<hr class="men-sel" style="background-color: {{theme}}">
+				{%endif%}
+			</div>
+		{%else%}
+			<div class="menu-element spacer"></div>
+		{%endif%}
+	{%endfor%}
+		
+		
+	
+		<div class="designed-menu">
+			<div class="designed" style="bottom: 0px;">
+				<div>
+					<span class="copyrighted">Copyrights © La Victoria</span>
+				</div>
+				<div>
+					<p><a href="http://realego.es/" target="_blank"><img src="{{asset('design.png')}}"></a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

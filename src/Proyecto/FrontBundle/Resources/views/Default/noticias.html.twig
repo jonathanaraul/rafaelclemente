@@ -1,0 +1,50 @@
+{%if articles is not null%}
+	{%for element in articles %}
+		<tr class="articulos borrar">
+			<td width="20%" valign="top" class="imagen-ocultar">
+				<a href="{{ path('proyecto_front_article', {'id': element.id}) }}">
+					<img alt="" src="{%if  images[loop.index0] is not null%}{{ images[loop.index0].getWebPath | apply_filter('my_thumb') }}{%endif%}">
+				</a>
+			</td>
+			<td width="20%" valign="top" class="noticias-ocultar"><b>{{element.getDateCreated.format('Y-m-d')}}</b></td>
+			<td width="60%"  valign="top" class="noticias-columna">
+					<div class="titulo-listado">
+							<b>{{element.name}}</b> 
+					</div>
+					<div class="noticias-mostrar">
+						<b>{{element.getDateCreated.format('Y-m-d')}}</b>
+					</div>
+					<div class="contenido-listado">
+						<a href="{{ path('proyecto_front_article', {'id': element.id}) }}">
+							<img class="imagen-mostrar" alt="" src="{%if  images[loop.index0] is not null%}{{ images[loop.index0].getWebPath | apply_filter('my_thumb') }}{%endif%}" align="left" style="padding-right: 8px;">
+						</a>
+							{{element.content|raw}}
+					</div> 	
+					<div>
+						<div class="boton-listado" style="width: 70px;">
+								<a href="{{ path('proyecto_front_article', {'id': element.id}) }}">{% trans %}Leer más{% endtrans %}</a>
+						</div>
+					</div>
+			</td>
+		</tr>
+	{%endfor%}
+	<tr class="paginacion borrar">
+		<td colspan="3">
+			<div style="float: left;width: 30%">
+			{%if izquierda !=0%}
+			<p style="text-align: right;"><img src="{{asset('izquierda.png')}}" style="cursor: pointer;" class="pagina-noticias" id="izquierda" valor="{{izquierda}}"></p>
+			{%endif%}
+			</div>
+			<div style="float: left;width: 70%">
+				{%if derecha !=0%}
+			<p style="text-align: right;"><img src="{{asset('derecha.png')}}" style="cursor: pointer;" class="pagina-noticias" id="derecha" valor="{{derecha}}" ></p>
+			{%endif%}
+			</div>	
+		</td>
+	</tr>
+	<tr id="fila-loader">
+		<td colspan="3" style="height: 350px;width:563px;display: none" id="loader">
+			<p style="text-align: center;"><img src="{{asset('loader.gif')}}" class="imagen-loader"></p>
+		</td>
+	</tr>
+{%endif%}

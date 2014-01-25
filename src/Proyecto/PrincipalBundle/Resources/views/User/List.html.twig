@@ -1,0 +1,31 @@
+{% extends "ProyectoPrincipalBundle:Helpers:baseInterna.html.twig" %}
+
+{%block contents%}
+
+ <td id="contents" style="height: 452px;"><!-- whole contents -->
+<table cellpadding="0" cellspacing="0" class="mytable">
+	<tbody>
+		<tr>
+			<th colspan="2">{% trans %}Informacion{% endtrans %}</th>
+		</tr>
+		<tr>
+			<td>ID:</td>
+			<td>{{user.id}}</td>
+		</tr>
+		<tr>
+			<td colspan="2" class="form_line"><div class="linebg"></div></td>
+		</tr>
+		<tr>
+			<td>{% trans %}Usuario{% endtrans %}:</td>
+			<td>{{user.username|title}}</td>
+		</tr>
+		<tr>
+			<td colspan="2" class="form_line"><div class="linebg"></div></td>
+		</tr>
+		<tr>
+			<td>{% trans %}Correo Electrónico{% endtrans %}:</td>
+			<td>{{user.email|title}}</td>
+		</tr>
+	</tbody>
+</table><!-- end whole contents --></td>
+{%endblock%}

@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0047)http://www.lavictoriacultural.com/admin.php/es/ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="title" content="Panel de Administración RELAEGO.ES">
+		<meta name="robots" content="NOINDEX, NOFOLLOW">
+		<meta name="description" content="panel administracyjny">
+		<meta name="keywords" content="panel administracyjny">
+		<title>Panel de Administración REALEGO.ES </title>
+		<link rel="shortcut icon" href="{{ asset('favicon2.ico') }}">
+		<!--<script type="text/javascript" src="{{ asset('js/jquery-1.10.2.js') }}"></script>-->
+		<script type="text/javascript" src="{{ asset('js/jquery-1.7.2.min.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('js/jquery-ui-1.8.20.custom.min.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('js/lightbox.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('js/cms_function.js') }}"></script>
+		{%block js%}
+		{%endblock%}
+		<link rel="stylesheet" type="text/css" media="screen" href="{{ asset('css/lightbox.css') }}">
+		<link rel="stylesheet" type="text/css" media="screen" href="{{ asset('css/admin_new.css') }}">
+	</head>
+	<body >
+		<div id="purpleTop"></div>
+		<table id="wholepage" cellspacing="0" cellpadding="0">
+			<tbody>
+				<tr class="purplebg">
+					<td id="left_login">&nbsp;</td>
+					<!-- login menu -->
+					<td id="inside_login"> {%block inside_login%}
+					{%endblock%} </td>
+					<!-- end login menu -->
+					<td id="right_login">&nbsp;</td>
+				</tr>
+				<tr>
+					<td id="space_between_menus" colspan="3"></td>
+				</tr>
+				<!-- menu -->
+				<tr>
+					<td id="left_menu">&nbsp;</td>
+					<td id="inside_menu">{%block inside_menu%}{%endblock%} </td>
+					<td id="right_menu">&nbsp;</td>
+				</tr>
+				<!-- end menu -->
+				<tr>
+					<td colspan="3" id="menu_space">&nbsp;</td>
+				</tr>
+				<tr>
+					<td id="left_bg">&nbsp;</td>
+					<td id="inside_bg">
+					<table id="middle" cellspacing="0" cellpadding="0">
+						<tbody>
+							<tr>
+								<td id="logo" style="width: 92px;text-align: center;"><a target="_blank" href="http://www.realego.es/">Realego ES<!--<img src="./Talento CMS panel administracyjny_files/cms_yeslogo_logo.jpg" alt="Cms_yeslogo_logo">--></a></td>
+								{%block contents%}
+								{%endblock%}
+							</tr>
+						</tbody>
+					</table></td>
+					<td id="right_bg">&nbsp;</td>
+				</tr>
+			</tbody>
+		</table>
+		<script type="text/javascript">
+			<!--
+
+			var r = (screen.width / screen.height);
+			var v = document.body.clientHeight;
+			var c = screen.height;
+			var d = window.innerHeight;
+			var f = document.documentElement.clientHeight;
+
+			//alert('screan width/height:'+r);
+			//alert(' document.body.clientHeight:'+v);
+			//alert('screen.height:'+c);
+			//alert('window.innerHeight:'+d);
+			//alert('document.documentElement.clientHeight:'+f);
+
+			//var contents = document.getElementById("contents").offsetHeight;
+
+			var roznica = f - v - 24 - 48 - 85 - 15;
+			var cala = roznica + v;
+			var calapx = cala + 'px';
+
+			if(v < f) {
+
+				document.getElementById("contents").style.height = calapx;
+			}
+
+			var $jQ = jQuery.noConflict();
+
+			$jQ(document).ready(function() {
+				$jQ('#big_font').click(function() {
+					$jQ('body').addClass('big');
+				});
+
+				$jQ('#small_font').click(function() {
+					$jQ('body').removeClass('big');
+				});
+			});
+			//-->
+		</script>
+	</body>
+</html>

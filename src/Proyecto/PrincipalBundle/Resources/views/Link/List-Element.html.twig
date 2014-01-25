@@ -1,0 +1,38 @@
+<tr class="sf_admin_row_{%if loop.index %2 ==0%}0{%else%}1{%endif%}">
+	<td>{{object.id}}</td>
+	<td>{{object.name|title}}</td>
+	<td>{{object.www}}</td>
+	<td> {%if object.newWindow== 1%} 
+		<img src="{{asset('sf/sf_admin/images/tick.png')}}" alt="Tick" style="display: block"> 
+		<img src="{{asset('sf/sf_admin/images/close.png')}}" alt="Close" style="display: none"> 
+		{%else%} 
+		<img src="{{asset('sf/sf_admin/images/tick.png')}}" alt="Tick" style="display: none"> 
+		<img src="{{asset('sf/sf_admin/images/close.png')}}" alt="Close" style="display: block"> 
+		{%endif%} 
+		<span id="contact-formid_34" class="change_target article" clave="{{object.id}}" style="cursor: pointer">
+			<img alt="" src="{{asset('images/refresh.png')}}" width="15">
+		</span>
+	</td>
+	<td> {%if object.published== 1%} 
+		<img src="{{asset('sf/sf_admin/images/tick.png')}}" alt="Tick" style="display: block"> 
+		<img src="{{asset('sf/sf_admin/images/close.png')}}" alt="Close" style="display: none"> 
+		{%else%} 
+		<img src="{{asset('sf/sf_admin/images/tick.png')}}" alt="Tick" style="display: none"> 
+		<img src="{{asset('sf/sf_admin/images/close.png')}}" alt="Close" style="display: block"> 
+		{%endif%} 
+		<span id="contact-formid_34" class="change_published article" clave="{{object.id}}" style="cursor: pointer">
+			<img alt="" src="{{asset('images/refresh.png')}}" width="15">
+		</span>
+	</td>
+	<td>
+	
+	<ul class="sf_admin_td_actions" clave="{{object.id}}">
+		<li class="editar" style="cursor: pointer" onclick="document.location.href='{{ path('proyecto_principal_link_edit', {'id': object.id}) }}';">
+			{% trans %}Editar{% endtrans %}</br></br>
+		</li>
+		<li class="eliminar" style="cursor: pointer">
+			{% trans %}Eliminar{% endtrans %}</br></br>
+		</li>
+
+	</ul></td>
+</tr>

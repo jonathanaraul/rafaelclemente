@@ -1,0 +1,31 @@
+{% extends "ProyectoFrontBundle:Helpers:base.html.twig" %}
+{%block body%}
+<body style="">
+	{% include 'ProyectoFrontBundle:Helpers:social.html.twig' %}
+	<div class="main-tab">
+		<div class="main-row" style="height: 500px;">
+			<div class="cell-left"></div>
+			<div class="cell-middle cell-main">
+				<div class="middle-tab">
+					{% include 'ProyectoFrontBundle:Helpers:lenguajes.html.twig' %}
+					<div class="middle-row">
+						<div class="middle-left">
+							<div class="logo">
+								<a title="Home page" href="{{path('proyecto_front_homepage')}}"> </a>
+							</div>
+							{{ render(controller('ProyectoFrontBundle:Helpers:menu', { 'idpage': idpage,'theme': theme.color })) }}
+						</div>
+						{%block contenido%}
+						{%endblock%}
+					</div>
+				</div>
+			</div>
+				{%block celda%}
+				{%endblock%}
+		</div>
+	</div>
+	<div id="culture">
+		es
+	</div>
+</body>
+{%endblock%}

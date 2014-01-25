@@ -1,0 +1,23 @@
+<tr class="sf_admin_row_{%if loop.index %2 ==0%}0{%else%}1{%endif%}">
+	<td>{{object.id}}</td>
+	<td>{{object.article|title}}</td>
+	<td>{{object.name|title}}</td>
+	<td>{{object.phone|title}}</td>
+	<td>{{object.email|title}}</td>
+	<td>{{object.date}}</td>
+	<td>{{object.rdate}}</td>
+
+	<td> 
+		{%if object.checked	== 1%} 
+			<img src="{{asset('sf/sf_admin/images/tick.png')}}" alt="Tick" style="display: block">
+			<img src="{{asset('sf/sf_admin/images/close.png')}}" alt="Close" style="display: none"> 
+		{%else%} 
+			<img src="{{asset('sf/sf_admin/images/tick.png')}}" alt="Tick" style="display: none">
+			<img src="{{asset('sf/sf_admin/images/close.png')}}" alt="Close" style="display: block"> 
+		{%endif%} 
+		<span id="contact-formid_34" class="change_checked page" clave="{{object.id}}" style="cursor: pointer"> 
+			<img alt="" src="{{asset('images/refresh.png')}}"> 
+		</span>
+	</td>
+	
+</tr>

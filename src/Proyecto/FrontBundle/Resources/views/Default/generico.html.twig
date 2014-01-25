@@ -1,0 +1,56 @@
+{%if articles is not null%}
+	{%for element in articles %}
+		<tr class="articulos borrar">
+			<td width="20%" valign="top" class="imagen-ocultar">
+				<a href="{{ path('proyecto_front_article', {'id': element.article.id}) }}">
+					<img alt="" src="{%if  images[loop.index0] is not null%}{{ images[loop.index0].getWebPath | apply_filter('my_thumb') }}{%endif%}">
+				</a>
+			</td>
+			<td width="20%" valign="top" class="noticias-ocultar" style="text-align: center;"><b>{{element.getDate.format('H:i')}}</b></td>
+			<td width="60%"  valign="top" class="noticias-columna">
+					<div class="titulo-listado">
+							<b>{{element.article.name}}</b>
+					</div>
+					<div class="noticias-mostrar">
+						<b>{{element.getDate.format('H:i')}}</b>
+					</div>
+					<div class="contenido-listado">
+						<a href="{{ path('proyecto_front_article', {'id': element.article.id}) }}">
+							<img class="imagen-mostrar" alt="" src="{%if  images[loop.index0] is not null%}{{ images[loop.index0].getWebPath | apply_filter('my_thumb') }}{%endif%}" align="left" style="padding-right: 8px;">
+						</a>
+							{{element.article.content|raw}}
+					</div> 	
+					<div class="atributos-listado">
+							<b>{{element.article.gender}}</b>
+					</div> 
+					<div>
+						<div style="width: 70%;float: left;">
+							<div class="boton-listado boton-reservaciones">
+								<a href="{{ path('proyecto_front_reservation', {'id': element.article.id}) }}">{% trans %}Reserva ahora{% endtrans %}</a>
+							</div>
+						</div>
+						<div style="width: 30%;float: left;">
+							<div class="boton-listado" style="width: 70px;">
+								<a href="{{ path('proyecto_front_article', {'id': element.article.id}) }}">{% trans %}Leer más{% endtrans %}</a>
+							</div>
+						</div>
+
+						
+
+					</div>
+			</td>
+		</tr>
+	{%endfor%}
+	<tr id="fila-loader">
+		<td colspan="3" style="height: 350px;width:563px;display: none" id="loader">
+			<p style="text-align: center;"><img src="{{asset('loader.gif')}}" ></p>
+		</td>
+	</tr>
+	{%if articles|length <1%}
+	<tr id="fila-sin resultados" class="borrar">
+		<td colspan="3" style="height: 350px;width:563px;" >
+			<p style="text-align: center;"><img src="{{asset('sin-resultados.png')}}" class="imagen-loader"></p>
+		</td>
+	</tr>
+	{%endif%}
+{%endif%}

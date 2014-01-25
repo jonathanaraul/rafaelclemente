@@ -1,0 +1,57 @@
+{% extends "ProyectoPrincipalBundle:Helpers:baseInterna.html.twig" %}
+
+{%block contents%} 
+
+<td id="contents" style="height: 495px;"><!-- whole contents -->
+<form action="{{ url }}" method="post" {{ form_enctype(form) }}>
+	<table cellpadding="0" cellspacing="0" class="mytable">
+		<tbody>
+			<tr>
+				<th colspan="2">{%if accion=='registro'%}{% trans %}Nueva Cuenta{% endtrans %}{%else%}{% trans %}Editar Perfil{% endtrans %}{%endif%}</th>
+			</tr>
+			<tr>
+				<td>{% trans %}Nombre de Usuario{% endtrans %}:</td>
+				<td>
+				{{ form_widget(form.username, { 'attr': { 'style':'width: 100%;' } }) }}
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="form_line"><div class="linebg"></div></td>
+			</tr>
+			<tr>
+				<td>{% trans %}Clave{% endtrans %}:</td>
+				<td>
+					{{ form_widget(form.password.password, { 'attr': { 'style':'width: 100%;' } }) }}
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="form_line"><div class="linebg"></div></td>
+			</tr>
+			<tr>
+				<td>{% trans %}Repetir Clave{% endtrans %}:</td>
+				<td>
+				{{ form_widget(form.password.confirm, { 'attr': { 'style':'width: 100%;' } }) }}
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="form_line"><div class="linebg"></div></td>
+			</tr>
+			<tr>
+				<td>{% trans %}Correo Electrónico{% endtrans %}:</td>
+				<td>
+				{{ form_widget(form.email, { 'attr': { 'style':'width: 100%;' } }) }}
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<hr>
+	<ul class="sf_admin_actions">
+		<li>
+			<input type="submit" name="submit" value="{%if accion=='registro'%}{% trans %}Guardar{% endtrans %}{%else%}{% trans %}Actualizar{% endtrans %}{%endif%}">
+		</li>
+	</ul>
+		<div style="display: none">
+					{{ form_rest(form) }}
+				</div>
+</form><!-- end whole contents --></td>
+{%endblock%}

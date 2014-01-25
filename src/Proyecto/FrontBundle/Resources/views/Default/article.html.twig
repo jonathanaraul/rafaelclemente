@@ -1,0 +1,89 @@
+{% extends "ProyectoFrontBundle:Helpers:body.html.twig" %}
+
+{%block imagenes%}
+var images = [{%if background is not null%}"{{ asset(''~ background.getWebPath ~'') }}"{%endif%}];
+{%endblock%}
+
+{%block contenido%}
+<div class="middle-right-sub">
+
+	{{ render(controller('ProyectoFrontBundle:Helpers:menuMobile')) }}
+	<div class="upper-text" style="background-color: {{theme.color}} !important"></div>
+
+	<div class="news-cont">
+		<hr class="barra-inferior">
+		<p class="content-title">
+			{{article.name}}
+		</p>
+		
+		<div class="news-cell">
+
+			<table cellpadding="12" id="contenido-pagina" style="width: 100%;">
+					<tr width="100%">
+						<td  width="100%" valign="top" colspan="3"> {{article.content|raw}}
+
+						 </td>
+					</tr>
+					<tr>
+						<td><p><img alt="" class="imagen-articulo" src="{%if  media is not null%}{{ media.getWebPath | apply_filter('my_thumb2') }}{%endif%}"></p>
+
+						</br>
+						{%if path is not null%}
+								<div class="boton-listado boton-reservaciones" style="margin-top: 14px;margin-right: 0px;" >
+									<a href="{{ asset(''~ path ~'') }}" target="_blank">{% trans %}Ver Adjunto{% endtrans %}</a>
+								</div>
+						{%endif%}
+						</br>
+						</td>
+
+					</tr>
+				{%if idpage == 37 or idpage==5  or idpage==38 or idpage==40  or idpage==41  or idpage==42 %}
+					<tr>
+						<td><b>{{article.gender}}</b></td>
+					</tr>
+					<tr>
+						<td>
+							<b>{% trans %}Fechas{% endtrans %}</b>
+
+							<div class="fechas-articulo">
+								{%for date in dates%}
+									<div class="contenedor{%if loop.index0 %2 == 0%}1{%else%}2{%endif%}-fechas">
+										{{date}}
+									</div>
+								{%endfor%}
+
+							</div>
+
+							<div>
+								<div class="boton-listado" style="width: 100px;margin-top: 20px;">
+									<a href="{{ path('proyecto_front_reservation', {'id': article.id}) }}">{% trans %}Reserva Ahora{% endtrans %}</a>
+								</div>
+							</div>
+						</td>
+					</tr>
+				{%endif%}
+			</table>
+		</div>
+		
+		<div class="lower-text"></div>
+		<div class="lower-box" style="#right: 200px;"></div>
+		<!--<div class="biography-logo"></div>-->
+	</div>
+	<div class="capa-baja-logo">
+		<div>
+			<span class="copyrighted">Copyrights © La Victoria</span>
+		</div>
+		<div>
+			<p>
+				<a href="http://realego.es/" target="_blank">
+					<img src="{{asset('design.png')}}">
+				</a>
+			</p>
+		</div>
+	</div>
+</div>
+
+{%endblock%}
+
+{%block celda%} <div class="cell-right-sub"></div>
+{%endblock%} 

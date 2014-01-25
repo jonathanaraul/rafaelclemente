@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Proyecto\PrincipalBundle\Entity\CmsPageTranslate" table="cms_page_translate">
+    <id name="pageTranslateId" type="integer" column="page_translate_id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="pageId" type="integer" column="page_id" precision="0" scale="0" nullable="false"/>
+    <field name="langId" type="integer" column="lang_id" precision="0" scale="0" nullable="false"/>
+    <field name="mediaId" type="integer" column="media_id" precision="0" scale="0" nullable="false"/>
+    <field name="backgroundId" type="integer" column="background_id" precision="0" scale="0" nullable="false"/>
+    <field name="themeId" type="integer" column="theme_id" precision="0" scale="0" nullable="false"/>
+    <field name="rank" type="integer" column="rank" precision="0" scale="0" nullable="false"/>
+    <field name="published" type="integer" column="published" precision="0" scale="0" nullable="true"/>
+    <field name="suspended" type="integer" column="suspended" precision="0" scale="0" nullable="true"/>
+    <field name="spacer" type="integer" column="spacer" precision="0" scale="0" nullable="true"/>
+    <field name="keywords" type="string" column="keywords" length="255" precision="0" scale="0" nullable="false"/>
+    <field name="descriptionMeta" type="string" column="description_meta" length="255" precision="0" scale="0" nullable="false"/>
+    <field name="title" type="string" column="title" length="100" precision="0" scale="0" nullable="false"/>
+    <field name="name" type="string" column="name" length="255" precision="0" scale="0" nullable="false"/>
+    <field name="upperText" type="string" column="upper_text" length="255" precision="0" scale="0" nullable="false"/>
+    <field name="lowerText" type="string" column="lower_text" length="255" precision="0" scale="0" nullable="false"/>
+    <field name="pdf" type="string" column="pdf" length="255" precision="0" scale="0" nullable="true"/>
+    <field name="friendlyName" type="string" column="friendly_name" length="255" precision="0" scale="0" nullable="false"/>
+    <field name="description" type="text" column="description" precision="0" scale="0" nullable="false"/>
+    <field name="content" type="text" column="content" precision="0" scale="0" nullable="false"/>
+    <field name="ip" type="string" column="ip" length="15" precision="0" scale="0" nullable="false"/>
+    <field name="dateCreated" type="datetime" column="date_created" precision="0" scale="0" nullable="true"/>
+    <field name="dateUpdated" type="datetime" column="date_updated" precision="0" scale="0" nullable="true"/>
+    <field name="userId" type="integer" column="user_id" precision="0" scale="0" nullable="false"/>
+    <lifecycle-callbacks>
+      <lifecycle-callback type="prePersist" method="preUpload"/>
+      <lifecycle-callback type="preUpdate" method="preUpload"/>
+      <lifecycle-callback type="postPersist" method="upload"/>
+      <lifecycle-callback type="postUpdate" method="upload"/>
+      <lifecycle-callback type="postRemove" method="removeUpload"/>
+    </lifecycle-callbacks>
+  </entity>
+</doctrine-mapping>

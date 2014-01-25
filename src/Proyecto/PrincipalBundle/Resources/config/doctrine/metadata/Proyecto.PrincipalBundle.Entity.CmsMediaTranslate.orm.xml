@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Proyecto\PrincipalBundle\Entity\CmsMediaTranslate" table="cms_media_translate">
+    <id name="mediaTranslateId" type="integer" column="media_translate_id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="mediaId" type="integer" column="media_id" precision="0" scale="0" nullable="false"/>
+    <field name="langId" type="integer" column="lang_id" precision="0" scale="0" nullable="false"/>
+    <field name="rank" type="integer" column="rank" precision="0" scale="0" nullable="false"/>
+    <field name="published" type="integer" column="published" precision="0" scale="0" nullable="true"/>
+    <field name="suspended" type="integer" column="suspended" precision="0" scale="0" nullable="true"/>
+    <field name="name" type="string" column="name" length="255" precision="0" scale="0" nullable="false"/>
+    <field name="friendlyName" type="string" column="friendly_name" length="255" precision="0" scale="0" nullable="false"/>
+    <field name="ip" type="string" column="ip" length="15" precision="0" scale="0" nullable="false"/>
+    <field name="dateCreated" type="datetime" column="date_created" precision="0" scale="0" nullable="true"/>
+    <field name="dateUpdated" type="datetime" column="date_updated" precision="0" scale="0" nullable="true"/>
+    <field name="userId" type="integer" column="user_id" precision="0" scale="0" nullable="false"/>
+  </entity>
+</doctrine-mapping>

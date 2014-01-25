@@ -1,0 +1,54 @@
+{% extends "ProyectoPrincipalBundle:Helpers:baseInterna.html.twig" %}
+
+{%block js%} <script type="text/javascript" src="{{asset('sf/prototype/js/prototype.js')}}"></script>
+<script type="text/javascript" src="{{asset('sf/prototype/js/builder.js')}}"></script>
+<script type="text/javascript" src="{{asset('sf/prototype/js/effects.js')}}"></script>
+<script type="text/javascript" src="{{asset('sf/prototype/js/dragdrop.js')}}"></script>
+<script type="text/javascript">var rankPost = '{{path('proyecto_principal_page_rank_post')}}';</script>
+{%endblock%}
+
+{%block contents%} <td id="contents"><!-- whole contents -->
+<style>
+	.sortable {
+		cursor: move;
+	}
+</style><h1>{% trans %}Determinar orden{% endtrans %}</h1>
+<ul id="order">
+	{%for object in objects%}
+	<li id="page_{{object.id}}" class="sortable" style="position: relative;">
+		
+	
+	{%if object.spacer == 0%}
+	 ID: {{object.id}}, <b>{{object.title|title}} </b>
+	{%else%}
+		<p class="spacer">
+			spacer
+		</p>
+	{%endif%}
+	</li>
+	{%endfor%}
+	
+</ul><div id="feedback"></div>
+<script type="text/javascript">
+	//<![CDATA[
+	Sortable.create('order', {
+		onUpdate : function() {
+			new Ajax.Updater('feedback', rankPost, {
+				asynchronous : true,
+				evalScripts : false,
+				parameters : Sortable.serialize('order')
+			})
+		}
+	})
+	//]]>
+</script>
+<ul class="sf_admin_actions">
+	<li>
+		<input class="cms_action_submit" value="{% trans %}Listado{% endtrans %}" type="button" onclick="document.location.href='{{path('proyecto_principal_page_list')}}';">
+	</li>
+</ul>
+<hr>
+<div class="example">
+	{% trans %}Ejemplo{% endtrans %}:
+</div><!-- end whole contents --></td>
+{%endblock%}

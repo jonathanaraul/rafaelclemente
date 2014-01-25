@@ -1,0 +1,35 @@
+{%if object.spacer == 0%}
+<tr class="sf_admin_row_{%if loop.index %2 ==0%}0{%else%}1{%endif%}">
+	<td>{{object.id}}</td>
+	<td>{{object.name|title}}</td>
+	<td class="center">{{object.friendlyName|title}}</td>
+	<td class="" style="height: 90px;text-align:center;">
+{%if object.background == '-' %}  - 
+{%else%}
+		<a alt="Telon" rel="lightbox" href="{{asset(''~ object.background ~'')}}" style="cursor: pointer"> <img src="{{ object.background | apply_filter('my_thumb') }}" /> </a>
+{%endif%} 
+	</td>
+	
+	
+	{%if object.media =='0'%} <td class="image_list center"> - </td>
+	{%else%} 
+	<td class="" style="height: 90px;">
+		<a alt="Telon" rel="lightbox" href="{{asset(''~ object.media ~'')}}" style="cursor: pointer"> 
+			<img src="{{ object.media | apply_filter('my_thumb') }}" /> </a></td>
+	{%endif%} 
+
+	<td style="background-color:{{object.theme}};height: 73px"></td>
+	<td> {%if object.published== 1%} <img src="{{asset('sf/sf_admin/images/tick.png')}}" alt="Tick" style="display: block"><img src="{{asset('sf/sf_admin/images/close.png')}}" alt="Close" style="display: none"> {%else%} <img src="{{asset('sf/sf_admin/images/tick.png')}}" alt="Tick" style="display: none"><img src="{{asset('sf/sf_admin/images/close.png')}}" alt="Close" style="display: block"> {%endif%} <span id="contact-formid_34" class="change_published page" clave="{{object.id}}" style="cursor: pointer"> <img alt="" src="{{asset('images/refresh.png')}}"> </span></td>
+	<td>
+	<ul class="sf_admin_td_actions" clave="{{object.id}}">
+		<li class="editar" style="cursor: pointer" onclick="document.location.href='{{ path('proyecto_principal_page_edit', {'id': object.id}) }}';">
+			{% trans %}Editar{% endtrans %}</br></br>
+		</li>
+		{%if object.special == false%}
+		<li class="eliminar" style="cursor: pointer">
+			{% trans %}Eliminar{% endtrans %}</br></br>
+		</li>
+		{%endif%}
+	</ul></td>
+</tr>
+{%endif%}

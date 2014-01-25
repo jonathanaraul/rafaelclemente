@@ -1,0 +1,21 @@
+Proyecto\PrincipalBundle\Entity\CmsArticle:
+    properties:
+        file:
+            - File:
+                maxSize: 20M
+                mimeTypes: [application/pdf, application/x-pdf]
+                mimeTypesMessage: Please upload a valid PDF
+
+Proyecto\PrincipalBundle\Entity\CmsPage:
+    properties:
+        file:
+            - File:
+                maxSize: 20M
+                mimeTypes: [application/pdf, application/x-pdf]
+                mimeTypesMessage: Please upload a valid PDF
+
+Proyecto\PrincipalBundle\Entity\CmsResource:
+    properties:
+        file:
+            - File:
+                maxSize: 20M

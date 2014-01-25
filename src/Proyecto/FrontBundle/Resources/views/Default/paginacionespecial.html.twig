@@ -1,0 +1,43 @@
+<tr>
+		<td  colspan="3">
+	<table border="0" width="100%" cellpadding="10" cellspacing="10">
+	
+		<tr>
+
+	<td width="5%" >
+		<p style="text-align: right;"><img src="{{asset('izquierda.png')}}" style="cursor: pointer;" id="mes-especial-izquierda" >
+		</p>
+	</td>
+	<td  colspan="3" class="mes-paginacion-especial" anio="{{anio}}">{{mes|title}}</td>
+	<td width="5%"  >
+		<p style="text-align: right;"><img src="{{asset('derecha.png')}}" style="cursor: pointer;" id="mes-especial-derecha"  >
+		</p>
+	</td>
+
+</tr>
+</table>
+</td>
+</tr>
+<tr id="paginacion-especial">
+
+	<td  colspan="3">
+	<table border="0" width="100%" cellpadding="10" cellspacing="10">
+	
+		<tr>
+			<td width="5%" id="celda-paginador-izquierda">
+				<p style="text-align: right;"><img src="{{asset('izquierda.png')}}" style="cursor: pointer;" id="pagina-especial-izquierda" >
+				</p>
+			</td>
+			{%for fecha in fechas%}
+				<td class="{%if loop.index0 ==0%}celdaseleccionada{%else%}celdanoseleccionada celdanovisible{%endif%} paginacion-especial " valor="{{fecha.fecha}}" listado="{{listado}}">
+						{{fecha.dia}}
+				</td>
+			{%endfor%}
+			<td width="5%"  id="celda-paginador-derecha">
+				<p style="text-align: right;"><img src="{{asset('derecha.png')}}" style="cursor: pointer;" id="pagina-especial-derecha"  >
+				</p>
+			</td>
+		</tr>
+	</table>
+	</td>
+</tr>

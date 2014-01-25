@@ -1,0 +1,78 @@
+{% extends "ProyectoFrontBundle:Helpers:body.html.twig" %}
+
+{%block imagenes%}
+var images = ["{{ asset(''~ background ~'') }}"];
+{%endblock%}
+
+{%block contenido%}
+<div class="middle-right-sub">
+	{{ render(controller('ProyectoFrontBundle:Helpers:menuMobile')) }}
+	<div class="upper-text" style="background-color: {{theme.color}} !important"></div>
+	<div class="news-cont">
+		<hr class="barra-inferior">
+		<p class="content-title">
+			{% trans %}Reservas{% endtrans %}
+		</p>
+		<div class="news-cell">
+				{%if message == ''%}
+				<form action="{{ url }}" method="post" {{ form_enctype(form) }} id="form-reservaciones">
+					<table style ="width: 100%;">
+						<tr>
+							<td>
+								{% trans %}Nombre Completo{% endtrans %}:
+							</td>
+							<td>
+								{{ form_widget(form.name, { 'attr': {'style': 'width: 100%;border: none;','class':'form-reservacion'} }) }}
+							</td>
+						</tr>
+						<tr>
+							<td>
+								{% trans %}Correo Electrónico{% endtrans %}:
+							</td>
+							<td>
+								{{ form_widget(form.email, { 'attr': {'style': 'width: 100%;border: none;','class':'form-reservacion'} }) }}
+							</td>
+						</tr>
+						<tr>
+							<td>
+								{% trans %}Teléfono{% endtrans %}:
+							</td>
+							<td>
+								{{ form_widget(form.phone, { 'attr': {'style': 'width: 100%;border: none;','class':'form-reservacion'} }) }}
+							</td>
+						</tr>
+						<tr>
+							<td>
+								{% trans %}Fecha de Interés{% endtrans %}:
+							</td>
+							<td>
+								{{ form_widget(form.rdate, { 'attr': {'style': 'width: 100%;border: none;','class':'form-reservacion'} }) }}
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<div class="boton-listado boton-reservaciones" style="margin-top: 14px;margin-right: 0px;" >
+									<a href="javascript:void(0);" id="botonReservaciones">{% trans %}Reservar{% endtrans %}</a>
+								</div>
+							</td>
+						</tr>
+					</table>
+				</form>
+				{%else%}
+				<p>{{message}}</p>
+				{%endif%}
+		</div>
+		
+		<div class="lower-text"></div>
+		<div class="lower-box" style=""></div>
+	</div>
+	<div class="main-big-title news-big-title" style="">
+		<div class="theme-sel-2">
+			{% trans %}Reservas{% endtrans %}
+		</div>
+	</div>
+</div>
+{%endblock%}
+
+{%block celda%} <div class="cell-right-sub"></div>
+{%endblock%} 

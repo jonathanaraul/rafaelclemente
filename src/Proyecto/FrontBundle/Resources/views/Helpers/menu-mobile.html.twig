@@ -1,0 +1,25 @@
+<div class="menu-hidden">
+	<div class="logo" style="margin-top: 0px;">
+		<a title="Home page" href="{{path('proyecto_front_homepage')}}"> </a>
+	</div>
+	<div style="text-align: center;padding-top: 105px;" id="menuobligado">
+		<ul id="menu" style="display:none">
+		{%for object in objects%}
+			{%if object.title|upper != 'SPACER'%}
+			<li>
+				<a href="{{path('proyecto_front_page',{'id': object.id, 'friendlyname' : object.friendlyName})}}">{{object.title|upper}}</a>
+			</li>
+			{%endif%}
+		{%endfor%}
+		</ul>
+	</div>
+</div>
+<div class="top-main-text">
+	<div class="top-main-big">
+		LA VICTORIA
+	</div>
+	<div class="top-main-small">
+		ESPACIO CULTURAL
+	</div>
+</div>
+

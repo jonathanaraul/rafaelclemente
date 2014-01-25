@@ -1,0 +1,53 @@
+proyecto_front_homepage:
+    pattern:  /{_locale}
+    defaults: { _controller: ProyectoFrontBundle:Default:inicio }
+    requirements:
+        _locale:  es|en
+proyecto_front_index:
+    pattern:  /
+    defaults: { _controller: ProyectoFrontBundle:Default:index }
+proyecto_front_page_pagina_noticias:
+    pattern:  /{_locale}/paginacionNoticias
+    defaults: { _controller: ProyectoFrontBundle:Listados:noticias }
+    requirements:
+        _method: POST
+        _locale:  es|en
+proyecto_front_page_pagina_cartelera:
+    pattern:  /{_locale}/paginacionCartelera
+    defaults: { _controller: ProyectoFrontBundle:Listados:cartelera }
+    requirements:
+        _method: POST
+        _locale:  es|en
+proyecto_front_page_pagina_talleres:
+    pattern:  /{_locale}/paginacionTalleres
+    defaults: { _controller: ProyectoFrontBundle:Listados:talleres }
+    requirements:
+        _method: POST
+        _locale:  es|en
+proyecto_front_page_pagina_calendario:
+    pattern:  /{_locale}/paginacionCalendario
+    defaults: { _controller: ProyectoFrontBundle:Listados:calendario }
+    requirements:
+        _method: POST
+        _locale:  es|en
+proyecto_front_reservation:
+    pattern:  /{_locale}/reservation/{id}
+    defaults: { _controller: ProyectoFrontBundle:Default:reservation }
+    requirements:
+        _locale:  es|en
+proyecto_front_article:
+    pattern:  /{_locale}/article/{id}
+    defaults: { _controller: ProyectoFrontBundle:Default:article }
+    requirements:
+        _locale:  es|en
+proyecto_front_page:
+    pattern:  /{_locale}/{id}/{friendlyname}
+    defaults: { _controller: ProyectoFrontBundle:Default:page }
+    requirements:
+        _locale:  es|en
+
+
+
+proyecto_front_cerrarsesion:
+    pattern:  /logout
+    defaults: { _controller: ProyectoFrontBundle:Default:inicio }

@@ -1,0 +1,8 @@
+<div class="lang-cont">
+	<div class="lang{%if app.request.locale == 'es'%}-sel{%endif%}" id="lang-es-selector">
+		<a title="home-page-es" href="{{path('proyecto_front_homepage', {'_locale': 'es'})}}">ES</a>
+	</div>
+	<div class="lang{%if app.request.locale == 'en'%}-sel{%endif%}">
+		<a title="home-page-en" href="{{path('proyecto_front_homepage', {'_locale': 'en'})}}">EN</a>
+	</div>
+</div>

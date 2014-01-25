@@ -1,0 +1,33 @@
+<tr class="sf_admin_row_{%if loop.index %2 ==0%}0{%else%}1{%endif%}">
+	<td>{{object.id}}</td>
+	<td>{{object.name|title}}</td>
+	<td>{{object.category|title}}</td>
+	<td class="image_list center"> {%if object.media =='0'%}
+	-
+	{%else%} <img alt="ss2" src="{{ object.media | apply_filter('my_thumb') }}"> {%endif%} </td>
+
+	
+	<td>{{object.dateCreated}}</td>
+
+	<td> {%if object.published== 1%} 
+		<img src="{{asset('sf/sf_admin/images/tick.png')}}" alt="Tick" style="display: block"> 
+		<img src="{{asset('sf/sf_admin/images/close.png')}}" alt="Close" style="display: none"> 
+		{%else%} 
+		<img src="{{asset('sf/sf_admin/images/tick.png')}}" alt="Tick" style="display: none"> 
+		<img src="{{asset('sf/sf_admin/images/close.png')}}" alt="Close" style="display: block"> 
+		{%endif%} 
+		<span id="contact-formid_34" class="change_published article" clave="{{object.id}}" style="cursor: pointer">
+			<img alt="" src="{{asset('images/refresh.png')}}">
+		</span>
+	</td>
+	<td>
+	
+	<ul class="sf_admin_td_actions" clave="{{object.id}}">
+		<li class="editar" style="cursor: pointer" onclick="document.location.href='{{ path('proyecto_principal_article_edit', {'type': type,'id': object.id}) }}';">
+			{% trans %}Editar{% endtrans %}</br></br>
+		</li>
+		<li class="eliminar" style="cursor: pointer">
+			{% trans %}Eliminar{% endtrans %}</br></br>
+		</li>
+	</ul></td>
+</tr>

@@ -1,0 +1,90 @@
+{% extends "ProyectoPrincipalBundle:Helpers:base.html.twig" %}
+{%block inside_login%}
+<table cellspacing="0" cellpadding="0" align="right">
+	<tbody>
+		<tr>
+			{%if app.request.locale == 'es'%}
+			<td class="lang"><a href="{{path('proyecto_principal_homepage', {'_locale': 'en'})}}">EN</a></td>
+			<td class="lang"><b>ES</b></td>
+			{%else%}
+			<td class="lang"><b>EN</b></td>
+			<td class="lang"><a href="{{path('proyecto_principal_homepage', {'_locale': 'es'})}}">ES</a></td>
+			{%endif%}
+			<td class="small_dots"><img src="{{asset('images/cms_yeslogo_small_dots.jpg')}}" alt="Cms_yeslogo_small_dots"></td>
+			<td id="small_letter"><img id="small_font" src="{{asset('images/cms_yeslogo_small_letter.jpg')}}" alt="Cms_yeslogo_small_letter"></td>
+			<td id="big_letter"><img id="big_font" src="{{asset('images/cms_yeslogo_big_letter.jpg')}}" alt="Cms_yeslogo_big_letter"></td>
+			<td class="small_dots"><img src="{{asset('images/cms_yeslogo_small_dots.jpg')}}" alt="Cms_yeslogo_small_dots"></td>
+			<td id="square"><img src="{{asset('images/cms_yeslogo_square.jpg')}}" alt="Cms_yeslogo_square"></td>
+			<td id="login_info">ADMIN - {{user.username|title}}</td>
+			<td class="small_dots"><img src="{{asset('images/cms_yeslogo_small_dots.jpg')}}" alt="Cms_yeslogo_small_dots"></td>
+			<td id="logout_ico"><img src="{{asset('images/cms_yeslogo_logout.jpg')}}" alt="Cms_yeslogo_logout"></td>
+			<td id="logout"><a class="menu" href="{{path('proyecto_front_cerrarsesion')}}">{% trans %}Cerrar sesión{% endtrans %}</a></td>
+		</tr>
+		<tr>
+			<td colspan="8" id="view_page"><a class="menu" target="_blank" href="{{path('proyecto_front_homepage')}}">{% trans %}Vista previa de la página{% endtrans %}</a></td>
+		</tr>
+	</tbody>
+</table>
+{%endblock%}
+
+{%block inside_menu%}
+<div>
+	<table cellspacing="0" cellpadding="0">
+		<tbody>
+			<tr>
+				<td class="menu_button{%if menu.seccion =='TU INFORMACIÓN'%}_click{%endif%}"><a class="menu" href="{%if menu.seccion =='TU INFORMACIÓN'%}#{%else%}{{path('proyecto_principal_homepage')}}{%endif%}">{% trans %}USUARIOS{% endtrans %}</a></td>
+				<td><img src="{{asset('images/cms_yeslogo_big_dots.jpg')}}" alt="Cms_yeslogo_big_dots"></td>
+				<td class="menu_button{%if menu.seccion =='PAGINAS'%}_click{%endif%}"><a class="menu" href="{%if menu.seccion =='PAGINAS'%}#{%else%}{{path('proyecto_principal_page_list')}}{%endif%}">{% trans %}PÁGINAS{% endtrans %}</a></td>
+				<td><img src="{{asset('images/cms_yeslogo_big_dots.jpg')}}" alt="Cms_yeslogo_big_dots"></td>
+				<td class="menu_button{%if menu.seccion =='ARTICULOS'%}_click{%endif%}"><a class="menu" href="{%if menu.seccion =='ARTICULOS'%}#{%else%}{{path('proyecto_principal_article_list', {'type': 'news'})}}{%endif%}">{% trans %}ARTÍCULOS{% endtrans %}</a></td>
+				<td><img src="{{asset('images/cms_yeslogo_big_dots.jpg')}}" alt="Cms_yeslogo_big_dots"></td>
+				<td class="menu_button{%if menu.seccion =='RECURSOS'%}_click{%endif%}"><a class="menu" href="{%if menu.seccion =='RECURSOS'%}#{%else%}{{path('proyecto_principal_resource_list', {'type': 'images'})}}{%endif%}">{% trans %}RECURSOS{% endtrans %}</a></td>
+				<td><img src="{{asset('images/cms_yeslogo_big_dots.jpg')}}" alt="Cms_yeslogo_big_dots"></td>
+				<td class="menu_button{%if menu.seccion =='LINKS'%}_click{%endif%}"><a class="menu" href="{%if menu.seccion =='LINKS'%}#{%else%}{{path('proyecto_principal_link_list')}}{%endif%}">{% trans %}ENLACES{% endtrans %}</a></td>
+				<td><img src="{{asset('images/cms_yeslogo_big_dots.jpg')}}" alt="Cms_yeslogo_big_dots"></td>
+				<td class="menu_button{%if menu.seccion =='RESERVACIONES'%}_click{%endif%}"><a class="menu" href="{%if menu.seccion =='RESERVACIONES'%}#{%else%}{{path('proyecto_principal_reservation_list')}}{%endif%}">{% trans %}RESERVAS{% endtrans %}</a></td>
+				<td><img src="{{asset('images/cms_yeslogo_big_dots.jpg')}}" alt="Cms_yeslogo_big_dots"></td>
+				<td class="menu_button{%if menu.seccion =='SETTING'%}_click{%endif%}"><a class="menu" href="{%if menu.seccion =='SETTING'%}#{%else%}{{path('proyecto_principal_setting_list')}}{%endif%}">{% trans %}OPCIONES{% endtrans %}</a></td>
+				<td><img src="{{asset('images/cms_yeslogo_big_dots.jpg')}}" alt="Cms_yeslogo_big_dots"></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<div>
+	<table id="submenu" cellspacing="0" cellpadding="0">
+		<tbody>
+			<tr>
+				{%if menu.seccion =='TU INFORMACIÓN'%}
+				<td class="submenu_button"><a class="menu" href="{{path('proyecto_principal_homepage')}}">{% trans %}Su Cuenta{% endtrans %}</a></td>
+				<td class="submenu_button"><a class="menu" href="{{path('proyecto_principal_user_edit')}}">{% trans %}Editar Perfil{% endtrans %}</a></td>
+				<td class="submenu_button"><a class="menu" href="{{path('proyecto_principal_user_new')}}">{% trans %}Crear Usuario{% endtrans %}</a></td>
+				{%elseif menu.seccion == 'PAGINAS'%}
+				<td class="submenu_button"><a class="menu" href="{{path('proyecto_principal_page_list')}}">{% trans %}Mostrar páginas{% endtrans %}</a></td>
+				<td class="submenu_button"><a class="menu" href="{{path('proyecto_principal_page_rank')}}">{% trans %}Determinar el orden{% endtrans %}</a></td>
+				<td class="submenu_button"><a class="menu" href="{{path('proyecto_principal_page_create')}}">{% trans %}Añadir página{% endtrans %}</a></td>
+				{%elseif menu.seccion == 'ARTICULOS'%}
+				<td class="submenu_button"><a class="menu" href="{{path('proyecto_principal_article_list',   {'type': 'news'})}}">{% trans %}Mostrar Noticias{% endtrans %}</a></td>
+				<td class="submenu_button"><a class="menu" href="{{path('proyecto_principal_article_create', {'type': 'news'})}}">{% trans %}Añadir Noticia{% endtrans %}</a></td>
+				<td class="submenu_button"><a class="menu" href="{{path('proyecto_principal_article_list',   {'type': 'events'})}}">{% trans %}Mostrar Espéctaculos{% endtrans %}</a></td>
+				<td class="submenu_button"><a class="menu" href="{{path('proyecto_principal_article_create', {'type': 'events'})}}">{% trans %}Añadir Espéctaculo{% endtrans %}</a></td>
+				<td class="submenu_button"><a class="menu" href="{{path('proyecto_principal_article_list',   {'type': 'programs'})}}">{% trans %}Mostrar Talleres{% endtrans %}</a></td>
+				<td class="submenu_button"><a class="menu" href="{{path('proyecto_principal_article_create', {'type': 'programs'})}}">{% trans %}Añadir Taller{% endtrans %}</a></td>
+				{%elseif menu.seccion == 'RECURSOS'%}
+				<td class="submenu_button"><a class="menu" href="{{path('proyecto_principal_resource_list',   {'type': 'images'})}}">{% trans %}Mostrar Imágenes{% endtrans %}</a></td>
+				<td class="submenu_button"><a class="menu" href="{{path('proyecto_principal_resource_create', {'type': 'images'})}}">{% trans %}Añadir Imagen{% endtrans %}</a></td>
+				<td class="submenu_button"><a class="menu" href="{{path('proyecto_principal_resource_list',   {'type': 'backgrounds'})}}">{% trans %}Mostrar Fondos{% endtrans %}</a></td>
+				<td class="submenu_button"><a class="menu" href="{{path('proyecto_principal_resource_create', {'type': 'backgrounds'})}}">{% trans %}Añadir Fondo{% endtrans %}</a></td>
+				{%elseif menu.seccion == 'LINKS'%}
+				<td class="submenu_button"><a class="menu" href="{{path('proyecto_principal_link_list')}}">{% trans %}Mostrar Enlaces{% endtrans %}</a></td>
+				<td class="submenu_button"><a class="menu" href="{{path('proyecto_principal_link_create')}}">{% trans %}Añadir Enlace{% endtrans %}</a></td>
+				{%elseif menu.seccion == 'SETTING'%}
+				<td class="submenu_button"><a class="menu" href="{{path('proyecto_principal_setting_list')}}">{% trans %}Mostrar Opciones{% endtrans %}</a></td>
+				{%elseif menu.seccion == 'RESERVATION'%}
+				<td class="submenu_button"><a class="menu" href="{{path('proyecto_principal_reservation_list')}}">{% trans %}Mostrar Reservas{% endtrans %}</a></td>
+				{%endif%}
+				<td id="rest">&nbsp;</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+{%endblock%} 

@@ -1,0 +1,186 @@
+<?php
+
+namespace Proyecto\PrincipalBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CmsPage
+ *
+ * @ORM\Table(name="cms_page")
+ * @ORM\Entity
+ */
+class CmsPage
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="page_id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $pageId;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="parent_page_id", type="integer", nullable=false)
+     */
+    private $parentPageId;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="media_id", type="integer", nullable=false)
+     */
+    private $mediaId;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="background_id", type="integer", nullable=false)
+     */
+    private $backgroundId;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="theme_id", type="integer", nullable=false)
+     */
+    private $themeId;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="rank", type="integer", nullable=false)
+     */
+    private $rank;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="published", type="boolean", nullable=true)
+     */
+    private $published;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="suspended", type="integer", nullable=true)
+     */
+    private $suspended;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="spacer", type="integer", nullable=true)
+     */
+    private $spacer;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="template", type="integer", nullable=false)
+     */
+    private $template;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="keywords", type="string", length=255, nullable=false)
+     */
+    private $keywords;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description_meta", type="string", length=255, nullable=false)
+     */
+    private $descriptionMeta;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="title", type="string", length=100, nullable=false)
+     */
+    private $title;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255, nullable=false)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="upper_text", type="string", length=255, nullable=false)
+     */
+    private $upperText;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lower_text", type="string", length=255, nullable=false)
+     */
+    private $lowerText;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="pdf", type="string", length=255, nullable=true)
+     */
+    private $pdf;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="friendly_name", type="string", length=255, nullable=false)
+     */
+    private $friendlyName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", nullable=false)
+     */
+    private $description;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="content", type="text", nullable=false)
+     */
+    private $content;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ip", type="string", length=15, nullable=false)
+     */
+    private $ip;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_created", type="datetime", nullable=true)
+     */
+    private $dateCreated;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_updated", type="datetime", nullable=true)
+     */
+    private $dateUpdated;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="user_id", type="integer", nullable=false)
+     */
+    private $userId;
+
+
+}

@@ -1,0 +1,41 @@
+{% extends "ProyectoPrincipalBundle:Helpers:baseInterna.html.twig" %}
+
+{%block js%} 
+{%endblock%}
+{%block contents%} 
+<td id="contents"><!-- whole contents -->
+<div id="sf_admin_container">
+	<h1>{{menu.subseccion}}</h1>
+	<div id="sf_admin_header"></div>
+	<div id="sf_admin_content">
+		<form action="{{ url }}" method="post" {{ form_enctype(form) }}>
+			<input type="hidden" name="page_id" id="page_id" value="">
+			<fieldset id="sf_fieldset_none" class="">
+				<div class="form-row">
+					<label for="page_title" class="required">Nombre: {{auxname}}</label>
+
+				</div>
+				<div class="form-row">
+					<label for="page_content" class="required">Contenido:</label>
+					<div class="content">
+						<input type="hidden" id="page[content]" name="page[content]" value="{{contenido}}" style="display:none">
+						
+						<input type="hidden" id="page[content]___Config" value="" style="display:none">
+						<iframe id="page[content]___Frame" src="{{asset('js/fckeditor/editor/fckeditor.html?InstanceName=page[content]&amp;Toolbar=Default')}}" width="100%" height="500" frameborder="0" scrolling="no" style="margin: 0px; padding: 0px; border: 0px; background-color: transparent; background-image: none; width: 100%; height: 500px;"></iframe>
+					</div>
+				</div>
+			</fieldset>
+			<ul class="sf_admin_actions">
+				<li>
+					<input class="sf_admin_action_list" value="Listado" type="button" onclick="document.location.href='{{path('proyecto_principal_setting_list')}}';">
+				</li>
+				<li>
+					<input type="submit" name="save" value="{%if accion == 'nuevo'%}Guardar{%else%}Actualizar{%endif%}">
+				</li>
+			</ul>
+		</form>
+		<ul class="sf_admin_actions"></ul>
+	</div>
+	<div id="sf_admin_footer"></div>
+</div><!-- end whole contents --></td>
+{%endblock%}

@@ -1,0 +1,179 @@
+{% extends "ProyectoPrincipalBundle:Helpers:baseInterna.html.twig" %}
+
+{%block js%}
+<script type="text/javascript" src="{{ asset('sf/calendar/calendar.js') }}"></script>
+<script type="text/javascript" src="{{ asset('sf/calendar/lang/calendar-es.js') }}"></script>
+<script type="text/javascript" src="{{ asset('sf/calendar/calendar-setup.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/datetimepicker.js') }}"></script>
+
+
+<link rel="stylesheet" type="text/css" media="screen" href="{{ asset('sf/sf_admin/css/main.css') }}">
+<link rel="stylesheet" type="text/css" media="screen" href="{{ asset('sf/calendar/skins/aqua/theme.css') }}">
+
+{%endblock%}
+{%block contents%} <td id="contents"><!-- whole contents -->
+<div id="sf_admin_container">
+	<h1>{{menu.subseccion|trans}}</h1>
+	<div id="sf_admin_header"></div>
+	<div id="sf_admin_content">
+		<form action="{{ url }}" method="post" {{ form_enctype(form) }}>
+			<input type="hidden" name="page_id" id="page_id" value="">
+			<fieldset id="sf_fieldset_none" class="">
+				<div class="form-row">
+					<label for="page_category" class="required">{% trans %}Categoría{% endtrans %}:</label>
+					<div class="content">
+						{{ form_widget(form.category, { 'attr': {'class': 'theme_toggle'}} ) }}
+					</div>
+				</div>
+				<div class="form-row">
+					<label for="page_title" class="required">{%if type == 'news'%}{% trans %}Título{% endtrans %}{%else%}{% trans %}Nombre{% endtrans %}{%endif%}:</label>
+					<div class="content">
+						{{ form_widget(form.name, { 'attr': {'size': '80'} }) }}
+					</div>
+				</div>
+				<div class="form-row" {%if type == 'news'%}style="display: none"{%endif%}>
+					<label for="page_title" class="required">{% trans %}Atributos{% endtrans %}:</label>
+					<div class="content">
+						{{ form_widget(form.gender, { 'attr': {'size': '80'} }) }}
+					</div>
+				</div>
+				<div class="form-row" {%if type == 'news'%}style="display: none"{%endif%}>
+					<label for="page_title" >{% trans %}Duración{% endtrans %}:</label>
+					<div class="content">
+						{{ form_widget(form.duration, { 'attr': {'size': '80'} }) }}
+					</div>
+				</div>
+				<div class="form-row">
+					<label for="page_keywords" class="required">{% trans %}Palabras Clave{% endtrans %} [metatag]:</label>
+					<div class="content">
+						{{ form_widget(form.keywords, { 'attr': {'size': '80'} }) }}
+					</div>
+				</div>
+				<div class="form-row">
+					<label for="page_description_meta" class="required">{% trans %}Descripción{% endtrans %}:</label>
+					<div class="content">
+						{{ form_widget(form.description, { 'attr': {'size': '80'} }) }}
+					</div>
+				</div>
+				<div class="form-row">
+					<label for="page_content" class="required">{%if type == 'events'%}{% trans %}Sinopsis{% endtrans %}{%else%}{% trans %}Resumen{% endtrans %}{%endif%}:</label>
+					<div class="content">
+						<input type="hidden" id="page[content]" name="page[content]" value="{{contenido}}" style="display:none">
+						<input type="hidden" id="page[content]___Config" value="" style="display:none">
+						<iframe id="page[content]___Frame" src="{{asset('js/fckeditor/editor/fckeditor.html?InstanceName=page[content]&amp;Toolbar=Default')}}" width="100%" height="500" frameborder="0" scrolling="no" style="margin: 0px; padding: 0px; border: 0px; background-color: transparent; background-image: none; width: 100%; height: 500px;"></iframe>
+					</div>
+				</div>
+				<div class="form-row">
+					<label for="page_pdf" >{% trans %}Archivo{% endtrans %}:</label>
+					<div class="content">
+						{{ form_widget(form.file, { 'attr': {'size': '64'} }) }}
+						<br>
+					</div>
+				</div>
+				<div class="form-row">
+					<label for="page_background_id" class="required">{% trans %}Fondo{% endtrans %}:</label>
+					<div class="content">
+						{{ form_widget(form.background) }}
+					</div>
+				</div>
+				<div class="form-row">
+					<label for="page_media_id" class="required">{% trans %}Imagen{% endtrans %}:</label>
+					<div class="content">
+						{{ form_widget(form.media, { 'attr': {'class': 'photo_toggle'} }) }}
+						<div class="media_container">
+							{%for object in media%}
+							<div class="media_{{object.id}}" style="display: none;">
+								<img alt="{{object.name}}" src="{{ object.getWebPath | apply_filter('my_thumb') }}" style="height: 100px;width: 106px;">
+							</div>
+							{%endfor%}
+						</div>
+					</div>
+				</div>
+				<div class="form-row">
+					<label for="page_theme_id" class="required">{% trans %}Tema{% endtrans %}:</label>
+					<div class="content">
+						{{ form_widget(form.theme, { 'attr': {'class': 'theme_toggle'} }) }}
+						<div class="theme_container">
+							{%for object in themes%} <div class="theme_{{object.id}}" style="background-color: {{object.color}}; display: none;height: 100px;width: 106px;"></div>
+							{%endfor%}
+						</div>
+					</div>
+				</div>
+				{%if type !="news"%}
+				<div class="form-row">
+					<label for="program_date">{% trans %}Fechas{% endtrans %}:</label>
+					<div id="contenidofechas">
+						{%if accion != 'nuevo'%}
+						{%for fecha in fechasprevias%}
+						<div class="nuevafecha" >
+							<input type="text" name="fechas[date_{{loop.index}}]" class="inputgrande fecha" id="f{{loop.index}}" onclick="javascript:NewCal('f1','ddmmyyyy','dropdown',true)" value="{{fecha.getDate|date("d-m-Y H:i:s")}}">
+							{%if loop.index0 == 0%}<img id="agregarfecha" class="agregarfecha" style="cursor: pointer; vertical-align: middle" src="{{asset('sf/images/sf_admin/add.png')}}" alt="Date">
+							{%else%}
+							<img class="eliminarfecha" style="cursor: pointer; vertical-align: middle" src="{{asset('sf/images/sf_admin/delete.png')}}" alt="Borrar">
+							{%endif%}
+							
+						</div>					
+						{%endfor%}
+
+						{%else%}
+						<div class="nuevafecha" >
+							<input type="text" name="fechas[date_1]" class="inputgrande fecha" id="f1" onclick="javascript:NewCal('f1','ddmmyyyy','dropdown',true)">
+							<img id="agregarfecha" class="agregarfecha" style="cursor: pointer; vertical-align: middle" src="{{asset('sf/images/sf_admin/add.png')}}" alt="Date">
+						</div>
+						{%endif%}
+
+					</div>
+				</div>
+				{%endif%}
+				<div class="form-row">
+					<label for="page_published">{% trans %}Publicado{% endtrans %}:</label>
+					<div class="content">
+						{{ form_widget(form.published, { 'attr': {'checked': 'checked'} }) }}
+					</div>
+				</div>
+			</fieldset>
+			<ul class="sf_admin_actions">
+				<li>
+					<input class="sf_admin_action_list" value="{% trans %}Listado{% endtrans %}" type="button" onclick="document.location.href='{{path('proyecto_principal_article_list',   {'type': type})}}';">
+				</li>
+				<li>
+					<input type="submit" name="save" value="{%if accion == 'nuevo'%}{% trans %}Guardar{% endtrans %}{%else%}{% trans %}Actualizar{% endtrans %}{%endif%}">
+				</li>
+			</ul>
+		</form>
+		<ul class="sf_admin_actions"></ul>
+	</div>
+	<div id="sf_admin_footer"></div>
+</div><!-- end whole contents --></td>
+
+<script type="text/javascript">
+jQuery('.agregarfecha').click(function() {  
+ 	var actual = jQuery(this);
+ 	var cantidad = jQuery('.nuevafecha').length;
+ 	console.log('la cantidad actual es'+cantidad);
+ 	jQuery('.nuevafecha').first().clone().appendTo( "#contenidofechas" );
+ 	jQuery('.nuevafecha').last().find('.agregarfecha').remove();
+ 	jQuery('.nuevafecha').last().find('.inputgrande').first().attr('id','f'+(cantidad+1));
+ 	jQuery('.nuevafecha').last().find('.inputgrande').first().attr('onclick',"javascript:NewCal('f"+(cantidad+1)+"','ddmmyyyy','dropdown',true)");
+ 	jQuery('.nuevafecha').last().find('.inputgrande').first().attr('name','fechas[date_'+(cantidad+1)+']');
+ 	
+ 	
+ 																			
+    return false;
+  });
+jQuery('.trigger_program_date').click(function() {  
+ 	var actual = jQuery(this);
+ 	
+ 	var codigo = actual.attr('codigo');
+ 	
+
+
+    return false;
+  });
+jQuery('.eliminarfecha').click(function() { 
+	var actual = jQuery(this);
+	actual.parent().remove();
+	console.log('deberia haber eliminado');
+});
+ </script>
+{%endblock%}

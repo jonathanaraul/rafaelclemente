@@ -1,0 +1,54 @@
+{% extends "ProyectoPrincipalBundle:Helpers:baseInterna.html.twig" %}
+
+{%block contents%} <td id="contents"><!-- whole contents -->
+<div id="sf_admin_container">
+	<h1>{{menu.subseccion|trans}}</h1>
+	<div id="sf_admin_header"></div>
+	<div id="sf_admin_content">
+		<table cellspacing="0" class="sf_admin_list">
+			<thead>
+				{%if objects|length >0%}
+				<tr>
+					<th id="sf_admin_list_th_page_id">
+						{{ knp_pagination_sortable(pagination, 'Id', 'n.id') }}
+						</th>
+					<th id="sf_admin_list_th_name">
+						{{ knp_pagination_sortable(pagination, 'Nombre'|trans, 'n.name') }}
+					</th>
+					<th id="sf_admin_list_th_name">
+						{{ knp_pagination_sortable(pagination, 'Valor'|trans, 'n.value') }}
+					</th>
+					<th id="sf_admin_list_th_media_id">
+						{{ knp_pagination_sortable(pagination, 'Fecha de Creación'|trans, 'n.dateUpdated') }}
+						</th>
+					<th id="sf_admin_list_th_sf_actions">{% trans %}Acciones{% endtrans %}</th>
+				</tr>
+				{%endif%}
+			</thead>
+
+			<tbody>
+				{%for object in objects%}
+					{% include 'ProyectoPrincipalBundle:Setting:List-Element.html.twig' with {'object': object} %}
+				{%endfor%}
+			</tbody>
+			<tfoot>
+				<tr>
+					<th colspan="8">
+					<div class="float-right navigation">
+						<!--<a href="/admin.php/es/page/list/page/1"><img align="absmiddle" alt="First" title="First" src="{{asset('sf/sf_admin/images/first.png')}}"></a><a href="/admin.php/es/page/list/page/1"><img align="absmiddle" alt="Previous" title="Previous" src="{{asset('sf/sf_admin/images/previous.png')}}"></a>
+						<span>1</span><a href="/admin.php/es/page/list/page/2">2</a>
+						<a href="/admin.php/es/page/list/page/2"><img align="absmiddle" alt="Next" title="Next" src="{{asset('sf/sf_admin/images/next.png')}}"></a><a href="/admin.php/es/page/list/page/2"><img align="absmiddle" alt="Last" title="Last" src="{{asset('sf/sf_admin/images/last.png')}}"></a>
+					-->
+					 {{ knp_pagination_render(pagination) }}
+					</div> 
+					
+					{{ pagination.getTotalItemCount }} {% trans %}resultados{% endtrans%}</th>
+				</tr>
+			</tfoot>
+		</table>
+
+	</div>
+	<div id="sf_admin_footer"></div>
+</div><!-- end whole contents -->
+</td>
+{%endblock%}

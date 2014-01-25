@@ -1,0 +1,77 @@
+{% extends "ProyectoFrontBundle:Helpers:body.html.twig" %}
+
+{%block imagenes%}
+var images = [{%if background is not null%}"{{ asset(''~ background.getWebPath ~'') }}"{%endif%}];
+{%endblock%}
+
+{%block contenido%}
+<div class="middle-right-sub">
+
+	{{ render(controller('ProyectoFrontBundle:Helpers:menuMobile')) }}
+	<div class="upper-text" style="background-color: {{theme.color}} !important"></div>
+	
+	<div class="news-cont">
+		<hr class="barra-inferior">
+		<p class="content-title">
+			{{page.name|title}}
+		</p>
+		<div class="news-cell">
+				<table cellpadding="12" id="contenido-pagina" style="width: 100%;">
+					<tr width="100%">
+						<td  width="100%" valign="top" colspan="3"> {{page.content|raw}}
+
+						</br>
+						{%if path is not null%}
+								<div class="boton-listado boton-reservaciones" style="margin-top: 14px;margin-right: 0px;" >
+									<a href="{{ asset(''~ path ~'') }}" target="_blank">{% trans %}Ver Adjunto{% endtrans %}</a>
+								</div>
+						{%endif%}
+						</br>
+						 </td>
+					</tr>
+					{%if listado is not null%}
+						{%if listado == 'noticias'%}
+							{{ render(controller('ProyectoFrontBundle:Listados:noticias')) }}
+						{%elseif listado == 'cartelera'%}
+							{{ render(controller('ProyectoFrontBundle:Listados:paginacionEspecial', { 'listado': listado })) }}
+							{{ render(controller('ProyectoFrontBundle:Listados:cartelera')) }}
+						{%elseif listado == 'talleres'%}
+						{{ render(controller('ProyectoFrontBundle:Listados:paginacionEspecial', { 'listado': listado })) }}
+							{{ render(controller('ProyectoFrontBundle:Listados:talleres')) }}
+						{%elseif listado == 'calendario'%}
+							{{ render(controller('ProyectoFrontBundle:Listados:paginacionEspecial', { 'listado': listado })) }}
+							{{ render(controller('ProyectoFrontBundle:Listados:calendario')) }}
+						{%endif%}
+					{%endif%}
+				</table>
+		</div>
+		<div class="lower-text"></div>
+		<div class="lower-box" style="#right: 200px;"></div>
+	</div>
+	<div class="main-big-title news-big-title" style="">
+		<div class="theme-sel-{{theme.id}}">
+			{{page.name|title}}
+		</div>
+	</div>
+	<div class="capa-baja-logo">
+		<div>
+			<span class="copyrighted">Copyrights © La Victoria</span>
+		</div>
+		<div>
+			<p>
+				<a href="http://realego.es/" target="_blank">
+					<img src="{{asset('design.png')}}">
+				</a>
+			</p>
+		</div>
+	</div>
+</div>
+{%endblock%}
+
+{%block celda%} <div class="cell-right-sub"></div>
+{%if page.id == 43 or page.id == 14%}
+<div class="map">
+	<iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.pl/maps?hl=pl&amp;ie=UTF8&amp;ll=40.409040,-3.701783&amp;spn=0.00638,0.016512&amp;t=m&amp;z=17&amp;output=embed"></iframe>
+</div>
+{%endif%}
+{%endblock%} 

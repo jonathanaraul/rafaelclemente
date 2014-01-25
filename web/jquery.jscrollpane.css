@@ -1,0 +1,134 @@
+/*
+ * CSS Styles that are needed by jScrollPane for it to operate correctly.
+ *
+ * Include this stylesheet in your site or copy and paste the styles below into your stylesheet - jScrollPane
+ * may not operate correctly without them.
+ */
+
+.jspContainer
+{
+	overflow: hidden;
+	position: relative;
+}
+
+.jspPane
+{
+	position: absolute;
+}
+
+.jspVerticalBar
+{
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 25px;
+	height: 100%;
+}
+
+.jspHorizontalBar
+{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 16px;
+}
+
+.jspVerticalBar *,
+.jspHorizontalBar *
+{
+	margin: 0;
+	padding: 0;
+}
+
+.jspCap
+{
+	display: none;
+}
+
+.jspHorizontalBar .jspCap
+{
+	float: left;
+}
+
+.jspTrack
+{
+	background: transparent url('../images/site/scroll_back.jpg') repeat-y center center;
+	position: relative;
+}
+
+/* ADDRED FOR DIFFERENT COLORS */
+.scroll .jspDrag{    background-color: #000; }
+.scroll-1 .jspDrag{    background-color: #98bf0e; }
+.scroll-2 .jspDrag{    background-color: #bac8d1; }
+.scroll-3 .jspDrag{    background-color: #61559d; }
+.scroll-4 .jspDrag{    background-color: #000; }
+.scroll-5 .jspDrag{    background-color: #009de0; }
+.scroll-6 .jspDrag{    background-color: #f49401; }
+.scroll-7 .jspDrag{    background-color: #780e12; }
+.scroll-8 .jspDrag{    background-color: #898989; }
+.scroll-9 .jspDrag{    background-color: #01336e; }
+.scroll-10 .jspDrag{    background-color: #ffdd00; }
+.scroll-11 .jspDrag{    background-color: #e3001b; }
+.scroll-12 .jspDrag{    background-color: #ec0052; }
+
+/* END OF ADDRED FOR DIFFERENT COLORS */
+
+.jspDrag
+{
+	position: relative;
+	top: 0;
+	left: 0;
+	cursor: pointer;
+}
+
+.jspHorizontalBar .jspTrack,
+.jspHorizontalBar .jspDrag
+{
+	float: left;
+	height: 100%;
+}
+
+.jspArrow
+{
+	background: #50506d;
+	text-indent: -20000px;
+	display: block;
+	cursor: pointer;
+}
+
+.jspArrow.jspDisabled
+{
+	cursor: default;
+	background: #80808d;
+}
+
+.jspVerticalBar .jspArrow
+{
+	height: 16px;
+}
+
+.jspHorizontalBar .jspArrow
+{
+	width: 16px;
+	float: left;
+	height: 100%;
+}
+
+.jspVerticalBar .jspArrow:focus
+{
+	outline: none;
+}
+
+.jspCorner
+{
+	background: #eeeef4;
+	float: left;
+	height: 100%;
+}
+
+/* Yuk! CSS Hack for IE6 3 pixel bug :( */
+* html .jspCorner
+{
+	margin: 0 -3px 0 0;
+}

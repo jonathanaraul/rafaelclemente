@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+ * FCKeditor - The text editor for Internet - http://www.fckeditor.net
+ * Copyright (C) 2003-2008 Frederico Caldeira Knabben
+ *
+ * == BEGIN LICENSE ==
+ *
+ * Licensed under the terms of any of the following licenses at your
+ * choice:
+ *
+ *  - GNU General Public License Version 2 or later (the "GPL")
+ *    http://www.gnu.org/licenses/gpl.html
+ *
+ *  - GNU Lesser General Public License Version 2.1 or later (the "LGPL")
+ *    http://www.gnu.org/licenses/lgpl.html
+ *
+ *  - Mozilla Public License Version 1.1 or later (the "MPL")
+ *    http://www.mozilla.org/MPL/MPL-1.1.html
+ *
+ * == END LICENSE ==
+ *
+ * This is the sample templates definitions file. It makes the "templates"
+ * command completely customizable.
+ *
+ * See FCKConfig.TemplatesXmlPath in the configuration file.
+-->
+<Templates imagesBasePath="fck_templatehttp://yeslogo.pl/images/newsletter/">
+	<Template title="Podstawowy szablon newslettera" image="newsletter.gif">
+		<Description>Newsletterowy szablon</Description>
+		<Html>
+			<![CDATA[
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="font-family: Trebuchet MS; line-height: 1.4em;"> 
+    <tr> 
+      <td background="http://yeslogo.pl/images/newsletter/baner_tlo.jpg" style="background:url('http://yeslogo.pl/images/newsletter/baner_tlo.jpg')"> 
+
+      <table align="center" border="0" cellpadding="0" cellspacing="0" width="550" height="253" background="http://yeslogo.pl/images/newsletter/baner.jpg" style="background:url('http://yeslogo.pl/images/newsletter/baner.jpg');"> 
+          <tr> 
+            <td style="text-align: right; padding-top:13px; color:#9c9c9c; font-size:12px;""> Czerwiec 2011 </td> 
+          </tr>
+          <tr>
+          <td colspan="2" style="text-align: center;"><a href="http://www.yeslogo.pl"><img align="center" style="margin:0 auto; border:0 !important" src="http://yeslogo.pl/images/newsletter/yeslogo_logo.png" alt="www.yeslogo.pl" /></a></td>
+          </tr> 
+          <tr>
+          <td colspan="2" style="text-align: center; color:#898989; font-size:14px;"> W słonecznym, czerwcowym newsletterze przeczytacie Panstwo o Lorem ipsum dolor sit amet</td>
+          </tr> 
+      </table>
+	</td>
+</tr>
+<tr>
+	<td style="background-color: rgb(245, 245, 245);">
+    TRESC
+      </td>
+</tr>
+<tr>
+	<td style="background-color: rgb(245, 245, 245);">
+      <table align="center" border="0" cellpadding="0" cellspacing="0" width="550" style="background-color: rgb(245, 245, 245);"> 
+          <tr>
+          <td style="text-align: center;"><img align="center" style="margin:0 auto" src="http://yeslogo.pl/images/newsletter/realizacja.png" alt="Nasza realizacja" /></td>
+          </tr> 
+          <tr>
+          <td style="text-align: center;">Miejsce na zdjęcie</td>
+          </tr>
+          <tr>
+          <td style="text-align: center; font-size:14px; color:#898989"><p>Zachęcamy do podzielenia się z nami Państwa konkluzjami i uwagami.</p>
+          <p>Maile prosimy kierować na adres: <span style="color:#cc33cc">ewa.szymanska@yeslogo.pl</span></p></td>
+          </tr> 
+          <tr>
+          <td style="text-align: center; font-size:14px; color:#898989">
+ <a href="http://www.yeslogo.pl"><img align="center" style="margin:0 auto" src="http://yeslogo.pl/images/newsletter/button_www.jpg" alt="www.yeslogo.pl" /></a>         
+ <a class="unsing" href="http://www.yeslogo.pl"> <img align="center" style="margin:0 auto" src="http://yeslogo.pl/images/newsletter/button2.jpg" alt="www.yeslogo.pl" /></a>         
+          </td>
+          </tr>  
+      </table> 
+   </td>
+</tr>
+<tr>
+	<td background="http://yeslogo.pl/images/newsletter/stopka_tlo.jpg" style="background:url('http://yeslogo.pl/images/newsletter/stopka_tlo.jpg'); text-align:center"> 
+		<table align="center" border="0" cellpadding="0" cellspacing="0" width="550" height="124"> 
+          <tr>
+          <td>
+			<img align="center" style="margin:0 auto" src="http://yeslogo.pl/images/newsletter/footer.png" alt="Stopka" />
+          </td>
+          </tr> 
+      </table> 
+    </td> 
+</tr> 
+ 
+          
+        </table> 
+			]]>
+		</Html>
+	</Template>
+	
+	<Template title="Szablon dla Ewy" image="newsletter.gif">
+		<Description>Szablon dla Ewy</Description>
+		<Html>
+			<![CDATA[
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="font-family: Trebuchet MS; line-height: 1.4em;"> 
+    <tr> 
+      <td background="http://yeslogo.pl/images/newsletter/baner_tlo.jpg" style="background:url('http://yeslogo.pl/images/newsletter/baner_tlo.jpg')"> 
+
+      <table align="center" border="0" cellpadding="0" cellspacing="0" width="550" height="253" background="http://yeslogo.pl/images/newsletter/baner.jpg" style="background:url('http://yeslogo.pl/images/newsletter/baner.jpg');"> 
+          <tr> 
+            <td style="text-align: right; padding-top:13px; color:#9c9c9c; font-size:12px;""> Czerwiec 2011 </td> 
+          </tr>
+          <tr>
+          <td colspan="2" style="text-align: center;"><a href="http://www.yeslogo.pl"><img align="center" style="margin:0 auto" src="http://yeslogo.pl/images/newsletter/yeslogo_logo.png" alt="www.yeslogo.pl" /></a></td>
+          </tr> 
+          <tr>
+          <td colspan="2" style="text-align: center; color:#898989; font-size:14px;"> W słonecznym, czerwcowym newsletterze przeczytacie Panstwo o Lorem ipsum dolor sit amet</td>
+          </tr> 
+      </table>
+	</td>
+</tr>
+<tr>
+	<td style="background-color: rgb(245, 245, 245);">
+      <table style="" align="center" border="0" cellpadding="0" cellspacing="0" width="550" style="style="margin-top:10px; color:#9c9c9c; font-size:12px;"> 
+          
+          <tr> 
+            <td style="padding: 8px 0px 0px 16px; background-color: rgb(245, 245, 245); font-size:12px; color:#9c9c9c"">
+             Lorem ipsum dolor sit amet enim.
+            </td> 
+          </tr>
+           <tr> 
+          <td colspan="2" background="http://yeslogo.pl/images/newsletter/pasek_13.jpg" style="background: url('http://yeslogo.pl/images/newsletter/pasek_13.jpg') repeat-x scroll center bottom transparent; height: 2px; line-height: 15px;"> </td>
+          </tr> 
+          </table>
+      </td>
+</tr>
+<tr>
+	<td style="background-color: rgb(245, 245, 245);">
+      <table align="center" border="0" cellpadding="0" cellspacing="0" width="550" style="background-color: rgb(245, 245, 245);"> 
+          <tr>
+          <td style="text-align: center;">Zdjecie 1</td>
+          </tr>
+          <tr>
+          <td style="text-align: center;">Zdjecie 2</td>
+          </tr>
+          
+          <tr>
+          <td style="text-align: center; font-size:14px; color:#898989"><p>Zachęcamy do podzielenia się z nami Państwa konkluzjami i uwagami.</p>
+          <p>Maile prosimy kierować na adres: <span style="color:#cc33cc">ewa.szymanska@yeslogo.pl</span></p></td>
+          </tr> 
+          <tr>
+          <td style="text-align: center; font-size:14px; color:#898989">
+ <a href="http://www.yeslogo.pl"><img align="center" style="margin:0 auto" src="http://yeslogo.pl/images/newsletter/button_www.jpg" alt="www.yeslogo.pl" /></a>         
+ <a class="unsing" href="http://www.yeslogo.pl"> <img align="center" style="margin:0 auto" src="http://yeslogo.pl/images/newsletter/button2.jpg" alt="www.yeslogo.pl" /></a>         
+          </td>
+          </tr>  
+      </table> 
+   </td>
+</tr>
+<tr>
+	<td background="http://yeslogo.pl/images/newsletter/stopka_tlo.jpg" style="background:url('http://yeslogo.pl/images/newsletter/stopka_tlo.jpg'); text-align:center"> 
+		<table align="center" border="0" cellpadding="0" cellspacing="0" width="550" height="124"> 
+          <tr>
+          <td>
+			<img align="center" style="margin:0 auto" src="http://yeslogo.pl/images/newsletter/footer.png" alt="Stopka" />
+          </td>
+          </tr> 
+      </table> 
+    </td> 
+</tr> 
+ 
+          
+        </table> 
+			]]>
+		</Html>
+	</Template>
+	
+	
+		<Template title="Wiersz treści do newslettera" image="newsletter.gif">
+		<Description>Wiersz na zawartość</Description>
+		<Html>
+			<![CDATA[
+
+		  <table style="" align="center" border="0" cellpadding="0" cellspacing="0" width="550" style="style="margin-top:10px; color:#9c9c9c; font-size:12px;"> 
+          <tr> 
+          <td colspan="2" style="text-align:center; color:#cc33cc; font-size:14px;"> Tytuł </td>
+          </tr> 
+          
+          <tr> 
+            <td style="padding: 8px 0px 0px 16px; background-color: rgb(245, 245, 245); font-size:12px; color:#9c9c9c"">
+             Lorem ipsum dolor sit amet enim.
+            </td> 
+            <td style="padding: 8px 0px 0px 16px; background-color: rgb(245, 245, 245); font-size:12px; color:#9c9c9c"">
+            Lorem ipsum dolor sit amet enim.
+            </td> 
+          </tr>
+           <tr> 
+          <td colspan="2" background="http://yeslogo.pl/images/newsletter/pasek_13.jpg" style="background: url('http://yeslogo.pl/images/newsletter/pasek_13.jpg') repeat-x scroll center bottom transparent; height: 2px; line-height: 15px;"> </td>
+          </tr> 
+          </table>
+			]]>
+		</Html>
+	</Template>
+</Templates>
