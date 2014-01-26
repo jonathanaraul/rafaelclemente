@@ -49,8 +49,8 @@ lightbox = new Lightbox options
 	var pfx = ["webkit", "moz", "ms", "o", ""];
 	LightboxOptions = (function () {
 		function LightboxOptions() {
-			this.fileLoadingImage = '/images/lightbox/loading.gif';
-			this.fileCloseImage = '/images/lightbox/close.png';
+			this.fileLoadingImage = 'http://www.yeslogo.pl/rafael_clemente/images/lightbox/loading.gif';
+			this.fileCloseImage = 'http://www.yeslogo.pl/rafael_clemente/images/lightbox/close.png';
 			this.resizeDuration = 500;
 			this.fadeDuration = 500;
 			this.labelImage = "";

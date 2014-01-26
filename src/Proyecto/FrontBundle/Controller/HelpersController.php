@@ -39,7 +39,7 @@ class HelpersController extends Controller
 	
         return $this->render('ProyectoFrontBundle:Helpers:menu-mobile.html.twig', $array);
     }
-    public function menuAction($idpage,$theme)
+    public function menuAction($idpage)
     {
     	$locale = UtilitiesAPI::getLocale($this);
 	
@@ -55,7 +55,6 @@ class HelpersController extends Controller
 
 		$array['objects'] = $query -> getResult();
 		$array['idpage'] = $idpage;
-		$array['theme'] = $theme;
 	
         return $this->render('ProyectoFrontBundle:Helpers:menu.html.twig', $array);
     }

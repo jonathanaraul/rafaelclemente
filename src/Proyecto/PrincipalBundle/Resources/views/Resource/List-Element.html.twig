@@ -10,23 +10,6 @@
 			<td class="image_list center">  
 	</td>
 	-->
-	{%if type=='backgrounds'%}
-	<td >
-		
-		{%if object.home== 1%} 
-		<img src="{{asset('sf/sf_admin/images/tick.png')}}" alt="Tick" style="display: block;"> 
-		<img src="{{asset('sf/sf_admin/images/close.png')}}" alt="Close" style="display: none;"> 
-		{%else%} 
-		<img src="{{asset('sf/sf_admin/images/tick.png')}}" alt="Tick" style="display: none;"> 
-		<img src="{{asset('sf/sf_admin/images/close.png')}}" alt="Close" style="display: block;"> 
-		{%endif%} 
-		
-		<span id="contact-formid_34" class="change_home article" clave="{{object.id}}" style="cursor: pointer;">
-			<img alt="" src="{{asset('images/refresh.png')}}" width="15">
-		</span>
-	
-	</td>
-	{%endif%}
 	<td>{{object.dateCreated}}</td>
 
 	<td> {%if object.published== 1%} 

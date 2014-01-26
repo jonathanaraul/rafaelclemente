@@ -23,23 +23,22 @@ class DefaultController extends Controller {
 
 		$firstArray = UtilitiesAPI::getDefaultContent('inicio', $this);
 		$secondArray = array();
-		$secondArray['backgrounds'] = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsResource') -> findByHome(1);
+		//$secondArray['backgrounds'] = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsResource') -> findByHome(1);
 		$secondArray['idpage'] = null;
-		$secondArray['theme'] = array('color'=>'black','id'=>0);
+		//$secondArray['theme'] = array('color'=>'black','id'=>0);
 		
 		$array = array_merge($firstArray, $secondArray);
-		return $this -> render('ProyectoFrontBundle:Default:inicio.html.twig', $array);
+		return $this -> render('ProyectoFrontBundle:Default2:inicio.html.twig', $array);
 	}
 	public function pageAction($id,$friendlyname) {
 		
 		$firstArray = UtilitiesAPI::getDefaultContent('contacto', $this);
 		$secondArray = array();
 		$secondArray['page'] = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsPage') -> find($id);
-		$secondArray['background'] = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsResource') -> find($secondArray['page']->getBackground());
 		$secondArray['media'] = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsResource') -> find($secondArray['page']->getMedia());
-		$secondArray['theme'] = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsTheme') -> find($secondArray['page']->getTheme());
-		$secondArray['path'] = $secondArray['page']->getPath();
-
+		$secondArray['idpage'] = $secondArray['page']->getId();
+		$template  = $secondArray['page']->getTemplate();
+		/*
 		if($secondArray['path']!=null && trim($secondArray['path'])!=""){
 			if (file_exists($secondArray['page']->getWebPath())) {
    				$secondArray['path'] = $secondArray['page']->getWebPath();
@@ -52,14 +51,14 @@ class DefaultController extends Controller {
 			$secondArray['path'] = null;
 		}
 
-
-		$secondArray['idpage'] = $secondArray['page']->getId();
-		$secondArray['articles'] = null;
-		$secondArray['listado'] = UtilitiesAPI::esListado($secondArray['idpage'],$this);
-		$secondArray['images'] = array();
+		*/
+		
+		
+		//$secondArray['listado'] = UtilitiesAPI::esListado($secondArray['idpage'],$this);
+		//$secondArray['images'] = array();
 		
 		$array = array_merge($firstArray, $secondArray);
-		return $this -> render('ProyectoFrontBundle:Default:page.html.twig', $array);
+		return $this -> render('ProyectoFrontBundle:Default2:page'.$template.'.html.twig', $array);
 	}
 	public function articleAction($id) {
 		$firstArray = UtilitiesAPI::getDefaultContent('noticias', $this);
@@ -180,7 +179,74 @@ class DefaultController extends Controller {
 
 		$array = array_merge($firstArray, $secondArray);
 		return $this -> render('ProyectoFrontBundle:Default:reservation.html.twig', $array);
-	}
+	
 
+	}
+	public function pinturaAction() {
+
+		$firstArray = UtilitiesAPI::getDefaultContent('inicio', $this);
+		$secondArray = array();
+		//$secondArray['backgrounds'] = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsResource') -> findByHome(1);
+		$secondArray['idpage'] = 1;
+		//$secondArray['theme'] = array('color'=>'black','id'=>0);
+		
+		$array = array_merge($firstArray, $secondArray);
+		return $this -> render('ProyectoFrontBundle:Helpers2:pintura.html.twig', $array);
+	}
+	public function fotografiaAction() {
+
+		$firstArray = UtilitiesAPI::getDefaultContent('inicio', $this);
+		$secondArray = array();
+		//$secondArray['backgrounds'] = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsResource') -> findByHome(1);
+		$secondArray['idpage'] = 2;
+		//$secondArray['theme'] = array('color'=>'black','id'=>0);
+		
+		$array = array_merge($firstArray, $secondArray);
+		return $this -> render('ProyectoFrontBundle:Helpers2:fotografia.html.twig', $array);
+	}
+	public function biografiaAction() {
+
+		$firstArray = UtilitiesAPI::getDefaultContent('inicio', $this);
+		$secondArray = array();
+		//$secondArray['backgrounds'] = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsResource') -> findByHome(1);
+		$secondArray['idpage'] = 3;
+		//$secondArray['theme'] = array('color'=>'black','id'=>0);
+		
+		$array = array_merge($firstArray, $secondArray);
+		return $this -> render('ProyectoFrontBundle:Helpers2:biografia.html.twig', $array);
+	}
+	public function exposicionesAction() {
+
+		$firstArray = UtilitiesAPI::getDefaultContent('inicio', $this);
+		$secondArray = array();
+		//$secondArray['backgrounds'] = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsResource') -> findByHome(1);
+		$secondArray['idpage'] = 4;
+		//$secondArray['theme'] = array('color'=>'black','id'=>0);
+		
+		$array = array_merge($firstArray, $secondArray);
+		return $this -> render('ProyectoFrontBundle:Helpers2:exposiciones.html.twig', $array);
+	}
+	public function prensaAction() {
+
+		$firstArray = UtilitiesAPI::getDefaultContent('inicio', $this);
+		$secondArray = array();
+		//$secondArray['backgrounds'] = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsResource') -> findByHome(1);
+		$secondArray['idpage'] = 5;
+		//$secondArray['theme'] = array('color'=>'black','id'=>0);
+		
+		$array = array_merge($firstArray, $secondArray);
+		return $this -> render('ProyectoFrontBundle:Helpers2:prensa.html.twig', $array);
+	}
+	public function contactoAction() {
+
+		$firstArray = UtilitiesAPI::getDefaultContent('inicio', $this);
+		$secondArray = array();
+		//$secondArray['backgrounds'] = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsResource') -> findByHome(1);
+		$secondArray['idpage'] = 6;
+		//$secondArray['theme'] = array('color'=>'black','id'=>0);
+		
+		$array = array_merge($firstArray, $secondArray);
+		return $this -> render('ProyectoFrontBundle:Helpers2:contacto.html.twig', $array);
+	}
 
 }

@@ -1,0 +1,21 @@
+{%set variable = 0%}
+
+{%for object in menuElements%}
+
+
+	<li class="menu-element{%if idpage == object.id%} menu-sel{%endif%}">
+		<div class="menu-link-cont">
+			<a title="{{object.title|upper}}" href="{{path('proyecto_front_page',{'id': object.id, 'friendlyname' : object.friendlyName})}}" class="link-menu">{{object.title|upper}}</a>
+			<div class="{%if variable == 0%}line-menu{%else%}line-rest{%endif%} "></div>
+		</div>
+	</li>
+	{%if idpage == object.id%} 
+		{%set variable = 1%}
+	{%endif%}
+{%endfor%}
+
+<li class="menu-rest">
+	<div class="menu-link-cont">
+		&nbsp; <div class="line-rest-last"></div>
+	</div>
+</li>

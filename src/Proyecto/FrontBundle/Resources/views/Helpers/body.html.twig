@@ -13,7 +13,7 @@
 							<div class="logo">
 								<a title="Home page" href="{{path('proyecto_front_homepage')}}"> </a>
 							</div>
-							{{ render(controller('ProyectoFrontBundle:Helpers:menu', { 'idpage': idpage,'theme': theme.color })) }}
+							{{ render(controller('ProyectoFrontBundle:Helpers:menu', { 'idpage': idpage})) }}
 						</div>
 						{%block contenido%}
 						{%endblock%}

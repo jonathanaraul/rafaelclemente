@@ -15,14 +15,9 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Util\StringUtils;
 use Proyecto\PrincipalBundle\Entity\Usuario;
 use Proyecto\PrincipalBundle\Entity\CmsResource;
-use Proyecto\PrincipalBundle\Entity\CmsArticle;
-use Proyecto\PrincipalBundle\Entity\CmsArticleTranslate;
-use Proyecto\PrincipalBundle\Entity\CmsCategory;
+//use Proyecto\PrincipalBundle\Entity\CmsArticle;
 use Proyecto\PrincipalBundle\Entity\CmsPage;
-use Proyecto\PrincipalBundle\Entity\CmsPageTranslate;
-use Proyecto\PrincipalBundle\Entity\CmsBackground;
-use Proyecto\PrincipalBundle\Entity\CmsTheme;
-use Proyecto\PrincipalBundle\Entity\CmsMedia;
+
 
 class ResourceController extends Controller {
 
@@ -97,9 +92,10 @@ class ResourceController extends Controller {
 		}
 		//////////////////////////////////////////////////////////////////////////////////////////////////
 		else {
+
 			$dql = "SELECT n FROM ProyectoPrincipalBundle:CmsResource n WHERE n.type = :type";
 			$query = $em -> createQuery($dql);
-			$query -> setParameter('type', $config['idtype']);
+			$query -> setParameter('type',$config['idtype']);
 		}
 
 		$paginator = $this -> get('knp_paginator');
@@ -112,16 +108,17 @@ class ResourceController extends Controller {
 			$auxiliar[$i]['id'] = $objects[$i] -> getId();
 			$auxiliar[$i]['name'] = $objects[$i] -> getName();
 			$auxiliar[$i]['published'] = $objects[$i] -> getPublished();
-			$auxiliar[$i]['home'] = $objects[$i] -> getHome();
 			$auxiliar[$i]['dateCreated'] = $objects[$i] -> getDateCreated() -> format('d/m/Y');
 			$auxiliar[$i]['path'] = $objects[$i] -> getWebPath();
 
 		}
+
 		$objects = $auxiliar;
 
 		$secondArray = array('pagination' => $pagination, 'filtros' => $filtros, 'objects' => $objects, 'form' => $form -> createView(), 'url' => $url);
 
 		$array = array_merge($firstArray, $secondArray);
+
 		return $this -> render('ProyectoPrincipalBundle:Resource:List.html.twig', $array);
 	}
 

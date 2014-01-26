@@ -27,30 +27,9 @@ class CmsPage
     /**
      * @var integer
      *
-     * @ORM\Column(name="parent_page", type="integer", nullable=true)
-     */
-    private $parentPage;
-
-    /**
-     * @var integer
-     *
      * @ORM\Column(name="media", type="integer", nullable=false)
      */
     private $media;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="background", type="integer", nullable=false)
-     */
-    private $background;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="theme", type="integer", nullable=false)
-     */
-    private $theme;
 
     /**
      * @var integer
@@ -83,16 +62,16 @@ class CmsPage
     /**
      * @var integer
      *
-     * @ORM\Column(name="spacer", type="integer", nullable=true)
+     * @ORM\Column(name="template", type="integer", nullable=false)
      */
-    private $spacer;
+    private $template;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="template", type="integer", nullable=false)
+     * @ORM\Column(name="scheme", type="integer", nullable=false)
      */
-    private $template;
+    private $scheme;
 
     /**
      * @var string
@@ -125,37 +104,9 @@ class CmsPage
     /**
      * @var string
      *
-     * @ORM\Column(name="upper_text", type="string", length=255, nullable=false)
-     */
-    private $upperText;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="lower_text", type="string", length=255, nullable=false)
-     */
-    private $lowerText;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="path", type="string", length=255, nullable=true)
-     */
-    private $path;
-
-    /**
-     * @var string
-     *
      * @ORM\Column(name="friendly_name", type="string", length=255, nullable=false)
      */
     private $friendlyName;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="description", type="text", nullable=false)
-     */
-    private $description;
 
     /**
      * @var string
@@ -199,10 +150,6 @@ class CmsPage
      */
     private $lang;
 
-	private $file;
-	private $temp;
-	private $remove;
-
     /**
      * Get id
      *
@@ -213,51 +160,7 @@ class CmsPage
         return $this->id;
     }
 
-    /**
-     * Set remove
-     *
-     * @param integer $remove
-     * @return CmsPage
-     */
-    public function setRemove($remove)
-    {
-        $this->remove = $remove;
-    
-        return $this;
-    }
-
-    /**
-     * Get remove
-     *
-     * @return integer 
-     */
-    public function getRemove()
-    {
-        return $this->remove;
-    }
-
-    /**
-     * Set parentPage
-     *
-     * @param integer $parentPage
-     * @return CmsPage
-     */
-    public function setParentPage($parentPage)
-    {
-        $this->parentPage = $parentPage;
-    
-        return $this;
-    }
-
-    /**
-     * Get parentPage
-     *
-     * @return integer 
-     */
-    public function getParentPage()
-    {
-        return $this->parentPage;
-    }
+  
 
     /**
      * Set media
@@ -282,51 +185,7 @@ class CmsPage
         return $this->media;
     }
 
-    /**
-     * Set background
-     *
-     * @param integer $background
-     * @return CmsPage
-     */
-    public function setBackground($background)
-    {
-        $this->background = $background;
-    
-        return $this;
-    }
 
-    /**
-     * Get background
-     *
-     * @return integer 
-     */
-    public function getBackground()
-    {
-        return $this->background;
-    }
-
-    /**
-     * Set theme
-     *
-     * @param integer $theme
-     * @return CmsPage
-     */
-    public function setTheme($theme)
-    {
-        $this->theme = $theme;
-    
-        return $this;
-    }
-
-    /**
-     * Get theme
-     *
-     * @return integer 
-     */
-    public function getTheme()
-    {
-        return $this->theme;
-    }
 
     /**
      * Set rank
@@ -424,29 +283,6 @@ class CmsPage
     }
 
     /**
-     * Set spacer
-     *
-     * @param integer $spacer
-     * @return CmsPage
-     */
-    public function setSpacer($spacer)
-    {
-        $this->spacer = $spacer;
-    
-        return $this;
-    }
-
-    /**
-     * Get spacer
-     *
-     * @return integer 
-     */
-    public function getSpacer()
-    {
-        return $this->spacer;
-    }
-
-    /**
      * Set template
      *
      * @param integer $template
@@ -467,6 +303,30 @@ class CmsPage
     public function getTemplate()
     {
         return $this->template;
+    }
+
+
+    /**
+     * Set scheme
+     *
+     * @param integer $scheme
+     * @return CmsPage
+     */
+    public function setScheme($scheme)
+    {
+        $this->scheme = $scheme;
+    
+        return $this;
+    }
+
+    /**
+     * Get scheme
+     *
+     * @return integer 
+     */
+    public function getScheme()
+    {
+        return $this->scheme;
     }
 
     /**
@@ -561,74 +421,7 @@ class CmsPage
         return $this->name;
     }
 
-    /**
-     * Set upperText
-     *
-     * @param string $upperText
-     * @return CmsPage
-     */
-    public function setUpperText($upperText)
-    {
-        $this->upperText = $upperText;
-    
-        return $this;
-    }
-
-    /**
-     * Get upperText
-     *
-     * @return string 
-     */
-    public function getUpperText()
-    {
-        return $this->upperText;
-    }
-
-    /**
-     * Set lowerText
-     *
-     * @param string $lowerText
-     * @return CmsPage
-     */
-    public function setLowerText($lowerText)
-    {
-        $this->lowerText = $lowerText;
-    
-        return $this;
-    }
-
-    /**
-     * Get lowerText
-     *
-     * @return string 
-     */
-    public function getLowerText()
-    {
-        return $this->lowerText;
-    }
-
-    /**
-     * Set path
-     *
-     * @param string $path
-     * @return CmsPage
-     */
-    public function setPath($path)
-    {
-        $this->path = $path;
-    
-        return $this;
-    }
-
-    /**
-     * Get path
-     *
-     * @return string 
-     */
-    public function getPath()
-    {
-        return $this->path;
-    }
+ 
 
     /**
      * Set friendlyName
@@ -651,29 +444,6 @@ class CmsPage
     public function getFriendlyName()
     {
         return $this->friendlyName;
-    }
-
-    /**
-     * Set description
-     *
-     * @param string $description
-     * @return CmsPage
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-    
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string 
-     */
-    public function getDescription()
-    {
-        return $this->description;
     }
 
     /**
@@ -813,93 +583,5 @@ class CmsPage
     {
         return $this->lang;
     }
-	
-	/**
-	 * Sets file.
-	 *
-	 * @param UploadedFile $file
-	 */
-	public function setFile(UploadedFile $file = null) {
-		$this -> file = $file;
-		// check if we have an old image path
-		if (isset($this -> path)) {
-			// store the old name to delete after the update
-			$this -> temp = $this -> path;
-			//$this -> path = null;
-		} else {
-			$this -> path = 'inicial';
-		}
-	}
 
-	/**
-	 * @ORM\PrePersist()
-	 * @ORM\PreUpdate()
-	 */
-	public function preUpload() {
-		if (null !== $this -> getFile()) {
-			// do whatever you want to generate a unique name
-			$filename = sha1(uniqid(mt_rand(), true));
-			$this -> path = $filename . '.' . $this -> getFile() -> guessExtension();
-		}
-	}
-
-	/**
-	 * @ORM\PostPersist()
-	 * @ORM\PostUpdate()
-	 */
-	public function upload() {
-		if (null === $this -> getFile()) {
-			return;
-		}
-
-		// if there is an error when moving the file, an exception will
-		// be automatically thrown by move(). This will properly prevent
-		// the entity from being persisted to the database on error
-		$this -> getFile() -> move($this -> getUploadRootDir(), $this -> path);
-
-		// check if we have an old image
-		if (isset($this -> temp)) {
-			// delete the old image
-			//unlink($this -> getUploadRootDir() . '/' . $this -> temp);
-			// clear the temp image path
-			$this -> temp = null;
-		}
-		$this -> file = null;
-	}
-
-	/**
-	 * @ORM\PostRemove()
-	 */
-	public function removeUpload() {
-		if ($file = $this -> getAbsolutePath()) {
-			unlink($file);
-		}
-	}
-		/**
-	 * Get file.
-	 *
-	 * @return UploadedFile
-	 */
-	public function getFile() {
-		return $this -> file;
-	}
-
-	public function getAbsolutePath() {
-		return null === $this -> path ? null : $this -> getUploadRootDir() . '/' . $this -> path;
-	}
-
-	public function getWebPath() {
-		return null === $this -> path ? null : $this -> getUploadDir() . '/' . $this -> path;
-	}
-
-	protected function getUploadRootDir() {
-		// the absolute directory path where uploaded
-		// documents should be saved
-		return __DIR__ . '/../../../../web/' . $this -> getUploadDir();
-	}
-
-	protected function getUploadDir() {
-		$directorio = 'page';
-		return 'uploads/' . $directorio;
-	}
 }

@@ -51,3 +51,34 @@ proyecto_front_page:
 proyecto_front_cerrarsesion:
     pattern:  /logout
     defaults: { _controller: ProyectoFrontBundle:Default:inicio }
+
+proyecto_front_pintura:
+    pattern:  /{_locale}/pintura
+    defaults: { _controller: ProyectoFrontBundle:Default:pintura }
+    requirements:
+        _locale:  es|en
+proyecto_front_fotografia:
+    pattern:  /{_locale}/fotografia
+    defaults: { _controller: ProyectoFrontBundle:Default:fotografia }
+    requirements:
+        _locale:  es|en
+proyecto_front_biografia:
+    pattern:  /{_locale}/biografia
+    defaults: { _controller: ProyectoFrontBundle:Default:biografia }
+    requirements:
+        _locale:  es|en
+proyecto_front_exposiciones:
+    pattern:  /{_locale}/exposiciones
+    defaults: { _controller: ProyectoFrontBundle:Default:exposiciones }
+    requirements:
+        _locale:  es|en
+proyecto_front_prensa:
+    pattern:  /{_locale}/prensa
+    defaults: { _controller: ProyectoFrontBundle:Default:prensa }
+    requirements:
+        _locale:  es|en
+proyecto_front_contacto:
+    pattern:  /{_locale}/contacto
+    defaults: { _controller: ProyectoFrontBundle:Default:contacto }
+    requirements:
+        _locale:  es|en

@@ -54,12 +54,6 @@ class CmsResource
      */
     private $published;
 
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="home", type="boolean", nullable=false)
-     */
-    private $home;
 
     /**
      * @var boolean
@@ -213,29 +207,7 @@ class CmsResource
         return $this->published;
     }
 
-    /**
-     * Set home
-     *
-     * @param boolean $home
-     * @return CmsResource
-     */
-    public function setHome($home)
-    {
-        $this->home = $home;
-    
-        return $this;
-    }
-
-    /**
-     * Get home
-     *
-     * @return boolean 
-     */
-    public function getHome()
-    {
-        return $this->home;
-    }
-
+ 
     /**
      * Set suspended
      *
@@ -461,9 +433,9 @@ class CmsResource
 	protected function getUploadDir() {
 		$directorio = 'resource';
 		if($this -> getType()==3)$directorio .= '/images'; 
-		else{
+		/*else{
 			$directorio .= '/backgrounds'; 
-		}
+		}*/
 		return 'uploads/' . $directorio;
 	}
 }

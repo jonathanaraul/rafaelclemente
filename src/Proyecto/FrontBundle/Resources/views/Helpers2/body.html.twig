@@ -1,0 +1,74 @@
+{% extends "ProyectoFrontBundle:Helpers2:base.html.twig" %}
+{%block body%}
+	<body>
+		<!--[if IE]>
+		<style type="text/css">
+		.line-rest-last{
+		right: 0px;
+		width: 100%;
+		bottom: -20px;
+		}
+
+		.line-menu{
+		left: 0px;
+		width: 100%;
+		bottom: -10px;
+		}
+		</style>
+		<![endif]-->
+		<div class="share-cont">
+			<div class="share-fb">
+				<a target="_blank" title="On Facebook" href="http://www.facebook.com/RafaelClemente"> </a>
+			</div>
+			<div class="share-tw">
+				<a target="_blank" title="On Twitter" href="http://twitter.com/RafaelClemente"> </a>
+			</div>
+			<div class="share-in">
+				<a target="_blank" title="On LinkedIn" href="http://linkedin.com/in/RafaelClemente"> </a>
+			</div>
+		</div>
+		<div class="header">
+			<div class="line-logo"></div>
+			<div class="menu-cont">
+				<a title="Homepage" id="logo" href="{{path('proyecto_front_homepage')}}"><img alt="Rafael Clemente Logo" src="{{ asset('images/site/logo.png')}}" /></a>
+
+
+				<ul class="menu">
+					{% include 'ProyectoFrontBundle:Helpers2:menu-normal.html.twig' with { 'idpage': idpage,'menuElements': menuElements} %}
+				</ul>
+
+			
+
+
+				<div id="langs">
+					<div class="langs-rel">
+						ES
+						<div class="langs-rest">
+							<p>
+								<a href="/rafael_clemente/en/">EN</a>
+							</p>
+							<p>
+								<a href="/rafael_clemente/fr/">FR</a>
+							</p>
+							<p>
+								<a href="/rafael_clemente/de/">DE</a>
+							</p>
+						</div>
+						<div class="line-langs"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		{%block contenido%}
+		{%endblock%}
+		<div id="culture">
+			es
+		</div>
+		<div id="escondido" style="margin-left: auto;margin-right: auto;width: 50%;display:none;">
+			<ul class="menu">
+				{% include 'ProyectoFrontBundle:Helpers:menu-viejo.html.twig' %}
+			</ul>
+		</div>
+			
+	</body>
+{%endblock%}

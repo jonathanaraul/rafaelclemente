@@ -1,0 +1,57 @@
+{% extends "ProyectoFrontBundle:Helpers2:body.html.twig" %}
+
+{%block contenido%}
+	<div class="content">
+		<div class="content-left">
+			{%if page.special==0%}
+			<a title="{{page.title|title}}" rel="lightbox" 
+			href="{%if  media is not null%}{{ media.getWebPath | apply_filter('my_thumb3') }}{%endif%}">
+				<img alt="{{page.title|title}}"  src="{%if  media is not null%}{{ media.getWebPath | apply_filter('my_thumb2') }}{%endif%}">
+			</a>
+			{%else%}
+			<div class="art-content">
+				<div class="art-row">
+					<div class="art-cell">
+						<a title="First artwork" href="/rafael_clemente/es/artwork/1/1/first-artwork.html"><img alt="First test artwork" src="http://www.rafaelclementeart.es/uploads/artwork/small/ab96ce746cd52c7f3de06735e8e7e99b.jpg" /></a>
+					</div>
+					<div class="art-cell">
+						<a title="Fifth artwork" href="/rafael_clemente/es/artwork/1/5/fifth-artwork.html"><img alt="Fourth photo" src="http://www.rafaelclementeart.es/uploads/artwork/small/0bcfb8e25c9610690cd1e6c16486bca9.jpg" /></a>
+					</div>
+					<div class="art-cell">
+						<a title="Second artwork" href="/rafael_clemente/es/artwork/1/2/second-artwork.html"><img alt="Second Artwork" src="http://www.rafaelclementeart.es/uploads/artwork/small/7e86c208832eba009a6067604097ea57.jpg" /></a>
+					</div>
+					<div class="art-cell no-margin">
+						<a title="Third artwork" href="/rafael_clemente/es/artwork/1/3/third-artwork.html"><img alt="Second Artwork" src="http://www.rafaelclementeart.es/uploads/artwork/small/7e86c208832eba009a6067604097ea57.jpg" /></a>
+					</div>
+				</div>
+				<div class="art-row">
+					<div class="art-cell">
+						<a title="Fourth artwork" href="/rafael_clemente/es/artwork/1/4/fourth-artwork.html"><img alt="third artphoto" src="http://www.rafaelclementeart.es/uploads/artwork/small/f8acf21d3f0499ef3c6e5dec58f746c1.jpg" /></a>
+					</div>
+					<div class="art-cell">
+						<a title="Sixth artwork" href="/rafael_clemente/es/artwork/1/6/sixth-artwork.html"><img alt="Sixth photo" src="http://www.rafaelclementeart.es/uploads/artwork/small/3807d9e3b005e9d4b5e98f7613cd4bbf.jpg" /></a>
+					</div>
+					<div class="art-cell">
+						<a title="Seventh artwork" href="/rafael_clemente/es/artwork/1/7/seventh-artwork.html"><img alt="First test artwork" src="http://www.rafaelclementeart.es/uploads/artwork/small/ab96ce746cd52c7f3de06735e8e7e99b.jpg" /></a>
+					</div>
+				</div>
+				<div class="art-paging">
+					<p class="pagin-left"></p>
+					<p class="pagin-right">
+						<span class="art-next p-2 pa-1">NEXT</span>
+					</p>
+				</div>
+			</div>
+			{%endif%}
+		</div>
+		<div class="content-right">
+			<h3>{{page.title|upper}}</h3>
+			<div class="top-margin">
+				{{page.content|raw}}
+			</div>
+		</div>
+	</div>
+	<div class="page-holder">
+		<div class="content-line"></div>
+	</div>
+{%endblock%}

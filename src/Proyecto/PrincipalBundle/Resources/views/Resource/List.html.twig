@@ -59,11 +59,6 @@ var cambiarHome = '{{path('proyecto_principal_resource_home')}}';
 					<th id="sf_admin_list_th_media_id">
 						{{ knp_pagination_sortable(pagination, 'Miniatura'|trans, 'n.media') }}
 						</th>
-					{%if type=='backgrounds'%}
-					<th id="sf_admin_list_th_media_id">
-						{{ knp_pagination_sortable(pagination, 'Pagina Principal'|trans, 'n.home') }}
-						</th>
-					{%endif%}
 					<th id="sf_admin_list_th_theme_id">
 						{{ knp_pagination_sortable(pagination, 'Fecha'|trans, 'n.dateCreated') }}
 						</th>

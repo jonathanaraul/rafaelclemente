@@ -24,13 +24,6 @@ var cambiarStatusPagina = '{{path('proyecto_principal_page_status')}}';
 							{{ form_widget(form.name, { 'attr': {'size': '15'} }) }}
 						</div>
 					</div>
-
-					<div class="form-row">
-						<label for="theme_id">{% trans %}Tema{% endtrans %}:</label>
-						<div class="content">
-							{{ form_widget(form.theme, { 'attr': {'class': 'theme_toggle'} }) }}
-						</div>
-					</div>
 					<div class="form-row">
 						<label for="published">{% trans %}Especial{% endtrans %}:</label>
 						<div class="content">
@@ -71,16 +64,10 @@ var cambiarStatusPagina = '{{path('proyecto_principal_page_status')}}';
 					</th>
 					<th id="sf_admin_list_th_parent_page_id">
 						{{ knp_pagination_sortable(pagination, 'Nombre Amigable'|trans, 'n.friendlyName') }}
-						</th>
-					<th id="sf_admin_list_th_background_id">
-						{{ knp_pagination_sortable(pagination, 'Fondo'|trans, 'n.background') }}
-						</th>
+					</th>
 					<th id="sf_admin_list_th_media_id">
 						{{ knp_pagination_sortable(pagination, 'Imagen'|trans, 'n.media') }}
-						</th>
-					<th id="sf_admin_list_th_theme_id">
-						{{ knp_pagination_sortable(pagination, 'Tema'|trans, 'n.theme') }}
-						</th>
+					</th>
 					<th id="sf_admin_list_th_published">
 						{{ knp_pagination_sortable(pagination, 'Publicado'|trans, 'n.published') }}
 						

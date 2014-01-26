@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta name="robots" content="INDEX, FOLLOW" />
+		<meta name="language" content="es" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Rafael Clemente</title>
+		<link rel="shortcut icon" href="http://www.rafaelclementeart.es/images/site/favicon/" type="image/x-icon"/>
+		<script type="text/javascript" src="{{ asset('js/jquery-1.7.2.min.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('js/lightbox.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('js/jquery.bxslider.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('js/page_function.js') }}"></script>
+		<link rel="stylesheet" type="text/css" media="screen" href="{{ asset('css/style.css') }}" />
+		<link rel="stylesheet" type="text/css" media="screen" href="{{ asset('css/jquery.jscrollpane.css') }}" />
+		<link rel="stylesheet" type="text/css" media="screen" href="{{ asset('css/lightbox.css') }}" />
+		<link rel="stylesheet" type="text/css" media="screen" href="{{ asset('css/jquery.bxslider.css') }}" />
+
+		<script>
+			var paginacionNoticias = '{{path('proyecto_front_page_pagina_noticias')}}';
+			var paginacionCartelera = '{{path('proyecto_front_page_pagina_cartelera')}}';
+			var paginacionTalleres = '{{path('proyecto_front_page_pagina_talleres')}}';
+			var paginacionCalendario = '{{path('proyecto_front_page_pagina_calendario')}}';
+		</script>
+
+		{%block js%}
+		{%endblock%}
+</head>
+	{%block body%}
+	{%endblock%}
+</html>

@@ -149,12 +149,31 @@ class UtilitiesAPI extends Controller {
 		$em->flush();
 	}
 
+    public static function getMenuElements($class)
+    {
+    	$locale = UtilitiesAPI::getLocale($class);
+	
+		$em = $class->getDoctrine()->getManager();
+		
+		$query = $em -> createQuery('SELECT d
+    								 FROM ProyectoPrincipalBundle:CmsPage d
+   	 								 WHERE d.lang      = :locale and
+   	 								       d.published = :published
+    								 ORDER BY d.rank ASC') 
+    		   -> setParameter('locale', $locale)
+			   -> setParameter('published', 1);
+
+		$array = $query -> getResult();
+		
+		return $array;
+    }
 	public static function getDefaultContent($menu,$class){
 
 		$user = UtilitiesAPI::getActiveUser($class);
 		$acceso = UtilitiesAPI::getAccess($user,$class);
+		$menuElements = UtilitiesAPI::getMenuElements($class);
 		
-		$array = array('menu' => $menu,'usuario' => $user, 'acceso'=>$acceso);
+		$array = array('menu' => $menu,'usuario' => $user, 'acceso'=>$acceso, 'menuElements'=>$menuElements);
 		return $array;
 	}
 	public static function getAccess($user,$class){

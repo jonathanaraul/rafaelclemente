@@ -3,9 +3,7 @@
 {%block imagenes%}
 
 	var images =  new Array();
-	{%for element in backgrounds%}
-		images[{{loop.index0}}] = "{{ asset(''~ element.getWebPath ~'') }}";
-	{%endfor%}
+
 
 {%endblock%}
 

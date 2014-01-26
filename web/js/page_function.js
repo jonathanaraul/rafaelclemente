@@ -2,40 +2,15 @@ var HOST = '';
 var SF_CULTURE = '';
 
 function setHost(){
-    HOST = "http://"+window.location.hostname+"/"+SF_CULTURE+"/";
-}
-
-function setBodyHeight(){
-    var height = Math.max(
-        $(document).height(),
-        $(window).height(),
-        document.documentElement.clientHeight);
-    var main = $('.main-row');
-    var black = $('.black-bottom');
-    if (main.height()<=height){
-        main.height(height);
-        if (black.length>0){
-            black.height(height);
-        }
-    }
-    $('.designed').css('bottom', '0px');
+    HOST = "http://"+window.location.hostname+"/rafael_clemente/"+SF_CULTURE+"/";
 }
 
 function setCulture(){
     SF_CULTURE = $('#culture').html();
 }
 
-function startScroller(){
-    $('#scroll-me, .scroll-me-news, .scroll-me-news-wide').jScrollPane({
-        verticalDragMinHeight: 9,
-        verticalDragMaxHeight: 9,
-        scrollbarMargin:20
-    });
-}
-
-$(document).ready(function(){
-    
-	function createLayer(obj, name){
+$(document).ready(function(){  
+    function createLayer(obj, name){
 		var layer = $('<div>', {
 			id: name
 		}).width(obj.width());
@@ -44,143 +19,98 @@ $(document).ready(function(){
 		obj.append(layer);
 	}
     
-    function newsNavigation(){
-        $('.next-news, .previous-news').live('click', function(event){
-            event.preventDefault();
+    function artNavigation(){
+        $('.art-paging .art-next, .art-paging .art-prev').live('click', function(event){
             var selected = $(this).attr('class').split(' ')[1].split('-')[1];
-            var target = $(".content-news");
-
+            $(this).attr('class').split(' ')[2]
+            var selectedPage = $(this).attr('class').split(' ')[2].split('-')[1];
+            var target = $(".art-content");
             $.ajax({
                 type: "POST",
-                url: HOST+"news/getNews",
-                data: {page_id: selected},
+                url: HOST+"artwork/getArtworks",
+                data: {p_id: selected, page_id: selectedPage},
                 beforeSend: function(){
-                    createLayer($('.news-cont'), 'layer');
+                    createLayer($('.content-left'), 'layer');
                 },
                 success: function (data){
                     target.empty().html(data).fadeIn();
                     $('#layer').remove();
-                    startScroller();
                 }
             });
         });
     }
     
-    function closeWindow(){
-        $('.close-window').live('click', function(){
-           $(this).parent().parent('.news-more-inside').hide();
-        });
-    }
-    
-    function showMore(){
-        $('.news-more').live('click', function(){
-           $(this).next('.news-more-inside').fadeIn(350);
-           startScroller();
-        });
-        $('.news-title-more').live('click', function(){
-           $(this).next('.rel').find('.news-more-inside').fadeIn(350);
-           startScroller();
-        });
-        
-    }
-    
-    function startScrollable(){
-        $(".scrollable").scrollable({ vertical: true, mousewheel: true });
-    }
-    
-    function startCalendarNavigation(){
-        $('.next-month, .prev-month').live('click', function(){
-            var date = $(this).attr('class').split(' ')[1].split('_')[1];
-            var page_id = $(this).attr('class').split(' ')[2].split('-')[1];
-            var target = $('#calendar');
+    function exNavigation(){
+        $('.ex-next, .ex-prev').live('click', function(event){
+            var selected = $(this).attr('class').split(' ')[1].split('-')[1];
+            var selectedPage = $(this).attr('class').split(' ')[2].split('-')[1];
+            var target = $(".ex-container");
             $.ajax({
                 type: "POST",
-                url: HOST+"program/getCalendar",
-                data: {day: date, page: page_id},
+                url: HOST+"exhibition/getExhibitions",
+                data: {p_id: selected, page_id: selectedPage},
                 beforeSend: function(){
-                    createLayer(target, 'layer_small');
+                    createLayer($('.ex-container'), 'ex-layer');
                 },
                 success: function (data){
                     target.empty().html(data).fadeIn();
-                    $('#layer_small').remove();
+                    $('#layer').remove();
                 }
             });
         });
-    };
+    }
     
-    function startCalendarPickDay(){
-        $('.pick-day').live('click', function(){
-            var date = $(this).attr('class').split(' ')[1].split('_')[1];
-            var page_id = $(this).attr('class').split(' ')[2].split('-')[1];
-            var target = $('.program-content-cont');
+    function pressNavigation(){
+        $('.art-paging .press-next, .art-paging .press-prev').live('click', function(event){
+            var selected = $(this).attr('class').split(' ')[1].split('-')[1];
+            var selectedPage = $(this).attr('class').split(' ')[2].split('-')[1];
+            var target = $(".art-content");
             $.ajax({
                 type: "POST",
-                url: HOST+"program/getDay",
-                data: {day: date, page: page_id},
+                url: HOST+"press/getPresss",
+                data: {p_id: selected, page_id: selectedPage},
                 beforeSend: function(){
-                    createLayer(target, 'layer_program');
+                    createLayer($('.content-left'), 'layer');
                 },
                 success: function (data){
                     target.empty().html(data).fadeIn();
-                    $('#layer_program').remove();
-                    startScrollable();
+                    $('#layer').remove();
                 }
             });
         });
-    };
+    }
     
-    function showSubMenu(){
-        $('.menu-element').hover(function(){
-            if (!$(this).find('subpages').hasClass('show-sub')){
-                var sub = $(this).find('.subpages');
-                if (sub.length>0){
-                    sub.fadeIn();
-                }
-            }
-            }, function(){
-                if (!$(this).find('.subpages').hasClass('show-sub')){
-                    var sub = $(this).find('.subpages');
-                    if (sub.length>0){
-                        sub.stop().fadeOut();
-                    }
-                }
-            });
-    };
-
+    function showLangs(){
+        $('.langs-rel').hover(function(){
+            $(this).find('.langs-rest').slideDown(400);
+        },function(){
+            $(this).find('.langs-rest').hide();
+        });
+    }
     
     setCulture();
     setHost();
-    newsNavigation();
-    showMore();
-    closeWindow();
-    startScrollable();
-    startCalendarNavigation();
-    startCalendarPickDay();
-    showSubMenu();
-    setBodyHeight();
+    showLangs();
+    artNavigation();
+    exNavigation();
+    pressNavigation();
 });
 
-function startBackground(){
-    if (typeof images != 'undefined'){
-        $(images).each(function(){
-            $('<img />')[0].src = this; 
-        });
-        var index = 0;
-        $.backstretch(images[index], {speed: 750});
-        setInterval(function() {
-            index = (index >= images.length - 1) ? 0 : index + 1;
-            $.backstretch(images[index]);
-        }, 15000);
-    }
+function startBxSlider(){
+    $('#main-page-slider').bxSlider({
+      mode: 'fade',
+      infiniteLoop: true,
+      easing: 'ease-in',
+      speed: 1000,
+      pager: true,
+      auto: true,
+      pause: 10000,
+      controls: false
+    });
 }
-    
 
 $(window).load(function(){
-    startScroller();
-    startBackground();
-    setBodyHeight();
+    startBxSlider();
 });
 
-$(window).resize(function(){
-    setBodyHeight();
-});
+$(window).resize(function(){ });
