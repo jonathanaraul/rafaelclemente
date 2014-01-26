@@ -6,11 +6,11 @@
 
 	
 	
-	{%if object.media =='0'%} <td class="image_list center"  style="height: 90px;text-align: center;"> - </td>
+	{%if object.resource =='0'%} <td class="image_list center"  style="height: 90px;text-align: center;"> - </td>
 	{%else%} 
 	<td class="" style="height: 90px;text-align: center;">
-		<a alt="Telon" rel="lightbox" href="{{asset(''~ object.media ~'')}}" style="cursor: pointer"> 
-			<img src="{{ object.media | apply_filter('my_thumb') }}" /> </a></td>
+		<a alt="Telon" rel="lightbox" href="{{asset(''~ object.resource ~'')}}" style="cursor: pointer"> 
+			<img src="{{ object.resource | apply_filter('my_thumb') }}" /> </a></td>
 	{%endif%} 
 
 	

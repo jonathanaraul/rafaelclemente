@@ -32,6 +32,24 @@ class UtilitiesAPI extends Controller {
 	const TIPO_CARTELERA = 1;
 	const TIPO_TALLERES = 2;
 
+	public static function getExhibitions($class){
+		$locale = UtilitiesAPI::getLocale($class);
+	
+		$em = $class->getDoctrine()->getManager();
+		
+		$query = $em -> createQuery('SELECT d
+    								 FROM ProyectoPrincipalBundle:CmsArticle d
+   	 								 WHERE d.lang      = :locale and
+   	 								       d.published = :published
+    								 ORDER BY d.rank ASC') 
+    		   -> setParameter('locale', $locale)
+			   -> setParameter('published', 1);
+
+		$array = $query -> getResult();
+		
+		return $array;
+	}
+
 	public static function letraDia($cadena,$class){
 		$array = array();
 
@@ -96,6 +114,7 @@ class UtilitiesAPI extends Controller {
 		else return 1;
 		
 	}
+
 	public static function getFriendlyName($title,$class){
 		$friendlyName = strtolower($title);
 		$friendlyName =  str_replace("á", "a", $friendlyName);

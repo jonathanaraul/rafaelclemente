@@ -6,24 +6,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityRepository;
-
 use Symfony\Component\Security\Core\SecurityContext;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Util\StringUtils;
+
 use Proyecto\PrincipalBundle\Entity\Usuario;
 use Proyecto\PrincipalBundle\Entity\CmsArticle;
-use Proyecto\PrincipalBundle\Entity\CmsArticleTranslate;
-use Proyecto\PrincipalBundle\Entity\CmsCategory;
 use Proyecto\PrincipalBundle\Entity\CmsPage;
-use Proyecto\PrincipalBundle\Entity\CmsPageTranslate;
-use Proyecto\PrincipalBundle\Entity\CmsBackground;
-use Proyecto\PrincipalBundle\Entity\CmsTheme;
-use Proyecto\PrincipalBundle\Entity\CmsMedia;
-use Proyecto\PrincipalBundle\Entity\CmsDate;
-use Proyecto\PrincipalBundle\Entity\CmsReservation;
+
 
 class ArticleController extends Controller {
 
@@ -35,18 +28,12 @@ class ArticleController extends Controller {
 		$firstArray = UtilitiesAPI::getDefaultContent('ARTICULOS', $config['list'], $this);
 		$firstArray['type'] = $config['type'];
 
-		
-		$category = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsCategory') -> findByType($config['idtype']);
-
 		$filtros['published'] = array(1 => 'Si', 0 => 'No');
-		$filtros['category'] = UtilitiesAPI::getFilterData($category,$this);
-
 		///////////////////////////////////////////////////////////////////////////////////////////////////
 		$data = new CmsArticle();
 		$form = $this -> createFormBuilder($data) 
 		-> add('name', 'text', array('required' => false))
 		-> add('published', 'choice', array('choices' => $filtros['published'], 'required' => false, )) 
-		-> add('category', 'choice', array('choices' => $filtros['category'], 'required' => false, )) 
 		-> getForm();
 
 		$em = $this -> getDoctrine() -> getEntityManager();
@@ -125,9 +112,8 @@ class ArticleController extends Controller {
 		}
 		//////////////////////////////////////////////////////////////////////////////////////////////////
 		else {
-			$dql = "SELECT n FROM ProyectoPrincipalBundle:CmsArticle n WHERE n.type = :type AND n.lang = :lang ";
+			$dql = "SELECT n FROM ProyectoPrincipalBundle:CmsArticle n WHERE n.lang = :lang ";
 			$query = $em -> createQuery($dql);
-			$query -> setParameter('type', $config['idtype']);
 			$query -> setParameter('lang', $locale);
 		}
 
@@ -137,17 +123,17 @@ class ArticleController extends Controller {
 		$objects = $pagination -> getItems();
 		$auxiliar = array();
 
+
 		for ($i = 0; $i < count($objects); $i++) {
 			$auxiliar[$i]['id'] = $objects[$i] -> getId();
-			$auxiliar[$i]['category'] = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsCategory') -> find($objects[$i] -> getCategory()) -> getName();
 			$auxiliar[$i]['name'] = $objects[$i] -> getName();
 			$auxiliar[$i]['published'] = $objects[$i] -> getPublished();
 			$auxiliar[$i]['dateCreated'] = $objects[$i] -> getDateCreated()->format('d/m/Y');
-			$auxiliar[$i]['media'] = '0';
-			if($objects[$i] -> getMedia() != 0){
-				$helper = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsResource') -> find($objects[$i] -> getMedia());
+			$auxiliar[$i]['resource'] = '0';
+			if($objects[$i] -> getResource() != 0 && $objects[$i] -> getResource() != null){
+				$helper = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsResource') -> find($objects[$i] -> getResource());
 				if($helper!= NULL){
-					$auxiliar[$i]['media'] = $helper  -> getWebPath();
+					$auxiliar[$i]['resource'] = $helper  -> getWebPath();
 				}
 			}
 		}

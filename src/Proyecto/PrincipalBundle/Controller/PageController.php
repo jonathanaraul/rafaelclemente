@@ -143,11 +143,11 @@ class PageController extends Controller {
 			$auxiliar[$i]['name'] = $objects[$i] -> getName();
 			$auxiliar[$i]['published'] = $objects[$i] -> getPublished();
 
-			$auxiliar[$i]['media'] = '0';
-			if($objects[$i] -> getMedia() != 0){
-				$helper = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsResource') -> find($objects[$i] -> getMedia());
+			$auxiliar[$i]['resource'] = '0';
+			if($objects[$i] -> getResource() != 0){
+				$helper = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsResource') -> find($objects[$i] -> getResource());
 				if($helper!= NULL){
-					$auxiliar[$i]['media'] = $helper  -> getWebPath();
+					$auxiliar[$i]['resource'] = $helper  -> getWebPath();
 				}
 			}
 
@@ -193,13 +193,13 @@ class PageController extends Controller {
 		$data = $array['data'];
 		
 		$array['themes'] = $class -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsTheme') -> findAll();
-		$array['media']  = $class -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsResource') -> findByType(3);
+		$array['resource']  = $class -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsResource') -> findByType(3);
 
 		$filtros = array();
 		$filtros['published'] = array(1 => 'Si', 0 => 'No');
 		$filtros['theme'] = UtilitiesAPI::getFilterData($array['themes'],$class);
 		$filtros['parentPage'] = UtilitiesAPI::getFilter('CmsPage',$class);
-		$filtros['media'] = UtilitiesAPI::getFilterData($array['media'],$class);
+		$filtros['resource'] = UtilitiesAPI::getFilterData($array['resource'],$class);
 		
 		$em = $class -> getDoctrine() -> getEntityManager();	
 		
@@ -230,7 +230,7 @@ class PageController extends Controller {
 		 -> add('file', 'file', array('required' => false)) 
 		 -> add('parentPage', 'choice', array('choices' => $filtros['parentPage'], 'required' => false, )) 
 		 -> add('theme', 'choice', array('choices' => $filtros['theme'], 'required' => true, )) 
-		 -> add('media', 'choice', array('choices' => $filtros['media'], 'required' => true, )) 
+		 -> add('resource', 'choice', array('choices' => $filtros['resource'], 'required' => true, )) 
 		 -> add('background', 'choice', array('choices' => $filtros['background'], 'required' => true, )) 
 		 -> add('published', 'checkbox', array('label' => 'Publicado', 'required' => false, )) 
 		 -> getForm();

@@ -17,12 +17,6 @@ var cambiarStatus = '{{path('proyecto_principal_article_status')}}';
 				<fieldset>
 					<h2>{% trans %}Filtros{% endtrans %}</h2>
 					<div class="form-row">
-						<label for="parent_page_id">{% trans %}Categoría{% endtrans %}:</label>
-						<div class="content">
-							{{ form_widget(form.category, { 'attr': {'class': 'theme_toggle'} }) }}
-						</div>
-					</div>
-					<div class="form-row">
 						<label for="name">{% trans %}Nombre{% endtrans %}:</label>
 						<div class="content">
 							{{ form_widget(form.name, { 'attr': {'size': '15'} }) }}
@@ -60,11 +54,8 @@ var cambiarStatus = '{{path('proyecto_principal_article_status')}}';
 					<th id="sf_admin_list_th_name">
 						{{ knp_pagination_sortable(pagination, 'Nombre'|trans, 'n.name') }}
 					</th>
-					<th id="sf_admin_list_th_name">
-						{{ knp_pagination_sortable(pagination, 'Categoría'|trans, 'n.category') }}
-					</th>
 					<th id="sf_admin_list_th_media_id">
-						{{ knp_pagination_sortable(pagination, 'Imagen'|trans, 'n.media') }}
+						{{ knp_pagination_sortable(pagination, 'Imagen'|trans, 'n.resource') }}
 						</th>
 					<th id="sf_admin_list_th_theme_id">
 						{{ knp_pagination_sortable(pagination, 'Fecha'|trans, 'n.dateCreated') }}

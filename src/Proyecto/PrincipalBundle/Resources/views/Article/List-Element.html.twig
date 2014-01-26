@@ -1,10 +1,9 @@
 <tr class="sf_admin_row_{%if loop.index %2 ==0%}0{%else%}1{%endif%}">
 	<td>{{object.id}}</td>
 	<td>{{object.name|title}}</td>
-	<td>{{object.category|title}}</td>
-	<td class="image_list center"> {%if object.media =='0'%}
+	<td class="image_list center"> {%if object.resource =='0'%}
 	-
-	{%else%} <img alt="ss2" src="{{ object.media | apply_filter('my_thumb') }}"> {%endif%} </td>
+	{%else%} <img alt="ss2" src="{{ object.resource | apply_filter('my_thumb') }}"> {%endif%} </td>
 
 	
 	<td>{{object.dateCreated}}</td>

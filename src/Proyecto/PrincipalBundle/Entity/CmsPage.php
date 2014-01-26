@@ -27,9 +27,9 @@ class CmsPage
     /**
      * @var integer
      *
-     * @ORM\Column(name="media", type="integer", nullable=false)
+     * @ORM\Column(name="resource", type="integer", nullable=false)
      */
-    private $media;
+    private $resource;
 
     /**
      * @var integer
@@ -163,26 +163,26 @@ class CmsPage
   
 
     /**
-     * Set media
+     * Set resource
      *
-     * @param integer $media
+     * @param integer $resource
      * @return CmsPage
      */
-    public function setMedia($media)
+    public function setResource($resource)
     {
-        $this->media = $media;
+        $this->resource = $resource;
     
         return $this;
     }
 
     /**
-     * Get media
+     * Get resource
      *
      * @return integer 
      */
-    public function getMedia()
+    public function getResource()
     {
-        return $this->media;
+        return $this->resource;
     }
 
 

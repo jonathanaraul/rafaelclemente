@@ -78,12 +78,12 @@ class UtilitiesAPI extends Controller {
 			$array['translate'] = 'Traducción de Página';
 			$array['type'] = $type;
 		}
-		if($type == 'news'){
+		if($type == 'exhibitions'){
 			$array['idtype'] = 0;
-			$array['list'] = 'Mostrar Noticias';
-			$array['create'] = 'Añadir Noticia';
-			$array['edit'] = 'Editar Noticia';
-			$array['translate'] = 'Traducir Noticia';
+			$array['list'] = 'Mostrar Exposiciones';
+			$array['create'] = 'Añadir Exposicion';
+			$array['edit'] = 'Editar Exposicion';
+			$array['translate'] = 'Traducir Exposicion';
 			$array['type'] = $type;
 		}
 		else if($type == 'events'){

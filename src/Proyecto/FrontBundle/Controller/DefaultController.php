@@ -35,7 +35,7 @@ class DefaultController extends Controller {
 		$firstArray = UtilitiesAPI::getDefaultContent('contacto', $this);
 		$secondArray = array();
 		$secondArray['page'] = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsPage') -> find($id);
-		$secondArray['media'] = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsResource') -> find($secondArray['page']->getMedia());
+		$secondArray['media'] = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsResource') -> find($secondArray['page']->getResource());
 		$secondArray['idpage'] = $secondArray['page']->getId();
 		$template  = $secondArray['page']->getTemplate();
 		/*
@@ -53,9 +53,12 @@ class DefaultController extends Controller {
 
 		*/
 		
-		
 		//$secondArray['listado'] = UtilitiesAPI::esListado($secondArray['idpage'],$this);
 		//$secondArray['images'] = array();
+
+		if($secondArray['page']->getScheme()==1){
+			$secondArray['exhibitions'] = UtilitiesAPI::getExhibitions($this);
+		}
 		
 		$array = array_merge($firstArray, $secondArray);
 		return $this -> render('ProyectoFrontBundle:Default2:page'.$template.'.html.twig', $array);
@@ -66,7 +69,7 @@ class DefaultController extends Controller {
 		$secondArray['article'] = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsArticle') -> find($id);
 		$secondArray['resource'] = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsResource') -> find($secondArray['article']->getBackground());
 		$secondArray['background'] = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsResource') -> find($secondArray['article']->getBackground());
-		$secondArray['media'] = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsResource') -> find($secondArray['article']->getMedia());
+		$secondArray['media'] = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsResource') -> find($secondArray['article']->getResource());
 		$secondArray['theme'] = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsTheme') -> find($secondArray['article']->getTheme());
 		$secondArray['idpage'] = null;
 
