@@ -53,7 +53,7 @@ class CmsGallery
     /**
      * @var integer
      *
-     * @ORM\Column(name="subtitle", type="integer", nullable=false)
+     * @ORM\Column(name="subtitle", type="string", nullable=false)
      */
     private $subtitle;
 
@@ -209,7 +209,7 @@ class CmsGallery
     /**
      * Set subtitle
      *
-     * @param integer $subtitle
+     * @param string $subtitle
      * @return CmsGallery
      */
     public function setSubtitle($subtitle)
@@ -222,7 +222,7 @@ class CmsGallery
     /**
      * Get subtitle
      *
-     * @return integer 
+     * @return string 
      */
     public function getSubtitle()
     {

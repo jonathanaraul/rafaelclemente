@@ -192,65 +192,49 @@ class PageController extends Controller {
 		$locale = UtilitiesAPI::getLocale($class);
 		$data = $array['data'];
 		
-		$array['themes'] = $class -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsTheme') -> findAll();
 		$array['resource']  = $class -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsResource') -> findByType(3);
-
+		
+		
 		$filtros = array();
 		$filtros['published'] = array(1 => 'Si', 0 => 'No');
-		$filtros['theme'] = UtilitiesAPI::getFilterData($array['themes'],$class);
-		$filtros['parentPage'] = UtilitiesAPI::getFilter('CmsPage',$class);
-		$filtros['resource'] = UtilitiesAPI::getFilterData($array['resource'],$class);
 		
+		$filtros['resource'] = UtilitiesAPI::getFilterData($array['resource'],$class);
+
 		$em = $class -> getDoctrine() -> getEntityManager();	
 		
-		$dql = "SELECT n.id, n.name
-		        FROM ProyectoPrincipalBundle:CmsResource n 
-		        WHERE n.path not like :path and
-		              n.type = :type
-		        ORDER by n.name ASC ";
-	
-		$query = $em -> createQuery($dql);
-		$query -> setParameter('path', '%nodisponible.jpg%');
-		$query -> setParameter('type', 4);
-		
-		$filtros['background'] = $query -> getResult();
-		$helper = array();
-		for ($i=0; $i < count($filtros['background']) ; $i++) { 
-			$helper[$filtros['background'][$i]['id']] = $filtros['background'][$i]['name'];
-		}
-		$filtros['background'] = $helper;
+
 
 		$form = $class -> createFormBuilder($data) -> add('name', 'text', array('required' => true))
 		 -> add('title', 'text', array('required' => true)) 
 		 -> add('descriptionMeta', 'text', array('required' => true)) 
 		 -> add('keywords', 'text', array('required' => true)) 
 		 -> add('content', 'hidden', array('data' => '', ))
-		 -> add('upperText', 'text', array('required' => true)) 
-		 -> add('lowerText', 'text', array('required' => true))
-		 -> add('file', 'file', array('required' => false)) 
-		 -> add('parentPage', 'choice', array('choices' => $filtros['parentPage'], 'required' => false, )) 
-		 -> add('theme', 'choice', array('choices' => $filtros['theme'], 'required' => true, )) 
 		 -> add('resource', 'choice', array('choices' => $filtros['resource'], 'required' => true, )) 
-		 -> add('background', 'choice', array('choices' => $filtros['background'], 'required' => true, )) 
 		 -> add('published', 'checkbox', array('label' => 'Publicado', 'required' => false, )) 
 		 -> getForm();
 
+		
 		if ($class -> getRequest() -> isMethod('POST')) {
 
 			$contenido = $request -> request -> all();
+			//var_dump($contenido);
 			$contenido = $contenido['page']['content'];
 
-			$form -> bind($class -> getRequest());
-			$em = $class -> getDoctrine() -> getManager();
 
+			$form -> bind($class -> getRequest());
+			
+			$em = $class -> getDoctrine() -> getManager();
+			
 			if ($array['accion'] == 'nuevo') {
+				//echo'esta en nuevo';exit;
 				$data -> setSpecial(0);
 				$data -> setLang($locale);
 				$data -> setRank(UtilitiesAPI::getRank($locale, $class));
 				$data -> setSuspended(0);
-				$data -> setSpacer(0);
+				//$data -> setSpacer(0);
 				$data -> setTemplate(0);
-				$data -> setDescription('');
+				$data -> setScheme(0);
+				
 				$data -> setDateCreated(new \DateTime());
 				$data -> setFriendlyName(UtilitiesAPI::getFriendlyName($data->getTitle(),$class));
 			} else {
@@ -275,6 +259,7 @@ class PageController extends Controller {
 		$array['contenido'] = $array['form'] -> getVars();
 		$array['contenido'] = $array['contenido']['value'] -> getContent();
 
+		// echo'vamos bien5'.$array['accion'];exit;
 		return $class -> render('ProyectoPrincipalBundle:Page:New-Edit.html.twig', $array);
 	}
 

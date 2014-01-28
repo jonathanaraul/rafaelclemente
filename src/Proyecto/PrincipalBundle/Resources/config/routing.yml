@@ -132,6 +132,12 @@ proyecto_principal_resource_home:
       _method: POST
       _locale:  es|en
 
+proyecto_principal_gallery_list:
+    pattern:  /{_locale}/gallery/list
+    defaults: { _controller: ProyectoPrincipalBundle:Gallery:list }
+    requirements:
+        _locale:  es|en
+
 proyecto_principal_link_list:
     pattern:  /{_locale}/link/list
     defaults: { _controller: ProyectoPrincipalBundle:Link:list }

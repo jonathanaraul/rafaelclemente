@@ -1,0 +1,154 @@
+{% extends "ProyectoPrincipalBundle:Helpers:baseInterna.html.twig" %}
+{%block js%}
+<script type="text/javascript">
+var eliminar = '{{path('proyecto_principal_article_delete')}}';
+var cambiarStatus = '{{path('proyecto_principal_article_status')}}';
+
+</script>
+{%endblock%}
+
+{%block contents%} <td id="contents"><!-- whole contents -->
+<div id="sf_admin_container">
+	<h1>{{menu.subseccion|trans}}</h1>
+	<div id="sf_admin_header"></div>
+	<div id="sf_admin_bar">
+		<div class="sf_admin_filters">
+			<form id="filter-form" action="{{ url }}" method="post" {{ form_enctype(form) }}>
+				<fieldset>
+					<h2>{% trans %}Filtros{% endtrans %}</h2>
+					<div class="form-row">
+						<label for="name">{% trans %}Nombre{% endtrans %}:</label>
+						<div class="content">
+							{{ form_widget(form.name, { 'attr': {'size': '15'} }) }}
+						</div>
+					</div>
+					<div class="form-row">
+						<label for="published">{% trans %}Publicado{% endtrans %}:</label>
+						<div class="content">
+							{{ form_widget(form.published, { 'attr': {'class': 'theme_toggle'} }) }}
+						</div>
+					</div>
+				</fieldset>
+				<ul class="sf_admin_actions">
+					<li>
+						<input class="sf_admin_action_reset_filter" value="{% trans %}Mostrar todo{% endtrans %}" type="button" onclick="document.location.href='{{url}}';">
+					</li>
+					<li>
+						<input type="submit" name="filter" value="{% trans %}Filtro{% endtrans %}" >
+					</li>
+				</ul>
+				<div style="display: none">
+					{{ form_rest(form) }}
+				</div>
+			</form>
+		</div>
+	</div>
+	<div id="sf_admin_content">
+		<table cellspacing="0" class="sf_admin_list">
+			<thead>
+				{%if objects|length >0%}
+				<tr>
+					<th id="sf_admin_list_th_page_id">
+						{{ knp_pagination_sortable(pagination, 'Id', 'n.id') }}
+						</th>
+					<th id="sf_admin_list_th_name">
+						{{ knp_pagination_sortable(pagination, 'Nombre'|trans, 'n.name') }}
+					</th>
+					<th id="sf_admin_list_th_media_id">
+						{{ knp_pagination_sortable(pagination, 'Pagina'|trans, 'n.page') }}
+						</th>
+					<th id="sf_admin_list_th_media_id">
+						{{ knp_pagination_sortable(pagination, 'Articulo'|trans, 'n.article') }}
+						</th>
+					<th id="sf_admin_list_th_theme_id">
+						{{ knp_pagination_sortable(pagination, 'Fecha'|trans, 'n.dateCreated') }}
+						</th>
+					<th id="sf_admin_list_th_published">
+						{{ knp_pagination_sortable(pagination, 'Publicado'|trans, 'n.published') }}
+						</th>
+					<th id="sf_admin_list_th_sf_actions">{% trans %}Acciones{% endtrans %}</th>
+				</tr>
+				{%endif%}
+			</thead>
+
+			<tbody>
+				{%for object in objects%}
+					{% include 'ProyectoPrincipalBundle:Gallery:List-Element.html.twig' with {'object': object,'type': type} %}
+				{%endfor%}
+			</tbody>
+			<tfoot>
+				<tr>
+					<th colspan="8">
+					<div class="float-right navigation">
+						<!--<a href="/admin.php/es/page/list/page/1"><img align="absmiddle" alt="First" title="First" src="{{asset('sf/sf_admin/images/first.png')}}"></a><a href="/admin.php/es/page/list/page/1"><img align="absmiddle" alt="Previous" title="Previous" src="{{asset('sf/sf_admin/images/previous.png')}}"></a>
+						<span>1</span><a href="/admin.php/es/page/list/page/2">2</a>
+						<a href="/admin.php/es/page/list/page/2"><img align="absmiddle" alt="Next" title="Next" src="{{asset('sf/sf_admin/images/next.png')}}"></a><a href="/admin.php/es/page/list/page/2"><img align="absmiddle" alt="Last" title="Last" src="{{asset('sf/sf_admin/images/last.png')}}"></a>
+					-->
+					 {{ knp_pagination_render(pagination) }}
+					</div> 
+					
+					{{ pagination.getTotalItemCount }} {% trans %}resultados{% endtrans %}</th>
+				</tr>
+			</tfoot>
+		</table>
+		
+		<ul class="sf_admin_actions">
+			<li>
+				<input class="sf_admin_action_create" value="{% trans %}Añadir{% endtrans %}" type="button" onclick="document.location.href='{{path('proyecto_principal_article_create',{'type': type})}}';">
+			</li>
+			<!--<li>
+				<input class="sf_admin_action_rank" value="Determinar orden" type="button" onclick="document.location.href='{{path('proyecto_principal_page_rank')}}';">
+			</li>-->
+		</ul>
+	</div>
+	<div id="sf_admin_footer"></div>
+</div><!-- end whole contents -->
+</td>
+<script type="text/javascript">
+jQuery('.eliminar').click(function() {  
+ 	var actual = jQuery(this);
+ 	var id = actual.parent().attr('clave'); 	
+ 	var data = 'id='+id;
+	actual.parent().parent().parent().remove();
+	
+	jQuery.ajax({
+		type : "POST",
+		url : eliminar,
+		data : data,
+		dataType : "json",
+		success : function(data) {
+								 }
+	      });
+
+    return false;
+  });
+ jQuery('.change_published').click(function() {  
+ 	var actual = jQuery(this);
+ 	var id = actual.attr('clave'); 	
+ 	var data = 'id='+id;
+ 	
+ 	var estado = actual.prev().css('display');
+ 	
+ 	if(estado == 'none'){
+ 		data +='&tarea=0';
+ 		actual.prev().prev().css('display','none');
+ 		actual.prev().css('display','block');
+ 	}
+ 	else{
+ 		data +='&tarea=1';
+ 		actual.prev().prev().css('display','block');
+ 		actual.prev().css('display','none');
+ 	}
+	jQuery.ajax({
+		type : "POST",
+		url : cambiarStatus,
+		data : data,
+		dataType : "json",
+		success : function(data) {
+								 }
+	      });
+
+    return false;
+  });
+</script>
+{%endblock%}

@@ -153,6 +153,7 @@ class ResourceController extends Controller {
 
 	public static function normal($array, Request $request, $class) {
 
+
 		if ($array['accion'] == 'nuevo')
 			$data = new CmsResource();
 		else
@@ -161,15 +162,12 @@ class ResourceController extends Controller {
 		$filtros = array();
 		//$filtros['published'] = array(1 => 'Si', 0 => 'No');
 
-		
 		$form = $class -> createFormBuilder($data) 
 		-> add('name', 'text', array('required' => true)) 
 		-> add('file', 'file', array('required' => true)) 
 		-> add('published', 'checkbox', array('label' => 'Publicado', 'required' => false, )) 
-		-> add('home', 'checkbox', array('label' => 'Pagina Principal', 'required' => false, )) 
 		-> getForm();
 		
-
 		if ($class -> getRequest() -> isMethod('POST')) {
 
 			$form -> bind($class -> getRequest());

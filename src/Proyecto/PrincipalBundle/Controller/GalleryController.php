@@ -14,23 +14,25 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Util\StringUtils;
 
 use Proyecto\PrincipalBundle\Entity\Usuario;
-use Proyecto\PrincipalBundle\Entity\CmsArticle;
-use Proyecto\PrincipalBundle\Entity\CmsPage;
+use Proyecto\PrincipalBundle\Entity\CmsResource;
+use Proyecto\PrincipalBundle\Entity\CmsGallery;
+use Proyecto\PrincipalBundle\Entity\CmsGalleryResource;
 
 
-class ArticleController extends Controller {
+class GalleryController extends Controller {
 
-	public function listAction($type,Request $request) {
+	public function listAction(Request $request) {
+
 		
 		$locale = UtilitiesAPI::getLocale($this);
-		$config = UtilitiesAPI::getConfig($type,$this);
-		$url = $this -> generateUrl('proyecto_principal_article_list',array('type' => $type));
-		$firstArray = UtilitiesAPI::getDefaultContent('ARTICULOS', $config['list'], $this);
+		$config = UtilitiesAPI::getConfig('gallery',$this);
+		$url = $this -> generateUrl('proyecto_principal_gallery_list');
+		$firstArray = UtilitiesAPI::getDefaultContent('RECURSOS', $config['list'], $this);
 		$firstArray['type'] = $config['type'];
 
 		$filtros['published'] = array(1 => 'Si', 0 => 'No');
 		///////////////////////////////////////////////////////////////////////////////////////////////////
-		$data = new CmsArticle();
+		$data = new CmsGallery();
 		$form = $this -> createFormBuilder($data) 
 		-> add('name', 'text', array('required' => false))
 		-> add('published', 'choice', array('choices' => $filtros['published'], 'required' => false, )) 
@@ -112,7 +114,7 @@ class ArticleController extends Controller {
 		}
 		//////////////////////////////////////////////////////////////////////////////////////////////////
 		else {
-			$dql = "SELECT n FROM ProyectoPrincipalBundle:CmsArticle n WHERE n.lang = :lang ";
+			$dql = "SELECT n FROM ProyectoPrincipalBundle:CmsGallery n WHERE n.lang = :lang ";
 			$query = $em -> createQuery($dql);
 			$query -> setParameter('lang', $locale);
 		}
@@ -123,26 +125,30 @@ class ArticleController extends Controller {
 		$objects = $pagination -> getItems();
 		$auxiliar = array();
 
-
 		for ($i = 0; $i < count($objects); $i++) {
 			$auxiliar[$i]['id'] = $objects[$i] -> getId();
 			$auxiliar[$i]['name'] = $objects[$i] -> getName();
+			$auxiliar[$i]['page'] = $objects[$i] -> getPage();
+			if(is_null($auxiliar[$i]['page'])){
+				$auxiliar[$i]['page'] ="-";
+			}
+			else if($auxiliar[$i]['page']==0){
+				$auxiliar[$i]['page'] ="Inicio";
+			} 
+			$auxiliar[$i]['article'] = $objects[$i] -> getArticle();
+			if(is_null($auxiliar[$i]['article'])){
+				$auxiliar[$i]['article'] ="-";
+			}
+
 			$auxiliar[$i]['published'] = $objects[$i] -> getPublished();
 			$auxiliar[$i]['dateCreated'] = $objects[$i] -> getDateCreated()->format('d/m/Y');
-			$auxiliar[$i]['resource'] = '0';
-			if($objects[$i] -> getResource() != 0 && $objects[$i] -> getResource() != null){
-				$helper = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsResource') -> find($objects[$i] -> getResource());
-				if($helper!= NULL){
-					$auxiliar[$i]['resource'] = $helper  -> getWebPath();
-				}
-			}
 		}
 		$objects = $auxiliar;
 
 		$secondArray = array('pagination' => $pagination, 'filtros' => $filtros, 'objects' => $objects, 'form' => $form -> createView(), 'url' => $url);
 
 		$array = array_merge($firstArray, $secondArray);
-		return $this -> render('ProyectoPrincipalBundle:Article:List.html.twig', $array);
+		return $this -> render('ProyectoPrincipalBundle:Gallery:List.html.twig', $array);
 	}
 	
 	public function editAction($type,$id, Request $request) {

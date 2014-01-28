@@ -53,8 +53,6 @@ class CmsResource
      * @ORM\Column(name="published", type="boolean", nullable=false)
      */
     private $published;
-
-
     /**
      * @var boolean
      *

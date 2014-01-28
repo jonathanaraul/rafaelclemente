@@ -13,34 +13,7 @@ use Proyecto\PrincipalBundle\Entity\Proyecto;
 
 class UtilitiesAPI extends Controller {
 		
-	public static function getFriendlyName($title,$class){
-		$friendlyName = strtolower($title);
-		$friendlyName =  str_replace("á", "a", $friendlyName);
-		$friendlyName =  str_replace("é", "e", $friendlyName);
-		$friendlyName =  str_replace("í", "i", $friendlyName);
-		$friendlyName =  str_replace("ó", "o", $friendlyName);
-		$friendlyName =  str_replace("ú", "u", $friendlyName);
-		$friendlyName =  str_replace("'", "", $friendlyName);
-		$friendlyName =  str_replace('"', "", $friendlyName);
-		$friendlyName =  str_replace("ñ", "n", $friendlyName);
-		$friendlyName =  str_replace("_", " ", $friendlyName);
-		$friendlyName =  str_replace(".", " ", $friendlyName);
-		$friendlyName =  str_replace(":", " ", $friendlyName);
-		$friendlyName =  str_replace("-", " ", $friendlyName);
-		$friendlyName =  str_replace("           ", " ", $friendlyName);
-		$friendlyName =  str_replace("          ", " ", $friendlyName);
-		$friendlyName =  str_replace("         ", " ", $friendlyName);
-		$friendlyName =  str_replace("        ", " ", $friendlyName);
-		$friendlyName =  str_replace("       ", " ", $friendlyName);
-		$friendlyName =  str_replace("      ", " ", $friendlyName);
-		$friendlyName =  str_replace("     ", " ", $friendlyName);
-		$friendlyName =  str_replace("    ", " ", $friendlyName);
-		$friendlyName =  str_replace("   ", " ", $friendlyName);
-		$friendlyName =  str_replace("  ", " ", $friendlyName);
-		$friendlyName =  str_replace(" ", "-", $friendlyName);
-		
-		return $friendlyName;
-	}
+
 	public static function getRank($locale, $class){
 
         $em = $class->getDoctrine()->getManager();
@@ -78,7 +51,7 @@ class UtilitiesAPI extends Controller {
 			$array['translate'] = 'Traducción de Página';
 			$array['type'] = $type;
 		}
-		if($type == 'exhibitions'){
+		else if($type == 'exhibitions'){
 			$array['idtype'] = 0;
 			$array['list'] = 'Mostrar Exposiciones';
 			$array['create'] = 'Añadir Exposicion';
@@ -134,6 +107,14 @@ class UtilitiesAPI extends Controller {
 		}
 		else if($type == 'reservation'){
 			$array['list'] = 'Mostrar Reservas';
+			$array['type'] = $type;
+		}
+		else if($type == 'gallery'){
+			//$array['idtype'] = 0;
+			$array['list'] = 'Mostrar Galerías';
+			$array['create'] = 'Añadir Galería';
+			$array['edit'] = 'Editar Galería';
+			$array['translate'] = 'Traducción de Galería';
 			$array['type'] = $type;
 		}
 		return $array;
@@ -318,6 +299,34 @@ class UtilitiesAPI extends Controller {
 		
 	 	return $fecha;
 	 }
+	 	public static function getFriendlyName($title,$class){
+		$friendlyName = strtolower($title);
+		$friendlyName =  str_replace("á", "a", $friendlyName);
+		$friendlyName =  str_replace("é", "e", $friendlyName);
+		$friendlyName =  str_replace("í", "i", $friendlyName);
+		$friendlyName =  str_replace("ó", "o", $friendlyName);
+		$friendlyName =  str_replace("ú", "u", $friendlyName);
+		$friendlyName =  str_replace("'", "", $friendlyName);
+		$friendlyName =  str_replace('"', "", $friendlyName);
+		$friendlyName =  str_replace("ñ", "n", $friendlyName);
+		$friendlyName =  str_replace("_", " ", $friendlyName);
+		$friendlyName =  str_replace(".", " ", $friendlyName);
+		$friendlyName =  str_replace(":", " ", $friendlyName);
+		$friendlyName =  str_replace("-", " ", $friendlyName);
+		$friendlyName =  str_replace("           ", " ", $friendlyName);
+		$friendlyName =  str_replace("          ", " ", $friendlyName);
+		$friendlyName =  str_replace("         ", " ", $friendlyName);
+		$friendlyName =  str_replace("        ", " ", $friendlyName);
+		$friendlyName =  str_replace("       ", " ", $friendlyName);
+		$friendlyName =  str_replace("      ", " ", $friendlyName);
+		$friendlyName =  str_replace("     ", " ", $friendlyName);
+		$friendlyName =  str_replace("    ", " ", $friendlyName);
+		$friendlyName =  str_replace("   ", " ", $friendlyName);
+		$friendlyName =  str_replace("  ", " ", $friendlyName);
+		$friendlyName =  str_replace(" ", "-", $friendlyName);
+		
+		return $friendlyName;
+	}
 	/*
 
 	 public static function obtenerFechaSistema($class) {

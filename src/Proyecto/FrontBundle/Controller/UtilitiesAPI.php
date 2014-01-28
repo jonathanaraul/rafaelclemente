@@ -4,10 +4,7 @@ namespace Proyecto\FrontBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\SecurityContext;
-use Proyecto\PrincipalBundle\Entity\Usuario;
-use Proyecto\PrincipalBundle\Entity\Autores;
-use Proyecto\PrincipalBundle\Entity\Sistema;
-use Proyecto\PrincipalBundle\Entity\Proyecto;
+use Proyecto\PrincipalBundle\Entity\CmsGalleryResource;
 
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -32,6 +29,42 @@ class UtilitiesAPI extends Controller {
 	const TIPO_CARTELERA = 1;
 	const TIPO_TALLERES = 2;
 
+	public static function getGalleryResources($gallery, $class){
+		//$locale = UtilitiesAPI::getLocale($class);
+		$em = $class->getDoctrine()->getManager();
+
+		$query = $em -> createQuery('SELECT r
+    								 FROM ProyectoPrincipalBundle:CmsGalleryResource d,
+    								      ProyectoPrincipalBundle:CmsResource r
+   	 								 WHERE d.gallery      = :gallery
+   	 								  and  d.resource = r.id
+   	 								  and  r.published = :published
+    								 ORDER BY d.rank ASC') 
+    		   
+    		   -> setParameter('gallery', $gallery)
+    		   -> setParameter('published', 1);
+		$array = $query -> getResult();
+
+		$array = UtilitiesAPI::devuelveRecursosExistentes($array,$class);
+
+		return $array;
+	}
+	public static function devuelveRecursosExistentes($array,$class){
+		$helper = array();
+		$contador = 0;
+
+		for ($i=0; $i < count($array) ; $i++) { 
+			
+			if($array[$i]->getPath()!= null && $array[$i]->getPath()!= '' && $array[$i]->getPath()!= 'initial'){
+				if (file_exists($array[$i]->getWebPath())) {
+   					$helper[$contador] = $array[$i];
+   					$contador++;
+				}
+			}
+		}
+
+		return $helper;
+	}
 	public static function getExhibitions($class){
 		$locale = UtilitiesAPI::getLocale($class);
 	
@@ -41,7 +74,7 @@ class UtilitiesAPI extends Controller {
     								 FROM ProyectoPrincipalBundle:CmsArticle d
    	 								 WHERE d.lang      = :locale and
    	 								       d.published = :published
-    								 ORDER BY d.rank ASC') 
+    								 ORDER BY d.date DESC') 
     		   -> setParameter('locale', $locale)
 			   -> setParameter('published', 1);
 

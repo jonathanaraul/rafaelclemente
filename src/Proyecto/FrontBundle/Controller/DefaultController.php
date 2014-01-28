@@ -23,9 +23,8 @@ class DefaultController extends Controller {
 
 		$firstArray = UtilitiesAPI::getDefaultContent('inicio', $this);
 		$secondArray = array();
-		//$secondArray['backgrounds'] = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsResource') -> findByHome(1);
+		$secondArray['gallery'] = UtilitiesAPI::getGalleryResources(1, $this);
 		$secondArray['idpage'] = null;
-		//$secondArray['theme'] = array('color'=>'black','id'=>0);
 		
 		$array = array_merge($firstArray, $secondArray);
 		return $this -> render('ProyectoFrontBundle:Default2:inicio.html.twig', $array);

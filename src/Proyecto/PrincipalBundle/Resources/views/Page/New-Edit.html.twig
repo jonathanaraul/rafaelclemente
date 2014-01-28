@@ -12,12 +12,6 @@
 			<input type="hidden" name="page_id" id="page_id" value="">
 			<fieldset id="sf_fieldset_none" class="">
 				<div class="form-row">
-					<label for="page_parent_page_id" class="required">{% trans %}Páginas relacionadas{% endtrans %}:</label>
-					<div class="content">
-						{{ form_widget(form.parentPage) }}
-					</div>
-				</div>
-				<div class="form-row">
 					<label for="page_title" class="required">{% trans %}Título{% endtrans %}:</label>
 					<div class="content">
 						{{ form_widget(form.title, { 'attr': {'size': '80'} }) }}
@@ -51,51 +45,14 @@
 					</div>
 				</div>
 				<div class="form-row">
-					<label for="page_upper_text" class="required">{% trans %}Texto Superior{% endtrans %}:</label>
-					<div class="content">
-						{{ form_widget(form.upperText, { 'attr': {'size': '80'} }) }}
-					</div>
-				</div>
-				<div class="form-row">
-					<label for="page_lower_text" class="required">{% trans %}Texto Inferior{% endtrans %}:</label>
-					<div class="content">
-						{{ form_widget(form.lowerText, { 'attr': {'size': '80'} }) }}
-					</div>
-				</div>
-				<div class="form-row">
-					<label for="page_pdf" class="required">{% trans %}Pdf{% endtrans %}:</label>
-					<div class="content">
-						{{ form_widget(form.file, { 'attr': {'size': '64'} }) }}
-						<br>
-					</div>
-				</div>
-				<div class="form-row">
-					<label for="page_background_id" class="required">{% trans %}Fondo{% endtrans %}:</label>
-					<div class="content">
-						{{ form_widget(form.background) }}
-
-					</div>
-				</div>
-				<div class="form-row">
 					<label for="page_media_id" class="required">{% trans %}Imagen{% endtrans %}:</label>
 					<div class="content">
-						{{ form_widget(form.media, { 'attr': {'class': 'photo_toggle'} }) }}
+						{{ form_widget(form.resource, { 'attr': {'class': 'photo_toggle'} }) }}
 						<div class="media_container">
-							{%for object in media%}
+							{%for object in resource%}
 							<div class="media_{{object.id}}" style="display: none;">
 								<img alt="{{object.name}}" src="{{ object.getWebPath | apply_filter('my_thumb') }}" style="height: 100px;width: 106px;">
 							</div>
-							{%endfor%}
-						</div>
-					</div>
-				</div>
-				<div class="form-row">
-					<label for="page_theme_id" class="required">{% trans %}Tema{% endtrans %}:</label>
-					<div class="content">
-						{{ form_widget(form.theme, { 'attr': {'class': 'theme_toggle'} }) }}
-						<div class="theme_container">
-							{%for object in themes%}
-							<div class="theme_{{object.id}}" style="background-color: {{object.color}}; display: none;height: 100px;width: 106px;"></div>
 							{%endfor%}
 						</div>
 					</div>
