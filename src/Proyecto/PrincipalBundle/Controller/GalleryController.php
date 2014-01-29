@@ -23,7 +23,6 @@ class GalleryController extends Controller {
 
 	public function listAction(Request $request) {
 
-		
 		$locale = UtilitiesAPI::getLocale($this);
 		$config = UtilitiesAPI::getConfig('gallery',$this);
 		$url = $this -> generateUrl('proyecto_principal_gallery_list');
@@ -45,18 +44,9 @@ class GalleryController extends Controller {
 
 			if ($form -> isValid()) {
 
-				$dql = "SELECT n FROM ProyectoPrincipalBundle:CmsArticle n ";
+				$dql = "SELECT n FROM ProyectoPrincipalBundle:CmsGallery n ";
 				$where = false;
 
-				if (is_numeric($data -> getCategory())) {
-
-					if ($where == false) {
-						$dql .= 'WHERE ';
-						$where = true;
-					}
-					$dql .= ' n.category = :category ';
-
-				}
 				if (!(trim($data -> getName()) == false)) {
 
 					if ($where == false) {
@@ -79,7 +69,7 @@ class GalleryController extends Controller {
 					}
 					$dql .= ' n.published = :published ';
 				}
-
+				/*
 				if ($where == false) {
 						$dql .= 'WHERE ';
 						$where = true;
@@ -87,7 +77,7 @@ class GalleryController extends Controller {
 						$dql .= 'AND ';
 				}
 				$dql .= ' n.type = :type ';
-
+				*/
 				if ($where == false) {
 					$dql .= 'WHERE ';
 					$where = true;
@@ -99,16 +89,13 @@ class GalleryController extends Controller {
 
 				$query = $em -> createQuery($dql);
 
-				if (is_numeric($data -> getCategory())) {
-					$query -> setParameter('category', $data -> getCategory());
-				}
 				if (!(trim($data -> getName()) == false)) {
 					$query -> setParameter('name', '%' . $data -> getName() . '%');
 				}
 				if (is_numeric($data -> getPublished())) {
 					$query -> setParameter('published', $data -> getPublished());
 				}
-				$query -> setParameter('type', $config['idtype']);
+				//$query -> setParameter('type', $config['idtype']);
 				$query -> setParameter('lang', $locale);
 			}
 		}
@@ -129,17 +116,15 @@ class GalleryController extends Controller {
 			$auxiliar[$i]['id'] = $objects[$i] -> getId();
 			$auxiliar[$i]['name'] = $objects[$i] -> getName();
 			$auxiliar[$i]['page'] = $objects[$i] -> getPage();
-			if(is_null($auxiliar[$i]['page'])){
-				$auxiliar[$i]['page'] ="-";
-			}
-			else if($auxiliar[$i]['page']==0){
-				$auxiliar[$i]['page'] ="Inicio";
-			} 
-			$auxiliar[$i]['article'] = $objects[$i] -> getArticle();
-			if(is_null($auxiliar[$i]['article'])){
-				$auxiliar[$i]['article'] ="-";
-			}
 
+			if((is_null($auxiliar[$i]['page']))==false && $auxiliar[$i]['page']==0) {
+				$auxiliar[$i]['page'] = "Inicio";
+			}
+				
+			else $auxiliar[$i]['page'] = UtilitiesAPI::getSingleAttribute('CmsPage','name',$auxiliar[$i]['page'],$this);
+			
+			$auxiliar[$i]['article'] = UtilitiesAPI::getSingleAttribute('CmsArticle','name',$objects[$i] -> getArticle(),$this);
+			
 			$auxiliar[$i]['published'] = $objects[$i] -> getPublished();
 			$auxiliar[$i]['dateCreated'] = $objects[$i] -> getDateCreated()->format('d/m/Y');
 		}
@@ -151,73 +136,70 @@ class GalleryController extends Controller {
 		return $this -> render('ProyectoPrincipalBundle:Gallery:List.html.twig', $array);
 	}
 	
-	public function editAction($type,$id, Request $request) {
+	public function editAction($id, Request $request) {
 
-		$config = UtilitiesAPI::getConfig($type,$this);
+		$config = UtilitiesAPI::getConfig('gallery',$this);
 		$firstArray = array();
-		$firstArray = UtilitiesAPI::getDefaultContent('ARTICULOS',$config['edit'], $this);
+		$firstArray = UtilitiesAPI::getDefaultContent('RECURSOS',$config['edit'], $this);
 
 		$secondArray = array('accion' => 'editar');
-		$secondArray['url'] = $this -> generateUrl('proyecto_principal_article_edit', array('type'=>$type,'id' => $id));
+		$secondArray['url'] = $this -> generateUrl('proyecto_principal_gallery_edit', array('id' => $id));
 		$secondArray['id'] = $id;
-		$secondArray['fechasprevias'] = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsDate') -> findByArticle($id);
-
+		
 		$array = array_merge($firstArray, $secondArray);
 		$array = array_merge($array, $config);
 
-		return ArticleController::normal($array, $request, $this);
+		return GalleryController::normal($array, $request, $this);
 	}
-	public function createAction($type,Request $request) {
+	public function createAction(Request $request) {
 		
-		$config = UtilitiesAPI::getConfig($type,$this);
+		$config = UtilitiesAPI::getConfig('gallery',$this);
 		$firstArray = array();
-		$firstArray = UtilitiesAPI::getDefaultContent('ARTICULOS',$config['create'], $this);
+		$firstArray = UtilitiesAPI::getDefaultContent('RECURSOS',$config['create'], $this);
 
 		$secondArray = array('accion' => 'nuevo');	
-		$secondArray['url'] = $this -> generateUrl('proyecto_principal_article_create',array('type' => $type));
+		$secondArray['url'] = $this -> generateUrl('proyecto_principal_gallery_create');
+		
 		$array = array_merge($firstArray, $secondArray);
 		$array = array_merge($array, $config);
 
-		return ArticleController::normal($array, $request, $this);
+		return GalleryController::normal($array, $request, $this);
 	}
 	public static function normal($array, Request $request, $class) {
 			
 		$locale = UtilitiesAPI::getLocale($class);
 
 		if ($array['accion'] == 'nuevo')
-			$data = new CmsArticle();
-		else
-			$data = $class -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsArticle') -> find($array['id']);
-
-		$objects = $class -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsPage') -> findAll();
-		$resource = $class -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsResource') -> findByType(3);
-		
+			$data = new CmsGallery();
+		else{
+			$data = $class -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsGallery') -> find($array['id']);
+			$array['galleryResources'] = UtilitiesAPI::getGalleryResources($array['id'],$class);
+		}
 
 		$filtros['published'] = array(1 => 'Si', 0 => 'No');
-		$filtros['resource'] = UtilitiesAPI::getFilterData($resource, $class);
-		
+		$filtros['page'] = UtilitiesAPI::getDataByEntity('CmsPage',false,$class);
+		$filtros['article'] = UtilitiesAPI::getDataByEntity('CmsArticle',false,$class);
+		$array['resources'] = UtilitiesAPI::getDataByEntityWithoutLang('CmsResource',$class);
+		$array['resources'] = UtilitiesAPI::devuelveRecursosExistentes($array['resources'],$class);
 
-		$validaciones = array(true,true);
-		if($array['type']=='news') 	$validaciones = array(false,false);
+		$filtros['published'] = array(1 => 'Si', 0 => 'No');
 		
 		$form = $class -> createFormBuilder($data) 
 		-> add('name', 'text', array('required' => true)) 
-		-> add('place', 'text', array('required' => true)) 
+		-> add('subtitle', 'text', array('required' => true)) 
 		-> add('keywords', 'text', array('required' => true)) 
 		-> add('content', 'hidden', array('data' => '', )) 
-		-> add('resource', 'choice', array('choices' => $filtros['resource'], 'required' => true, )) 
+		-> add('page', 'choice', array('choices' => $filtros['page'], 'required' => false, )) 
+		-> add('article', 'choice', array('choices' => $filtros['article'], 'required' => false, )) 
 		-> add('published', 'checkbox', array('label' => 'Publicado', 'required' => false, )) 
 		-> getForm();
 		
 		if ($class -> getRequest() -> isMethod('POST')) {
 
-			$contenido = $request -> request -> all();
-
 			$em = $class -> getDoctrine() -> getManager();
-			$fechas = null;
-			
-			//$fechas = $contenido['fechas'];
-			
+
+			$contenido = $request -> request -> all();			
+			$numeracion = $contenido['numeracion'];
 			
 			$contenido = $contenido['page']['content'];
 
@@ -228,13 +210,14 @@ class GalleryController extends Controller {
 				$data -> setLang($locale);
 				$data -> setSuspended(0);
 				$data -> setDateCreated(new \DateTime());
-				$data -> setRank(0);
-
-				$data -> setDate(new \DateTime());
 				
 			} else {
 				$data -> setDateUpdated(new \DateTime());
+				if($data->getId()==1){
+					$data->setPage(0);
+				}
 			}
+			$data -> setType(3);
 			$data -> setContent($contenido);
 			$data -> setIp($class -> container -> get('request') -> getClientIp());
 			$data -> setUser($array['user'] -> getId());
@@ -244,34 +227,40 @@ class GalleryController extends Controller {
 				$em -> persist($data);
 
 			$em -> flush();
-			/*
-			if($array['type'] != 'news'){
-				
-				$fechasBorrar= $class -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsDate') -> findByArticle($data->getId());
-				for ($i=0; $i < count($fechasBorrar); $i++) {
-					$em -> remove($fechasBorrar[$i]);
-					$em -> flush();
-					}
 
-			foreach ($fechas as $key => $value) {
-
-				$fecha = new CmsDate();
-				$fecha->setArticle($data);
-				$fecha->setDate(UtilitiesAPI::convertirFechaNormal($value,$class));
-				$em -> persist($fecha);
+			$elementosPrevios = $class -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsGalleryResource') -> findByGallery($data->getId());
+			
+			for ($i=0; $i < count($elementosPrevios); $i++) {
+				$em -> remove($elementosPrevios[$i]);
 				$em -> flush();
 			}
-			}*/
-			return $class -> redirect($class -> generateUrl('proyecto_principal_article_list',array('type' => $array['type'])));
+
+
+			$arregloAuxiliar =explode(",", $numeracion);
+			
+			for ($i=0; $i < count($arregloAuxiliar); $i++) {
+
+				$element = new CmsGalleryResource();
+				$element->setGallery($data->getId());
+				$element->setResource($arregloAuxiliar[$i]);
+				$element->setRank($i+1);
+				$element->setIp($class -> container -> get('request') -> getClientIp());
+				$element->setUser($array['user'] -> getId());
+				$em -> persist($element);
+				$em -> flush();
+			}
+			
+			return $class -> redirect($class -> generateUrl('proyecto_principal_gallery_list'));
 			//if ($form -> isValid()) {}
 		}
 
 		$array['form'] = $form -> createView();
-		$array['resource'] = $resource;
+		//$array['resource'] = $resource;
 		$array['contenido'] = $array['form'] -> getVars();
 		$array['contenido'] = $array['contenido']['value'] -> getContent();
 
-		return $class -> render('ProyectoPrincipalBundle:Article:New-Edit.html.twig', $array);
+
+		return $class -> render('ProyectoPrincipalBundle:Gallery:New-Edit.html.twig', $array);
 	}
 	public function deleteAction() {
 
@@ -284,10 +273,17 @@ class GalleryController extends Controller {
 		$em = $this -> getDoctrine() -> getManager();
 		
 		//Remover original
-		$object = $em -> getRepository('ProyectoPrincipalBundle:CmsArticle') -> find($id);
-		$em -> remove($object);
-		$em -> flush();
-		
+		$object = $em -> getRepository('ProyectoPrincipalBundle:CmsGallery') -> find($id);
+		if((is_null($object))==false){
+			$em -> remove($object);
+			$em -> flush();
+		}
+
+		$objects = $em -> getRepository('ProyectoPrincipalBundle:CmsGalleryResource') -> findByGallery($id);
+		for ($i=0; $i < count($objects) ; $i++) { 
+			$em -> remove($objects[$i]);
+			$em -> flush();
+		}
 
 		$estado = true;
 		$respuesta = new response(json_encode(array('estado' => $estado)));
@@ -315,48 +311,5 @@ class GalleryController extends Controller {
 		$respuesta -> headers -> set('content_type', 'aplication/json');
 		return $respuesta;
 	}
-	public static function insertaFechas($class)
-	{
-			echo "llego a la funcion";
-			$articles = array( 43 =>14, 44=>16 );//Id articulo => hora funcion
-			
-			$fecha = new \DateTime("now");
-			var_dump($fecha);
-			$em = $class -> getDoctrine() -> getEntityManager();	
-			
-			
-			for ($i=0; $i < 30 ; $i++) {
-				foreach ($articles as $key => $value) {
-					
-					$fecha->setTime ( $value, 0, 0 );
-					
-					$date = new CmsDate();
-					$date->setArticle($class -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsArticle') -> find($key));
-					$date->setDate($fecha);
-					$em -> persist($date);
-					$em -> flush();
-
-					$fecha->add(new \DateInterval('PT3H'));
-
-					$date = new CmsDate();
-					$date->setArticle($class -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsArticle') -> find($key));
-					$date->setDate($fecha);
-					$em -> persist($date);
-					$em -> flush();
-
-				}
-			$fecha->add(new \DateInterval('P1D'));
-			}
-			//echo'final de funcion';
-
-			foreach ($articles as $key => $value) {
-				$dates = $class -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsDate') -> findByArticle($key);
-				echo "</br><hr>\n Para el articulo de Id ".$key.' las fechas son:</br>\n';
-				var_dump($dates);
-			}
-			
-			
-		exit;
-	}
-
+	
 }

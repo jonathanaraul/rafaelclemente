@@ -13,7 +13,114 @@ use Proyecto\PrincipalBundle\Entity\Proyecto;
 
 class UtilitiesAPI extends Controller {
 		
+	public static function getGalleryResources($gallery,$class){
+		$locale = UtilitiesAPI::getLocale($class);
+	
+		$em = $class->getDoctrine()->getManager();
 
+		$query = $em -> createQuery('SELECT d.resource,d.rank,r.name
+    								 FROM ProyectoPrincipalBundle:CmsGalleryResource d,
+    								      ProyectoPrincipalBundle:CmsResource r
+   	 								 WHERE d.gallery      = :gallery
+   	 								  and  d.resource = r.id
+   	 								  and  r.published = :published
+    								 ORDER BY d.rank ASC') 
+    		   
+    		   -> setParameter('gallery', $gallery)
+    		   -> setParameter('published', 1);
+		$array = $query -> getResult();
+
+		return $array;
+	}
+	public static function getDataByEntity($entity,$inicial,$class){
+		$locale = UtilitiesAPI::getLocale($class);
+	
+		$em = $class->getDoctrine()->getManager();
+		
+		$sql = 'SELECT d.id,d.name
+    								 FROM ProyectoPrincipalBundle:'.$entity.' d
+   	 								 WHERE d.lang      = :locale and
+   	 								       d.published = :published
+    								 ORDER BY d.name ASC';
+
+		$query = $em -> createQuery($sql) 
+    		   -> setParameter('locale', $locale)
+			   -> setParameter('published', 1);
+
+		$array = $query -> getResult();
+
+		$helper = array();
+
+		if($inicial==true){
+			$helper[0] = 'Sin Definir';
+		}
+
+		for ($i=0; $i < count($array) ; $i++) { 
+			$helper[$array[$i]['id']] = $array[$i]['name'];
+		}
+		
+		$array = $helper;
+		return $array;
+	}
+	public static function getDataByEntityWithoutLang($entity,$class){
+		$locale = UtilitiesAPI::getLocale($class);
+	
+		$em = $class->getDoctrine()->getManager();
+		
+
+		$sql = 'SELECT d FROM ProyectoPrincipalBundle:'.$entity.' d
+   	 			WHERE d.published = :published ORDER BY d.dateCreated ASC';
+
+		$query = $em -> createQuery($sql) 
+			   -> setParameter('published', 1);
+
+		$array = $query -> getResult();
+
+		return $array;
+	}
+	public static function devuelveRecursosExistentes($array,$class){
+		$helper = array();
+		$contador = 0;
+
+		for ($i=0; $i < count($array) ; $i++) { 
+			
+			if($array[$i]->getPath()!= null && $array[$i]->getPath()!= '' && $array[$i]->getPath()!= 'initial'){
+				if (file_exists($array[$i]->getWebPath())) {
+   					$helper[$contador] = $array[$i];
+   					$contador++;
+				}
+			}
+		}
+
+		return $helper;
+	}
+	public static function getSingleAttribute($entity,$attribute,$id, $class){
+
+		$resultado = "";
+        $em = $class->getDoctrine()->getManager();
+       
+		$locale = UtilitiesAPI::getLocale($class);
+	
+		$em = $class->getDoctrine()->getManager();
+		
+		$sql = 'SELECT d.'.$attribute.'
+    								 FROM ProyectoPrincipalBundle:'.$entity.' d
+   	 								 WHERE d.id = :id';
+
+		$query = $em -> createQuery($sql) 
+			   -> setParameter('id', $id);
+
+		$array = $query -> getResult();
+
+		if(count ($array)<1){
+			$resultado = '-';
+		}
+		else{
+			$resultado = $array[0][$attribute];
+		}
+
+		return $resultado;
+	}
 	public static function getRank($locale, $class){
 
         $em = $class->getDoctrine()->getManager();

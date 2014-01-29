@@ -210,41 +210,6 @@ class ResourceController extends Controller {
 		return $class -> render('ProyectoPrincipalBundle:Resource:New-Edit.html.twig', $array);
 	}
 
-	public function translateAction($type, $id, Request $request) {
-
-		$config = UtilitiesAPI::getConfig($type, $this);
-		$firstArray = array();
-		$firstArray = UtilitiesAPI::getDefaultContent('ARTICULOS', $config['translate'], $this);
-
-		$secondArray = array('accion' => 'editar');
-		$secondArray['url'] = $this -> generateUrl('proyecto_principal_article_translate', array('type' => $type, 'id' => $id));
-		$secondArray['id'] = $id;
-
-		$data = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsArticleTranslate') -> findOneByArticle($id);
-		$object = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsArticle') -> find($id);
-
-		if (!$object) {
-			throw $this -> createNotFoundException('El articulo que intenta traducir no existe ');
-		}
-		//$secondArray = array();
-		$secondArray['object'] = $object;
-
-		if (!$data) {
-			$secondArray['accion'] = 'nuevo';
-			$secondArray['data'] = new CmsArticleTranslate();
-		} else {
-			$secondArray['accion'] = 'editar';
-			$secondArray['data'] = $data;
-		}
-
-		//$secondArray['id'] = $id;
-
-		$array = array_merge($firstArray, $secondArray);
-		$array = array_merge($array, $config);
-
-		return ArticleController::traduccion($array, $request, $this);
-	}
-
 	public function deleteAction() {
 
 		$peticion = $this -> getRequest();

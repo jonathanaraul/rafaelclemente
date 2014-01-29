@@ -132,11 +132,34 @@ proyecto_principal_resource_home:
       _method: POST
       _locale:  es|en
 
+
 proyecto_principal_gallery_list:
     pattern:  /{_locale}/gallery/list
     defaults: { _controller: ProyectoPrincipalBundle:Gallery:list }
     requirements:
         _locale:  es|en
+proyecto_principal_gallery_create:
+    pattern:  /{_locale}/gallery/create
+    defaults: { _controller: ProyectoPrincipalBundle:Gallery:create }
+    requirements:
+        _locale:  es|en
+proyecto_principal_gallery_edit:
+    pattern:  /{_locale}/gallery/edit/{id}
+    defaults: { _controller: ProyectoPrincipalBundle:Gallery:edit, id: '1' }
+    requirements:
+        _locale:  es|en
+proyecto_principal_gallery_delete:
+    pattern:  /{_locale}/gallery/delete
+    defaults: { _controller: ProyectoPrincipalBundle:Gallery:delete }
+    requirements:
+      _method: POST
+      _locale:  es|en
+proyecto_principal_gallery_status:
+    pattern:  /{_locale}/gallery/status
+    defaults: { _controller: ProyectoPrincipalBundle:Gallery:status }
+    requirements:
+      _method: POST
+      _locale:  es|en
 
 proyecto_principal_link_list:
     pattern:  /{_locale}/link/list

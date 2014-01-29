@@ -497,3 +497,22 @@ ul.sf_admin_actions input{
     display: table-cell;
     vertical-align: middle;
 }
+.imagen-galeria{
+    cursor: pointer;
+}
+
+.imagen-galeria-noseleccionada{
+	text-align:center;
+	text-align: center;
+	background: rgba(255, 0, 0, 1);
+	width: 86px;
+}
+.imagen-galeria-seleccionada{
+	text-align:center;
+	text-align: center;
+	background: rgba(0, 255, 0, 1);
+	width: 86px;
+}
+	.sortable {
+		cursor: move;
+	}

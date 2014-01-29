@@ -6,10 +6,42 @@
 <script type="text/javascript" src="{{ asset('sf/calendar/calendar-setup.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/datetimepicker.js') }}"></script>
 
+<script type="text/javascript" src="{{asset('sf/prototype/js/prototype.js')}}"></script>
+<script type="text/javascript" src="{{asset('sf/prototype/js/builder.js')}}"></script>
+<script type="text/javascript" src="{{asset('sf/prototype/js/effects.js')}}"></script>
+<script type="text/javascript" src="{{asset('sf/prototype/js/dragdrop.js')}}"></script>
+
 
 <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('sf/sf_admin/css/main.css') }}">
 <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('sf/calendar/skins/aqua/theme.css') }}">
+<script type="text/javascript">
+	function ejecuta(){
+		Sortable.create('order', {
+			onUpdate : function() {
+				ajustaListadoImagenesSeleccionadas();
+								  }
+							     });
+	}
+	function ajustaListadoImagenesSeleccionadas(){
+		var numeracion ="";
 
+	 	jQuery.each(jQuery(".sortable"), function(indice, valor) {
+			
+			var id = jQuery(valor).attr('numero');
+
+			if(numeracion==""){
+				numeracion = id;
+			}
+			else{
+				numeracion = numeracion +','+id;
+			}
+			
+		});
+
+		jQuery('#numeracion').val(numeracion);
+	 	return false;
+	}
+</script>
 {%endblock%}
 {%block contents%} <td id="contents"><!-- whole contents -->
 <div id="sf_admin_container">
@@ -26,9 +58,9 @@
 					</div>
 				</div>
 				<div class="form-row"  class="required">
-					<label for="page_title" class="required">{% trans %}Lugar{% endtrans %}:</label>
+					<label for="page_title" class="required">{% trans %}Subtitulo{% endtrans %}:</label>
 					<div class="content">
-						{{ form_widget(form.place, { 'attr': {'size': '80'} }) }}
+						{{ form_widget(form.subtitle, { 'attr': {'size': '80'} }) }}
 					</div>
 				</div>
 				<div class="form-row">
@@ -46,48 +78,81 @@
 					</div>
 				</div>
 				<div class="form-row">
-					<label for="page_media_id" class="required">{% trans %}Imagen{% endtrans %}:</label>
+					<label for="page_media_id" class="required">{% trans %}Pagina{% endtrans %}:</label>
 					<div class="content">
-						{{ form_widget(form.resource, { 'attr': {'class': 'photo_toggle'} }) }}
-						<div class="media_container">
-							{%for object in resource%}
-							<div class="media_{{object.id}}" style="display: none;">
-								<img alt="{{object.name}}" src="{{ object.getWebPath | apply_filter('my_thumb') }}" style="height: 100px;width: 106px;">
-							</div>
-							{%endfor%}
-						</div>
+						{{ form_widget(form.page, { 'attr': {'class': 'photo_toggle'} }) }}
 					</div>
 				</div>
-			
-				
 				<div class="form-row">
-					<label for="program_date">{% trans %}Fecha{% endtrans %}:</label>
-					<div id="contenidofechas">
-						{%if accion != 'nuevo'%}
-						
-						<div class="nuevafecha" >
-							<input type="text" name="fechas[date_{{loop.index}}]" class="inputgrande fecha" id="f{{loop.index}}" onclick="javascript:NewCal('f1','ddmmyyyy','dropdown',true)" value="{{fecha.getDate|date("d-m-Y H:i:s")}}">
-							
-							<img class="eliminarfecha" style="cursor: pointer; vertical-align: middle" src="{{asset('sf/images/sf_admin/delete.png')}}" alt="Borrar">
-							
-						</div>					
-			
-						{%else%}
-						{%endif%}
-
+					<label for="page_media_id" class="required">{% trans %}Articulo{% endtrans %}:</label>
+					<div class="content">
+						{{ form_widget(form.article, { 'attr': {'class': 'photo_toggle'} }) }}
 					</div>
 				</div>
-				
 				<div class="form-row">
 					<label for="page_published">{% trans %}Publicado{% endtrans %}:</label>
 					<div class="content">
 						{{ form_widget(form.published, { 'attr': {'checked': 'checked'} }) }}
+					</div> 
+				</div>
+				<div class="form-row">
+					<label for="page_published">{% trans %}Imagenes{% endtrans %}:</label>
+					<div class="content">
+						{%set variable = 0%}
+						<table border="1" width="100%">
+							
+							{%for element in resources %}
+								{%if variable ==0%}<tr>{%endif%}
+								{%if variable % 8 ==0%}</tr><tr>{%endif%}
+								{%set seleccionado = true%}
+								
+								{%if accion != 'nuevo'%}
+									{%for resource in galleryResources if seleccionado %}
+										{%if resource.resource ==element.id%}
+											{%set seleccionado = false%}
+										{%endif%}
+									{%endfor%}
+								{%endif%}
+
+								<td>
+									<p class="imagen-galeria-{%if seleccionado== true %}no{%endif%}seleccionada">
+										<img alt="{{element.name|title}}" title="{{element.name|title}}" id="{{element.getId}}" src="{{ element.getWebPath | apply_filter('gallery') }}" class="imagen-galeria"/>
+									</p>
+								</td>
+
+								{%set variable = variable +1%}
+							{%endfor%}
+							</tr>
+						</table>
 					</div>
+				</div>
+				<div class="form-row">
+					<label for="page_published">{% trans %}Rank{% endtrans %}:</label>
+					<div class="content">
+						<ul id="order">
+							{%if accion != 'nuevo'%}
+								{%for resource in galleryResources%}
+									<li id="page_{{resource.resource}}" numero="{{resource.resource}}" class="sortable" style="position: relative;width: 95%;">ID: {{resource.resource}}, {{resource.name}}<b> </b></li>
+								{%endfor%}
+							{%endif%}
+						</ul>
+						<div id="feedback"></div>
+							{%if accion != 'nuevo'%}
+								<script type="text/javascript">
+								 	Sortable.create('order', {
+									onUpdate : function() {
+										ajustaListadoImagenesSeleccionadas();
+							  					}
+						     				});
+								</script>
+							{%endif%}
+					</div>
+					<input type="hidden" id="numeracion" name="numeracion" value="">
 				</div>
 			</fieldset>
 			<ul class="sf_admin_actions">
 				<li>
-					<input class="sf_admin_action_list" value="{% trans %}Listado{% endtrans %}" type="button" onclick="document.location.href='{{path('proyecto_principal_article_list',   {'type': type})}}';">
+					<input class="sf_admin_action_list" value="{% trans %}Listado{% endtrans %}" type="button" onclick="document.location.href='{{path('proyecto_principal_gallery_list')}}';">
 				</li>
 				<li>
 					<input type="submit" name="save" value="{%if accion == 'nuevo'%}{% trans %}Guardar{% endtrans %}{%else%}{% trans %}Actualizar{% endtrans %}{%endif%}">
@@ -123,10 +188,31 @@ jQuery('.trigger_program_date').click(function() {
 
     return false;
   });
-jQuery('.eliminarfecha').click(function() { 
+jQuery('.imagen-galeria').click(function() { 
 	var actual = jQuery(this);
-	actual.parent().remove();
-	console.log('deberia haber eliminado');
+	var id = actual.attr('id');
+	var nombre = actual.attr('title');
+
+	if(actual.parent().hasClass('imagen-galeria-noseleccionada')){
+		actual.parent().removeClass('imagen-galeria-noseleccionada');
+		actual.parent().addClass('imagen-galeria-seleccionada');
+
+		var cadena = '<li id="page_'+id+'" numero="'+id+'" class="sortable" style="position: relative;width: 95%;">ID: '+id+', <b>'+nombre+' </b></li>';
+		jQuery('#order').append(cadena);
+		ajustaListadoImagenesSeleccionadas();
+		ejecuta();
+		
+							 
+	}
+	else{
+		actual.parent().removeClass('imagen-galeria-seleccionada');
+		actual.parent().addClass('imagen-galeria-noseleccionada');
+
+		jQuery('#page_'+id).remove();
+		ajustaListadoImagenesSeleccionadas();
+	}
 });
+
+	
  </script>
 {%endblock%}

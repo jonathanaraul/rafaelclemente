@@ -1,8 +1,8 @@
 {% extends "ProyectoPrincipalBundle:Helpers:baseInterna.html.twig" %}
 {%block js%}
 <script type="text/javascript">
-var eliminar = '{{path('proyecto_principal_article_delete')}}';
-var cambiarStatus = '{{path('proyecto_principal_article_status')}}';
+var eliminar = '{{path('proyecto_principal_gallery_delete')}}';
+var cambiarStatus = '{{path('proyecto_principal_gallery_status')}}';
 
 </script>
 {%endblock%}
@@ -94,11 +94,8 @@ var cambiarStatus = '{{path('proyecto_principal_article_status')}}';
 		
 		<ul class="sf_admin_actions">
 			<li>
-				<input class="sf_admin_action_create" value="{% trans %}Añadir{% endtrans %}" type="button" onclick="document.location.href='{{path('proyecto_principal_article_create',{'type': type})}}';">
+				<input class="sf_admin_action_create" value="{% trans %}Añadir{% endtrans %}" type="button" onclick="document.location.href='{{path('proyecto_principal_gallery_create')}}';">
 			</li>
-			<!--<li>
-				<input class="sf_admin_action_rank" value="Determinar orden" type="button" onclick="document.location.href='{{path('proyecto_principal_page_rank')}}';">
-			</li>-->
 		</ul>
 	</div>
 	<div id="sf_admin_footer"></div>
