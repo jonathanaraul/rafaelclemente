@@ -1,0 +1,12 @@
+<div class="menu-hidden">
+
+	<div style="text-align: center;padding-top: 105px;" id="menuobligado">
+		<ul id="menu-mobile" >
+		{%for object in menuElements%}			
+			<li>
+				<a href="{{path('proyecto_front_page',{'id': object.id, 'friendlyname' : object.friendlyName})}}">{{object.title|upper}}</a>
+			</li>
+		{%endfor%}
+		</ul>
+	</div>
+</div>

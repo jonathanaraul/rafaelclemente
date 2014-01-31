@@ -3,16 +3,16 @@
  *
  */
 $(function(){
-	$('#menu').slicknav({
-		prependTo:'#menuobligado'
+	$('#menu-mobile').slicknav({
+		//prependTo:'#menuobligado'
 						});
 
 	});
 $( document ).ready(function() {
   // Handler for .ready() called.
-  if ($('#paginacion-especial').length>0){
-  	paginadorEspecial();
-  }
+  //if ($('#paginacion-especial').length>0){
+  	inicializador();
+  //}
 });
 
 $('#botonReservaciones').live("click", function() {
@@ -29,7 +29,26 @@ $('#botonReservaciones').live("click", function() {
 
 	return false;
 });
+function inicializador(){
+	var dimension = $( window ).width();
+	if(dimension <= 566){
+		/*if($('.paginacion-especial:not(.celdanovisible)').length==6){
+			$('.paginacion-especial:not(.celdanovisible)').last().addClass('celdanovisible');
+		}*/
+		var nuevoTamanio = dimension*0.83;
 
+		$('.imagen-inicio').css('width',nuevoTamanio);
+		$('#main-page-slider-cont').css('width',nuevoTamanio);
+		
+		//console.log('La dimension ya se hizo menor a lo indicado 566');
+		
+	}
+	else{
+		$('.imagen-inicio').css('width',470);
+		$('#main-page-slider-cont').css('width',470);
+	}
+
+}
 function paginadorEspecial(){
 
 	//$('.paginacion-especial:not(.celdanovisible)').first().removeClass('celdanovisible');
@@ -70,62 +89,25 @@ $( window ).resize(function() {
 // 261 borra cinco
 // 271 borra seis
 	var dimension = $( window ).width();
-	if(dimension <= 453){
-		if($('.paginacion-especial:not(.celdanovisible)').length==6){
+	if(dimension <= 566){
+		/*if($('.paginacion-especial:not(.celdanovisible)').length==6){
 			$('.paginacion-especial:not(.celdanovisible)').last().addClass('celdanovisible');
-		}
+		}*/
+		var nuevoTamanio = dimension*0.83;
+
+		$('.imagen-inicio').css('width',nuevoTamanio);
+		$('#main-page-slider-cont').css('width',nuevoTamanio);
+		
+		//console.log('La dimension ya se hizo menor a lo indicado 566');
 		
 	}
 	else{
-		if($('.paginacion-especial:not(.celdanovisible)').length==5){
-			$('.paginacion-especial:not(.celdanovisible)').last().next().removeClass('celdanovisible');
-		}
+		$('.imagen-inicio').css('width',470);
+		$('#main-page-slider-cont').css('width',470);
 	}
-	
-	if(dimension <= 406){
-		if($('.paginacion-especial:not(.celdanovisible)').length==5){
-			$('.paginacion-especial:not(.celdanovisible)').last().addClass('celdanovisible');
-		}
-		
-	}
-	else{
-		if($('.paginacion-especial:not(.celdanovisible)').length==4){
-			$('.paginacion-especial:not(.celdanovisible)').last().next().removeClass('celdanovisible');
-		}
-	}
-	if(dimension <= 361){
-		if($('.paginacion-especial:not(.celdanovisible)').length==4){
-			$('.paginacion-especial:not(.celdanovisible)').last().addClass('celdanovisible');
-		}
-		
-	}
-	else{
-		if($('.paginacion-especial:not(.celdanovisible)').length==3){
-			$('.paginacion-especial:not(.celdanovisible)').last().next().removeClass('celdanovisible');
-		}
-	}
-	if(dimension <= 311){
-		if($('.paginacion-especial:not(.celdanovisible)').length==3){
-			$('.paginacion-especial:not(.celdanovisible)').last().addClass('celdanovisible');
-		}
-		
-	}
-	else{
-		if($('.paginacion-especial:not(.celdanovisible)').length==2){
-			$('.paginacion-especial:not(.celdanovisible)').last().next().removeClass('celdanovisible');
-		}
-	}
-	if(dimension <= 271){
-		if($('.paginacion-especial:not(.celdanovisible)').length==2){
-			$('.paginacion-especial:not(.celdanovisible)').last().addClass('celdanovisible');
-		}
-		
-	}
-	else{
-		if($('.paginacion-especial:not(.celdanovisible)').length==1){
-			$('.paginacion-especial:not(.celdanovisible)').last().next().removeClass('celdanovisible');
-		}
-	}
+
+
+	console.log('La dimension es'+dimension);
 	
 });
 $('.pagina-noticias').live("click", function() {

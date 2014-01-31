@@ -152,8 +152,8 @@ a, a:link, a:hover, a:active, a:visited{
 
 .content{
     margin: 0 auto;
-    width: 774px;
-    padding-left: 196px;
+    #width: 774px;
+    #padding-left: 196px;
     padding-top: 120px;
     position: relative;
 }
@@ -163,6 +163,7 @@ a, a:link, a:hover, a:active, a:visited{
     top: 35%;
     right: 0px;
     z-index: 120;
+    background-color: rgba(255, 255, 255, 0.3);
 }
 
 .share-cont div{
@@ -207,6 +208,8 @@ a, a:link, a:hover, a:active, a:visited{
 #main-page-slider-cont, #main-page-slider{
     width: 470px;
     height: 470px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .top-margin{
@@ -480,3 +483,47 @@ a, a:link, a:hover, a:active, a:visited{
     display: table-row;
 }
 
+.menu-hidden{
+    background-color: black;
+    color: white;    
+    vertical-align: middle;
+    display: none;
+}
+.slicknav_menu {
+    display:none;
+}
+
+@media screen and (max-width:970px){
+
+    .menu-hidden{
+        #display: table-cell;
+        #width: 10%;
+    }
+    .slicknav_menu {
+        display: block;
+    }
+    .menu-normal{
+        display: none;
+    }
+
+    .line-logo{
+        display: none;
+    }
+    .menu-cont{
+        margin-left: auto;
+        margin-right: auto;
+        width: 418px;
+    }
+    .#main-page-slider-cont, #main-page-slider{
+        width: 300px;
+    }
+
+    .imagen-inicio{
+        width: 300px;
+    }
+    .header{
+        margin-left: auto;
+        margin-right: auto;
+        width: 282px;
+    }
+}

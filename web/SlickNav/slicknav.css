@@ -62,6 +62,7 @@
 .slicknav_nav, .slicknav_nav ul {
 	list-style: none;
 	overflow:hidden;
+	text-align: right;
 }
 .slicknav_nav ul {
 	padding:0;

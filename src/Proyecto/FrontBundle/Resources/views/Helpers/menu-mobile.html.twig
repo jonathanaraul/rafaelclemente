@@ -5,11 +5,11 @@
 	<div style="text-align: center;padding-top: 105px;" id="menuobligado">
 		<ul id="menu" style="display:none">
 		{%for object in objects%}
-			{%if object.title|upper != 'SPACER'%}
+			
 			<li>
 				<a href="{{path('proyecto_front_page',{'id': object.id, 'friendlyname' : object.friendlyName})}}">{{object.title|upper}}</a>
 			</li>
-			{%endif%}
+		
 		{%endfor%}
 		</ul>
 	</div>
