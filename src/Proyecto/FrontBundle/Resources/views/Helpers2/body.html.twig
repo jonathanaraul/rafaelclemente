@@ -32,28 +32,12 @@
 			<div class="menu-cont">
 				<a title="Homepage" id="logo" href="{{path('proyecto_front_homepage')}}"><img alt="Rafael Clemente Logo" src="{{ asset('images/site/logo.png')}}" /></a>
 
-
 				<ul class="menu">
 					{% include 'ProyectoFrontBundle:Helpers2:menu-normal.html.twig' with { 'idpage': idpage,'menuElements': menuElements} %}
 				</ul>
 				
-				<div id="langs">
-					<div class="langs-rel">
-						ES
-						<div class="langs-rest">
-							<p>
-								<a href="/rafael_clemente/en/">EN</a>
-							</p>
-							<p>
-								<a href="/rafael_clemente/fr/">FR</a>
-							</p>
-							<p>
-								<a href="/rafael_clemente/de/">DE</a>
-							</p>
-						</div>
-						<div class="line-langs"></div>
-					</div>
-				</div>
+				{% include 'ProyectoFrontBundle:Helpers2:lenguajes.html.twig' %}
+
 			</div>
 		</div>
 		{%block contenido%}
@@ -61,11 +45,5 @@
 		<div id="culture">
 			es
 		</div>
-		<div id="escondido" style="margin-left: auto;margin-right: auto;width: 50%;display:none;">
-			<ul class="menu">
-				{% include 'ProyectoFrontBundle:Helpers:menu-viejo.html.twig' %}
-			</ul>
-		</div>
-			
 	</body>
 {%endblock%}

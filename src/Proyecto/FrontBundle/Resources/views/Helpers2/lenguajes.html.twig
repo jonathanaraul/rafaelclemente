@@ -1,0 +1,28 @@
+<div id="langs">
+	<div class="langs-rel">
+
+		{%if app.request.locale == 'es'%}ES
+		{%elseif app.request.locale == 'en'%}EN
+		{%endif%}
+		<div class="langs-rest">
+			{%if app.request.locale != 'es'%}
+			<p>
+				<a href="{{path('proyecto_front_homepage', {'_locale': 'es'})}}">ES</a>
+			</p>
+			{%endif%}
+			{%if app.request.locale != 'en'%}
+			<p>
+				<a href="{{path('proyecto_front_homepage', {'_locale': 'en'})}}">EN</a>
+			</p>
+			{%endif%}
+			<!--
+			<p>
+				<a href="{{path('proyecto_front_homepage', {'_locale': 'fr'})}}">FR</a>
+			</p>
+			<p>
+				<a href="{{path('proyecto_front_homepage', {'_locale': 'de'})}}">DE</a>
+			</p>-->
+		</div>
+		<div class="line-langs"></div>
+	</div>
+</div>

@@ -33,10 +33,33 @@
 			{%endif%}
 		</div>
 		<div class="content-right  ex-top">
+			{%if gallery  is null or page.scheme==1 %}
 			<a title="{{page.title|title}}" rel="lightbox" 
 			href="{%if  media is not null%}{{ media.getWebPath | apply_filter('my_thumb3') }}{%endif%}">
 				<img alt="{{page.title|title}}"  src="{%if  media is not null%}{{ media.getWebPath | apply_filter('my_thumb2') }}{%endif%}">
 			</a>
+			{%else%}
+			<div class="art-content">
+				{%for element in galleryResources%}
+					{%if loop.index0 ==0%}
+					<div class="art-row">
+					{%endif%}
+					{%if loop.index % 5 == 0 %}</div><div class="art-row">{%endif%}
+						<div class="art-cell">
+							<a title="First artwork" href="#">
+								<img alt="First test artwork" src="{{element.getWebPath | apply_filter('front_gallery')}}" />
+							</a>
+						</div>
+				{%endfor%}
+				</div>
+				<div class="art-paging">
+					<p class="pagin-left"></p>
+					<p class="pagin-right">
+						<span class="art-next p-2 pa-1">NEXT</span>
+					</p>
+				</div>
+			</div>
+			{%endif%}
 		</div>
 	</div>
 	<div class="page-holder">

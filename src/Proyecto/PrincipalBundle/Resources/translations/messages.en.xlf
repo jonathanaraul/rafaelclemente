@@ -367,12 +367,12 @@
                 <target>Interest Date</target>
             </trans-unit>
             <trans-unit id="92">
-                <source></source>
-                <target></target>
+                <source>Mostrar Galerias</source>
+                <target>Show Galleries</target>
             </trans-unit>
             <trans-unit id="93">
-                <source></source>
-                <target></target>
+                <source>Añadir Galeria</source>
+                <target>Create Gallery</target>
             </trans-unit>
             <trans-unit id="94">
                 <source></source>

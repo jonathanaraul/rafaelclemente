@@ -2,7 +2,7 @@ proyecto_front_homepage:
     pattern:  /{_locale}
     defaults: { _controller: ProyectoFrontBundle:Default:inicio }
     requirements:
-        _locale:  es|en
+        _locale:  es|en|fr|de|ch
 proyecto_front_index:
     pattern:  /
     defaults: { _controller: ProyectoFrontBundle:Default:index }
@@ -11,42 +11,40 @@ proyecto_front_page_pagina_noticias:
     defaults: { _controller: ProyectoFrontBundle:Listados:noticias }
     requirements:
         _method: POST
-        _locale:  es|en
+        _locale:  es|en|fr|de|ch
 proyecto_front_page_pagina_cartelera:
     pattern:  /{_locale}/paginacionCartelera
     defaults: { _controller: ProyectoFrontBundle:Listados:cartelera }
     requirements:
         _method: POST
-        _locale:  es|en
+        _locale:  es|en|fr|de|ch
 proyecto_front_page_pagina_talleres:
     pattern:  /{_locale}/paginacionTalleres
     defaults: { _controller: ProyectoFrontBundle:Listados:talleres }
     requirements:
         _method: POST
-        _locale:  es|en
+        _locale:  es|en|fr|de|ch
 proyecto_front_page_pagina_calendario:
     pattern:  /{_locale}/paginacionCalendario
     defaults: { _controller: ProyectoFrontBundle:Listados:calendario }
     requirements:
         _method: POST
-        _locale:  es|en
+        _locale:  es|en|fr|de|ch
 proyecto_front_reservation:
     pattern:  /{_locale}/reservation/{id}
     defaults: { _controller: ProyectoFrontBundle:Default:reservation }
     requirements:
-        _locale:  es|en
+        _locale:  es|en|fr|de|ch
 proyecto_front_article:
     pattern:  /{_locale}/article/{id}
     defaults: { _controller: ProyectoFrontBundle:Default:article }
     requirements:
-        _locale:  es|en
+        _locale:  es|en|fr|de|ch
 proyecto_front_page:
     pattern:  /{_locale}/{id}/{friendlyname}
     defaults: { _controller: ProyectoFrontBundle:Default:page }
     requirements:
-        _locale:  es|en
-
-
+        _locale:  es|en|fr|de|ch
 
 proyecto_front_cerrarsesion:
     pattern:  /logout
@@ -56,29 +54,29 @@ proyecto_front_pintura:
     pattern:  /{_locale}/pintura
     defaults: { _controller: ProyectoFrontBundle:Default:pintura }
     requirements:
-        _locale:  es|en
+        _locale:  es|en|fr|de|ch
 proyecto_front_fotografia:
     pattern:  /{_locale}/fotografia
     defaults: { _controller: ProyectoFrontBundle:Default:fotografia }
     requirements:
-        _locale:  es|en
+        _locale:  es|en|fr|de|ch
 proyecto_front_biografia:
     pattern:  /{_locale}/biografia
     defaults: { _controller: ProyectoFrontBundle:Default:biografia }
     requirements:
-        _locale:  es|en
+        _locale:  es|en|fr|de|ch
 proyecto_front_exposiciones:
     pattern:  /{_locale}/exposiciones
     defaults: { _controller: ProyectoFrontBundle:Default:exposiciones }
     requirements:
-        _locale:  es|en
+        _locale:  es|en|fr|de|ch
 proyecto_front_prensa:
     pattern:  /{_locale}/prensa
     defaults: { _controller: ProyectoFrontBundle:Default:prensa }
     requirements:
-        _locale:  es|en
+        _locale:  es|en|fr|de|ch
 proyecto_front_contacto:
     pattern:  /{_locale}/contacto
     defaults: { _controller: ProyectoFrontBundle:Default:contacto }
     requirements:
-        _locale:  es|en
+        _locale:  es|en|fr|de|ch

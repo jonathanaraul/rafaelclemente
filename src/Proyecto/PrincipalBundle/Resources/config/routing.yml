@@ -2,17 +2,17 @@ proyecto_principal_homepage:
     pattern:  /{_locale}
     defaults: { _controller: ProyectoPrincipalBundle:User:list }
     requirements:
-        _locale:  es|en
+        _locale:  es|en|fr|de|ch
 proyecto_principal_user_edit:
     pattern:  /{_locale}/user/edit
     defaults: { _controller: ProyectoPrincipalBundle:User:edit }
     requirements:
-        _locale:  es|en
+        _locale:  es|en|fr|de|ch
 proyecto_principal_user_new:
     pattern:  /{_locale}/user/new
     defaults: { _controller: ProyectoPrincipalBundle:User:new }
     requirements:
-        _locale:  es|en
+        _locale:  es|en|fr|de|ch
 proyecto_principal_acceso:
     pattern:  /acceso
     defaults: { _controller: ProyectoPrincipalBundle:User:login }
@@ -21,211 +21,211 @@ proyecto_principal_page_list:
     pattern:  /{_locale}/page/list/{mirror}
     defaults: { _controller: ProyectoPrincipalBundle:Page:list, mirror: '0' }
     requirements:
-        _locale:  es|en
+        _locale:  es|en|fr|de|ch
 proyecto_principal_page_rank:
     pattern:  /{_locale}/page/rank
     defaults: { _controller: ProyectoPrincipalBundle:Page:rank }
     requirements:
-        _locale:  es|en
+        _locale:  es|en|fr|de|ch
 proyecto_principal_page_rank_post:
     pattern:  /{_locale}/page/rank/post
     defaults: { _controller: ProyectoPrincipalBundle:Page:rankPost }
     requirements:
-        _locale:  es|en
+        _locale:  es|en|fr|de|ch
 proyecto_principal_page_create:
     pattern:  /{_locale}/page/create
     defaults: { _controller: ProyectoPrincipalBundle:Page:create }
     requirements:
-        _locale:  es|en
+        _locale:  es|en|fr|de|ch
 proyecto_principal_page_edit:
     pattern:  /{_locale}/page/edit/{id}
     defaults: { _controller: ProyectoPrincipalBundle:Page:edit, id: '1' }
     requirements:
-        _locale:  es|en
+        _locale:  es|en|fr|de|ch
 proyecto_principal_page_translate:
     pattern:  /{_locale}/page/translate/{id}
     defaults: { _controller: ProyectoPrincipalBundle:Page:translate, id: '1' }
     requirements:
-        _locale:  es|en
+        _locale:  es|en|fr|de|ch
 proyecto_principal_page_delete:
     pattern:  /{_locale}/page/delete
     defaults: { _controller: ProyectoPrincipalBundle:Page:delete }
     requirements:
       _method: POST
-      _locale:  es|en
+      _locale:  es|en|fr|de|ch
 proyecto_principal_page_status:
     pattern:  /{_locale}/page/status
     defaults: { _controller: ProyectoPrincipalBundle:Page:status }
     requirements:
       _method: POST
-      _locale:  es|en
+      _locale:  es|en|fr|de|ch
 
 proyecto_principal_article_list:
     pattern:  /{_locale}/article/{type}/list
     defaults: { _controller: ProyectoPrincipalBundle:Article:list }
     requirements:
-        _locale:  es|en
+        _locale:  es|en|fr|de|ch
 proyecto_principal_article_create:
     pattern:  /{_locale}/article/{type}/create
     defaults: { _controller: ProyectoPrincipalBundle:Article:create }
     requirements:
-        _locale:  es|en
+        _locale:  es|en|fr|de|ch
 proyecto_principal_article_edit:
     pattern:  /{_locale}/article/{type}/edit/{id}
     defaults: { _controller: ProyectoPrincipalBundle:Article:edit, id: '1' }
     requirements:
-        _locale:  es|en
+        _locale:  es|en|fr|de|ch
 proyecto_principal_article_translate:
     pattern:  /{_locale}/article/{type}/translate/{id}
     defaults: { _controller: ProyectoPrincipalBundle:Article:translate, id: '1' }
     requirements:
-        _locale:  es|en
+        _locale:  es|en|fr|de|ch
 proyecto_principal_article_delete:
     pattern:  /{_locale}/article/delete
     defaults: { _controller: ProyectoPrincipalBundle:Article:delete }
     requirements:
       _method: POST
-      _locale:  es|en
+      _locale:  es|en|fr|de|ch
 proyecto_principal_article_status:
     pattern:  /{_locale}/article/status
     defaults: { _controller: ProyectoPrincipalBundle:Article:status }
     requirements:
       _method: POST
-      _locale:  es|en
+      _locale:  es|en|fr|de|ch
 
 proyecto_principal_resource_create:
     pattern:  /{_locale}/resource/{type}/create
     defaults: { _controller: ProyectoPrincipalBundle:Resource:create }
     requirements:
-        _locale:  es|en
+        _locale:  es|en|fr|de|ch
 proyecto_principal_resource_edit:
     pattern:  /{_locale}/resource/{type}/edit/{id}
     defaults: { _controller: ProyectoPrincipalBundle:Resource:edit, id: '1' }
     requirements:
-        _locale:  es|en
+        _locale:  es|en|fr|de|ch
 proyecto_principal_resource_translate:
     pattern:  /{_locale}/resource/{type}/translate/{id}
     defaults: { _controller: ProyectoPrincipalBundle:Resource:translate, id: '1' }
     requirements:
-        _locale:  es|en
+        _locale:  es|en|fr|de|ch
 proyecto_principal_resource_list:
     pattern:  /{_locale}/resource/{type}/list
     defaults: { _controller: ProyectoPrincipalBundle:Resource:list }
     requirements:
-        _locale:  es|en
+        _locale:  es|en|fr|de|ch
 proyecto_principal_resource_delete:
     pattern:  /{_locale}/resource/delete
     defaults: { _controller: ProyectoPrincipalBundle:Resource:delete }
     requirements:
       _method: POST
-      _locale:  es|en
+      _locale:  es|en|fr|de|ch
 proyecto_principal_resource_status:
     pattern:  /{_locale}/resource/status
     defaults: { _controller: ProyectoPrincipalBundle:Resource:status }
     requirements:
       _method: POST
-      _locale:  es|en
+      _locale:  es|en|fr|de|ch
 proyecto_principal_resource_home:
     pattern:  /{_locale}/resource/home
     defaults: { _controller: ProyectoPrincipalBundle:Resource:home }
     requirements:
       _method: POST
-      _locale:  es|en
+      _locale:  es|en|fr|de|ch
 
 
 proyecto_principal_gallery_list:
     pattern:  /{_locale}/gallery/list
     defaults: { _controller: ProyectoPrincipalBundle:Gallery:list }
     requirements:
-        _locale:  es|en
+        _locale:  es|en|fr|de|ch
 proyecto_principal_gallery_create:
     pattern:  /{_locale}/gallery/create
     defaults: { _controller: ProyectoPrincipalBundle:Gallery:create }
     requirements:
-        _locale:  es|en
+        _locale:  es|en|fr|de|ch
 proyecto_principal_gallery_edit:
     pattern:  /{_locale}/gallery/edit/{id}
     defaults: { _controller: ProyectoPrincipalBundle:Gallery:edit, id: '1' }
     requirements:
-        _locale:  es|en
+        _locale:  es|en|fr|de|ch
 proyecto_principal_gallery_delete:
     pattern:  /{_locale}/gallery/delete
     defaults: { _controller: ProyectoPrincipalBundle:Gallery:delete }
     requirements:
       _method: POST
-      _locale:  es|en
+      _locale:  es|en|fr|de|ch
 proyecto_principal_gallery_status:
     pattern:  /{_locale}/gallery/status
     defaults: { _controller: ProyectoPrincipalBundle:Gallery:status }
     requirements:
       _method: POST
-      _locale:  es|en
+      _locale:  es|en|fr|de|ch
 
 proyecto_principal_link_list:
     pattern:  /{_locale}/link/list
     defaults: { _controller: ProyectoPrincipalBundle:Link:list }
     requirements:
-        _locale:  es|en
+        _locale:  es|en|fr|de|ch
 proyecto_principal_link_create:
     pattern:  /{_locale}/link/create
     defaults: { _controller: ProyectoPrincipalBundle:Link:create }
     requirements:
-        _locale:  es|en
+        _locale:  es|en|fr|de|ch
 proyecto_principal_link_edit:
     pattern:  /{_locale}/link/edit/{id}
     defaults: { _controller: ProyectoPrincipalBundle:Link:edit, id: '1' }
     requirements:
-        _locale:  es|en
+        _locale:  es|en|fr|de|ch
 proyecto_principal_link_translate:
     pattern:  /{_locale}/link/translate/{id}
     defaults: { _controller: ProyectoPrincipalBundle:Link:translate, id: '1' }
     requirements:
-        _locale:  es|en
+        _locale:  es|en|fr|de|ch
 proyecto_principal_link_delete:
     pattern:  /{_locale}/link/delete
     defaults: { _controller: ProyectoPrincipalBundle:Link:delete }
     requirements:
       _method: POST
-      _locale:  es|en
+      _locale:  es|en|fr|de|ch
 proyecto_principal_link_status:
     pattern:  /{_locale}/link/status
     defaults: { _controller: ProyectoPrincipalBundle:Link:status }
     requirements:
       _method: POST
-      _locale:  es|en
+      _locale:  es|en|fr|de|ch
 proyecto_principal_link_target:
     pattern:  /{_locale}/link/target
     defaults: { _controller: ProyectoPrincipalBundle:Link:target }
     requirements:
       _method: POST
-      _locale:  es|en
+      _locale:  es|en|fr|de|ch
 proyecto_principal_setting_list:
     pattern:  /{_locale}/setting/list
     defaults: { _controller: ProyectoPrincipalBundle:Setting:list }
     requirements:
-        _locale:  es|en
+        _locale:  es|en|fr|de|ch
 proyecto_principal_setting_edit:
     pattern:  /{_locale}/setting/edit/{id}
     defaults: { _controller: ProyectoPrincipalBundle:Setting:edit, id: '1' }
     requirements:
-        _locale:  es|en
+        _locale:  es|en|fr|de|ch
 proyecto_principal_setting_translate:
     pattern:  /{_locale}/setting/translate/{id}
     defaults: { _controller: ProyectoPrincipalBundle:Setting:translate, id: '1' }
     requirements:
-        _locale:  es|en
+        _locale:  es|en|fr|de|ch
 
 proyecto_principal_reservation_list:
     pattern:  /{_locale}/reservation/list
     defaults: { _controller: ProyectoPrincipalBundle:Reservation:list }
     requirements:
-        _locale:  es|en
+        _locale:  es|en|fr|de|ch
 proyecto_principal_link_checked:
     pattern:  /{_locale}/reservation/checked
     defaults: { _controller: ProyectoPrincipalBundle:Reservation:checked }
     requirements:
       _method: POST
-      _locale:  es|en
+      _locale:  es|en|fr|de|ch
 
 proyecto_principal_validacion:
     pattern:  /validacion

@@ -11,20 +11,14 @@
 <style>
 	.sortable {
 		cursor: move;
-	}
+	}
+
+
 </style><h1>{% trans %}Determinar orden{% endtrans %}</h1>
 <ul id="order">
 	{%for object in objects%}
 	<li id="page_{{object.id}}" class="sortable" style="position: relative;">
-		
-	
-	{%if object.spacer == 0%}
 	 ID: {{object.id}}, <b>{{object.title|title}} </b>
-	{%else%}
-		<p class="spacer">
-			spacer
-		</p>
-	{%endif%}
 	</li>
 	{%endfor%}
 	

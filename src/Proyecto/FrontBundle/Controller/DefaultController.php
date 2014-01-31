@@ -10,8 +10,12 @@ use Proyecto\PrincipalBundle\Entity\Data;
 use Proyecto\PrincipalBundle\Entity\Categoria;
 use Proyecto\PrincipalBundle\Entity\Entrada;
 use Proyecto\PrincipalBundle\Entity\Usuario;
-use Proyecto\PrincipalBundle\Entity\CmsReservation;
+//use Proyecto\PrincipalBundle\Entity\CmsReservation;
 use Proyecto\PrincipalBundle\Entity\CmsPage;
+use Proyecto\PrincipalBundle\Entity\CmsGallery;
+use Proyecto\PrincipalBundle\Entity\CmsGalleryResource;
+use Proyecto\PrincipalBundle\Entity\CmsResource;
+
 
 
 class DefaultController extends Controller {
@@ -36,29 +40,19 @@ class DefaultController extends Controller {
 		$secondArray['page'] = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsPage') -> find($id);
 		$secondArray['media'] = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsResource') -> find($secondArray['page']->getResource());
 		$secondArray['idpage'] = $secondArray['page']->getId();
-		$template  = $secondArray['page']->getTemplate();
-		/*
-		if($secondArray['path']!=null && trim($secondArray['path'])!=""){
-			if (file_exists($secondArray['page']->getWebPath())) {
-   				$secondArray['path'] = $secondArray['page']->getWebPath();
-			}
-			else{
-				$secondArray['path'] = null;
-			}
-		}
-		else{
-			$secondArray['path'] = null;
-		}
-
-		*/
+		$secondArray['gallery'] = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsGallery') -> findOneByPage($secondArray['idpage']);
+		$secondArray['galleryResources'] = null;
+		$secondArray['exhibitions'] = null;
 		
-		//$secondArray['listado'] = UtilitiesAPI::esListado($secondArray['idpage'],$this);
-		//$secondArray['images'] = array();
-
+		if(is_null($secondArray['gallery'])==false){
+			$secondArray['galleryResources'] = UtilitiesAPI::getGalleryResources($secondArray['gallery']->getId(), $this);
+		}
+		
 		if($secondArray['page']->getScheme()==1){
 			$secondArray['exhibitions'] = UtilitiesAPI::getExhibitions($this);
 		}
-		
+
+		$template  = $secondArray['page']->getTemplate();
 		$array = array_merge($firstArray, $secondArray);
 		return $this -> render('ProyectoFrontBundle:Default2:page'.$template.'.html.twig', $array);
 	}
