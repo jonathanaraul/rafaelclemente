@@ -11,7 +11,7 @@ $(function(){
 $( document ).ready(function() {
   // Handler for .ready() called.
   //if ($('#paginacion-especial').length>0){
-  	inicializador();
+  	ajustaDimensiones();
   //}
 });
 
@@ -29,85 +29,58 @@ $('#botonReservaciones').live("click", function() {
 
 	return false;
 });
-function inicializador(){
+function ajustaDimensiones(){
+
 	var dimension = $( window ).width();
+	var tipoPagine = $('#tipopagina').val();
+
+
 	if(dimension <= 566){
-		/*if($('.paginacion-especial:not(.celdanovisible)').length==6){
-			$('.paginacion-especial:not(.celdanovisible)').last().addClass('celdanovisible');
-		}*/
 		var nuevoTamanio = dimension*0.83;
 
 		$('.imagen-inicio').css('width',nuevoTamanio);
 		$('#main-page-slider-cont').css('width',nuevoTamanio);
-		
-		//console.log('La dimension ya se hizo menor a lo indicado 566');
-		
+		$('.imagen-pagina').css('width',nuevoTamanio);
+		$('.content-left').css('width',dimension);
+
+		if(tipoPagine!='page1'){
+			$('#contenidoImagen').css('width',dimension);
+		}
+		$('.content-line').css('width',nuevoTamanio);
+		$('.art-content').css('width',dimension);
+		$('.art-row').css('width',dimension);
+		$('.art-content-pag').css('width',dimension*0.76);
 	}
 	else{
+		
+		
 		$('.imagen-inicio').css('width',470);
 		$('#main-page-slider-cont').css('width',470);
+		$('.imagen-pagina').css('width',470);
+		$('#contenidoImagen').css('width',470);
+		if(tipoPagine!='page1')
+		$('.content-left').css('width','');
+		else $('.content-left').css('width',dimension);
+
+		$('.art-content').css('width',430);
+		$('.art-row').css('width',428);
+		$('.art-content-pag').css('width',430);
+		
+
 	}
+	if(dimension <=970){
+		$('.content-left').css('width','');
+		$('#contenidoImagen').css('width',dimension);
+		if(tipoPagine!='page1')$('.content-left').css('width','100%');
+
+						}
+	//console.log('La dimension es'+dimension+' y el tipo de pagina es'+tipoPagine);
 
 }
-function paginadorEspecial(){
 
-	//$('.paginacion-especial:not(.celdanovisible)').first().removeClass('celdanovisible');
-	var dimension = $( window ).width();
-	if(dimension > 271){
-		if($('.paginacion-especial:not(.celdanovisible)').length==1){
-			$('.paginacion-especial:not(.celdanovisible)').last().next().removeClass('celdanovisible');
-		}
-	}
-	if(dimension > 311){
-		if($('.paginacion-especial:not(.celdanovisible)').length==2){
-			$('.paginacion-especial:not(.celdanovisible)').last().next().removeClass('celdanovisible');
-		}
-	}
-	if(dimension > 361){
-		if($('.paginacion-especial:not(.celdanovisible)').length==3){
-			$('.paginacion-especial:not(.celdanovisible)').last().next().removeClass('celdanovisible');
-		}
-	}
-
-	if(dimension > 406){
-		if($('.paginacion-especial:not(.celdanovisible)').length==4){
-			$('.paginacion-especial:not(.celdanovisible)').last().next().removeClass('celdanovisible');
-		}
-	}
-	if(dimension > 453){
-		if($('.paginacion-especial:not(.celdanovisible)').length==5){
-			$('.paginacion-especial:not(.celdanovisible)').last().next().removeClass('celdanovisible');
-		}
-	}
-	return false;
-}
 $( window ).resize(function() {
-//453 borra uno
-// 406 borra dos
-// 361 borra tres
-// 311 borra cuatro
-// 261 borra cinco
-// 271 borra seis
-	var dimension = $( window ).width();
-	if(dimension <= 566){
-		/*if($('.paginacion-especial:not(.celdanovisible)').length==6){
-			$('.paginacion-especial:not(.celdanovisible)').last().addClass('celdanovisible');
-		}*/
-		var nuevoTamanio = dimension*0.83;
 
-		$('.imagen-inicio').css('width',nuevoTamanio);
-		$('#main-page-slider-cont').css('width',nuevoTamanio);
-		
-		//console.log('La dimension ya se hizo menor a lo indicado 566');
-		
-	}
-	else{
-		$('.imagen-inicio').css('width',470);
-		$('#main-page-slider-cont').css('width',470);
-	}
-
-
-	console.log('La dimension es'+dimension);
+	ajustaDimensiones();
 	
 });
 $('.pagina-noticias').live("click", function() {

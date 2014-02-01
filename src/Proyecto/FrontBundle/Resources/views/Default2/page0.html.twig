@@ -1,20 +1,24 @@
 {% extends "ProyectoFrontBundle:Helpers2:body.html.twig" %}
 
 {%block contenido%}
+<input type="hidden" id="tipopagina" value="page0">
 	<div class="content">
 		<div class="content-left">
 			{%if gallery  is null %}
-			<a title="{{page.title|title}}" rel="lightbox" 
-			href="{%if  media is not null%}{{ media.getWebPath | apply_filter('my_thumb3') }}{%endif%}">
-				<img alt="{{page.title|title}}"  src="{%if  media is not null%}{{ media.getWebPath | apply_filter('my_thumb2') }}{%endif%}">
-			</a>
+			<!--IMAGEN DE PAGINA-->
+			<div id="contenidoImagen">
+				<p style="text-align:center;">
+					<a title="{{page.title|title}}" rel="lightbox" 
+				href="{%if  media is not null%}{{ media.getWebPath | apply_filter('my_thumb3') }}{%endif%}">
+						<img alt="{{page.title|title}}"  src="{%if  media is not null%}{{ media.getWebPath | apply_filter('my_thumb2') }}{%endif%}" class="imagen-pagina">
+					</a>
+				</p>
+			</div>
 			{%else%}
+			<!--GALERIA DE IMAGENES-->
 			<div class="art-content">
+				<div class="art-row">
 				{%for element in galleryResources%}
-					{%if loop.index0 ==0%}
-					<div class="art-row">
-					{%endif%}
-					{%if loop.index % 5 == 0 %}</div><div class="art-row">{%endif%}
 						<div class="art-cell">
 							<a title="First artwork" href="#">
 								<img alt="First test artwork" src="{{element.getWebPath | apply_filter('front_gallery')}}" />
@@ -22,17 +26,45 @@
 						</div>
 				{%endfor%}
 				</div>
-				<div class="art-paging">
-					<p class="pagin-left"></p>
-					<p class="pagin-right">
-						<span class="art-next p-2 pa-1">NEXT</span>
-					</p>
+				<div class="art-content-pag" style="display:none">
+					<span class="art-next p-2 pa-1">NEXT</span>
 				</div>
 			</div>
 			{%endif%}
+			<div class="contenidoOculto">
+				<h3 class="titulo-pagina">{{page.title|upper}}</h3>
+				{%if page.scheme==0%}
+				<div class="top-margin">
+					{{page.content|raw}}
+				</div>
+				{%else%}
+					<div class="ex-container">
+						{%for element in exhibitions%}
+						<div class="ex-cont">
+							<p class="name">
+								{{element.name|title}}
+							</p>
+							<p class="date">
+								{{element.date|date("Y/m/d")}}
+							</p>
+							<p class="name">
+								{{element.place|title}}
+							</p>
+							<div class="desc">
+								{{element.content|raw}}
+							</div>
+						</div>
+						{%endfor%}
+						<div class="ex-navigation" style="display:none;">
+							<span class="ex-next p-2 pa-4">NEXT</span>
+						</div>
+					</div>
+				{%endif%}
+				<div class="content-line"></div>
+			</div>
 		</div>
 		<div class="content-right">
-			<h3>{{page.title|upper}}</h3>
+			<h3 class="titulo-pagina">{{page.title|upper}}</h3>
 			{%if page.scheme==0%}
 			<div class="top-margin">
 				{{page.content|raw}}

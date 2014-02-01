@@ -13,8 +13,9 @@
 					<ul class="menu menu-normal">
 						{% include 'ProyectoFrontBundle:Helpers2:menu-normal.html.twig' with { 'idpage': idpage,'menuElements': menuElements} %}
 					</ul>
-					{% include 'ProyectoFrontBundle:Helpers2:lenguajes.html.twig' %}
+					{% include 'ProyectoFrontBundle:Helpers2:lenguajes.html.twig'  with { 'clase': 'lenguajes-normal'} %}
 				</div>
+				{# include 'ProyectoFrontBundle:Helpers2:lenguajes.html.twig'  with { 'clase': 'lenguajes-pequenios'} #}
 			</div>
 			{%block contenido%}
 			{%endblock%}

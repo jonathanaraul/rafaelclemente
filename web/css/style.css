@@ -267,6 +267,7 @@ a, a:link, a:hover, a:active, a:visited{
 
 .art-row{
     padding-top: 22px;
+    width: 428px;
 }
 
 .art-row .no-margin {
@@ -276,7 +277,9 @@ a, a:link, a:hover, a:active, a:visited{
 .art-cell{
     width: 90px;
     height: 90px;
-    padding-right: 22px;
+    padding-left: 10px;
+    float: left;
+    padding-bottom: 16px;
 }
 
 .art-next, .art-prev{
@@ -492,6 +495,39 @@ a, a:link, a:hover, a:active, a:visited{
 .slicknav_menu {
     display:none;
 }
+.content{
+    margin-left: auto;
+    margin-right: auto;
+    width: 800px;
+}
+#contenidoImagen{
+    margin-left: auto;
+    margin-right: auto;
+    width: 470px;
+}
+.contenidoOculto{
+    display: none;
+    float: left;
+}
+.lenguajes-pequenios{
+        display: none;
+    }
+.art-content{
+        width: 430px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+.art-content-pag{
+        width: 430px;
+        margin-left: auto;
+        margin-right: auto;
+        float: left;
+        text-align: right;
+    }
+.contenidoNoOculto{
+    width: 100%;
+    float: left;
+                }
 
 @media screen and (max-width:970px){
 
@@ -505,7 +541,45 @@ a, a:link, a:hover, a:active, a:visited{
     .menu-normal{
         display: none;
     }
-
+    .content{
+        width: 100%;
+        padding-top: 30px;
+    }
+    .contenidoOculto{
+        display: block;
+    }
+    .content-right{
+        display: none;
+    }
+    .titulo-pagina{
+        text-align: center;
+    }
+    .content-left{
+        #width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .page-holder{
+        display: none;
+    }
+    .top-margin{
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+    .art-content{
+        width: 430px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .art-content-pag{
+        width: 430px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .ex-cont{
+        margin-right: 10px;
+        margin-left: 10px;
+    }
     .line-logo{
         display: none;
     }
@@ -517,7 +591,6 @@ a, a:link, a:hover, a:active, a:visited{
     .#main-page-slider-cont, #main-page-slider{
         width: 300px;
     }
-
     .imagen-inicio{
         width: 300px;
     }
@@ -525,5 +598,14 @@ a, a:link, a:hover, a:active, a:visited{
         margin-left: auto;
         margin-right: auto;
         width: 282px;
+    }
+    .lenguajes-pequenios{
+        display: block;
+    }
+}
+@media screen and (max-width:970px){
+
+    .header{
+        width: 150px;
     }
 }
