@@ -10,7 +10,7 @@
 				<p style="text-align:center;">
 					<a title="{{page.title|title}}" rel="lightbox" 
 				href="{%if  media is not null%}{{ media.getWebPath | apply_filter('my_thumb3') }}{%endif%}">
-						<img alt="{{page.title|title}}"  src="{%if  media is not null%}{{ media.getWebPath | apply_filter('my_thumb2') }}{%endif%}" class="imagen-pagina">
+						<img alt="{{page.title|title}}"  src="{%if  media is not null%}{{ media.getWebPath | apply_filter('my_thumb2') }}{%endif%}" class="imagen-pagina" width="470" height="392">
 					</a>
 				</p>
 			</div>
@@ -20,8 +20,8 @@
 				<div class="art-row">
 				{%for element in galleryResources%}
 						<div class="art-cell">
-							<a title="First artwork" href="#">
-								<img alt="First test artwork" src="{{element.getWebPath | apply_filter('front_gallery')}}" />
+							<a title="{{element.getFriendlyName}}" href="{{path('proyecto_front_resource',{'galerianombre': gallery.getFriendlyName, 'idgaleria' : gallery.getId, 'recursonombre' :element.getFriendlyName , 'idrecurso' :element.getId})}}">
+								<img alt="{{element.getFriendlyName}}" src="{{element.getWebPath | apply_filter('front_gallery')}}" width="90" height="90"/>
 							</a>
 						</div>
 				{%endfor%}

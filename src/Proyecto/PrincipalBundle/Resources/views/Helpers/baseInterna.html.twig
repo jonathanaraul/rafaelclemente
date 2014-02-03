@@ -3,13 +3,48 @@
 <table cellspacing="0" cellpadding="0" align="right">
 	<tbody>
 		<tr>
-			{%if app.request.locale == 'es'%}
-			<td class="lang"><a href="{{path('proyecto_principal_homepage', {'_locale': 'en'})}}">EN</a></td>
-			<td class="lang"><b>ES</b></td>
-			{%else%}
-			<td class="lang"><b>EN</b></td>
-			<td class="lang"><a href="{{path('proyecto_principal_homepage', {'_locale': 'es'})}}">ES</a></td>
-			{%endif%}
+
+			<td class="lang">
+				{%if app.request.locale == 'es'%}
+					<b>
+				{%else%}
+					<a href="{{path('proyecto_principal_homepage', {'_locale': 'es'})}}">
+				{%endif%}
+					ES
+				{%if app.request.locale == 'es'%}
+				</b>
+				{%else%}
+					</a>
+				{%endif%}
+			</td>
+			<td class="lang">
+				{%if app.request.locale == 'en'%}
+					<b>
+				{%else%}
+					<a href="{{path('proyecto_principal_homepage', {'_locale': 'en'})}}">
+				{%endif%}
+					EN
+				{%if app.request.locale == 'en'%}
+				</b>
+				{%else%}
+					</a>
+				{%endif%}
+			</td>
+			{#
+			<td class="lang">
+				{%if app.request.locale == 'fr'%}
+					<b>
+				{%else%}
+					<a href="{{path('proyecto_principal_homepage', {'_locale': 'fr'})}}">
+				{%endif%}
+					FR
+				{%if app.request.locale == 'fr'%}
+				</b>
+				{%else%}
+					</a>
+				{%endif%}
+			</td>
+				#}
 			<td class="small_dots"><img src="{{asset('images/cms_yeslogo_small_dots.jpg')}}" alt="Cms_yeslogo_small_dots"></td>
 			<td id="small_letter"><img id="small_font" src="{{asset('images/cms_yeslogo_small_letter.jpg')}}" alt="Cms_yeslogo_small_letter"></td>
 			<td id="big_letter"><img id="big_font" src="{{asset('images/cms_yeslogo_big_letter.jpg')}}" alt="Cms_yeslogo_big_letter"></td>
@@ -73,6 +108,11 @@
 				{%elseif menu.seccion == 'RECURSOS'%}
 				<td class="submenu_button"><a class="menu" href="{{path('proyecto_principal_resource_list',   {'type': 'images'})}}">{% trans %}Mostrar Imágenes{% endtrans %}</a></td>
 				<td class="submenu_button"><a class="menu" href="{{path('proyecto_principal_resource_create', {'type': 'images'})}}">{% trans %}Añadir Imagen{% endtrans %}</a></td>
+
+				<td class="submenu_button"><a class="menu" href="{{path('proyecto_principal_text_resource_list')}}">{% trans %}Mostrar Textos Asociados{% endtrans %}</a></td>
+				<td class="submenu_button"><a class="menu" href="{{path('proyecto_principal_text_resource_create')}}">{% trans %}Añadir Texto Asociado{% endtrans %}</a></td>
+
+
 				<td class="submenu_button"><a class="menu" href="{{path('proyecto_principal_gallery_list')}}">{% trans %}Mostrar Galerias{% endtrans %}</a></td>
 				<td class="submenu_button"><a class="menu" href="{{path('proyecto_principal_gallery_create')}}">{% trans %}Añadir Galeria{% endtrans %}</a></td>
 				{#<td class="submenu_button"><a class="menu" href="{{path('proyecto_principal_resource_list',   {'type': 'backgrounds'})}}">{% trans %}Mostrar Fondos{% endtrans %}</a></td>

@@ -185,6 +185,7 @@ class ResourceController extends Controller {
 				}
 				$data -> setIp($class -> container -> get('request') -> getClientIp());
 				$data -> setUser($array['user'] -> getId());
+				$data -> setFriendlyName(UtilitiesAPI::getFriendlyName($data -> getName(),$class));
 
 				$em -> persist($data);
 

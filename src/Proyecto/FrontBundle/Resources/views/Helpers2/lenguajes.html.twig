@@ -3,6 +3,7 @@
 
 		{%if app.request.locale == 'es'%}ES
 		{%elseif app.request.locale == 'en'%}EN
+		{#{%elseif app.request.locale == 'fr'%}FR#}
 		{%endif%}
 		<div class="langs-rest">
 			{%if app.request.locale != 'es'%}
@@ -15,10 +16,14 @@
 				<a href="{{path('proyecto_front_homepage', {'_locale': 'en'})}}">EN</a>
 			</p>
 			{%endif%}
-			<!--
+			{#
+			{%if app.request.locale != 'fr'%}
 			<p>
 				<a href="{{path('proyecto_front_homepage', {'_locale': 'fr'})}}">FR</a>
 			</p>
+			{%endif%}
+			#}
+			<!--
 			<p>
 				<a href="{{path('proyecto_front_homepage', {'_locale': 'de'})}}">DE</a>
 			</p>-->

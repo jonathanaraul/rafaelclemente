@@ -224,6 +224,14 @@ class UtilitiesAPI extends Controller {
 			$array['translate'] = 'Traducción de Galería';
 			$array['type'] = $type;
 		}
+		else if($type == 'text-resource'){
+			//$array['idtype'] = 0;
+			$array['list'] = 'Mostrar Textos Asociados';
+			$array['create'] = 'Añadir Texto Asociado';
+			$array['edit'] = 'Editar Texto Asociado';
+			$array['translate'] = 'Traducción Texto Asociado';
+			$array['type'] = $type;
+		}
 		return $array;
 	}
 	public static function generaTrans($class){
@@ -406,7 +414,7 @@ class UtilitiesAPI extends Controller {
 		
 	 	return $fecha;
 	 }
-	 	public static function getFriendlyName($title,$class){
+	 public static function getFriendlyName($title,$class){
 		$friendlyName = strtolower($title);
 		$friendlyName =  str_replace("á", "a", $friendlyName);
 		$friendlyName =  str_replace("é", "e", $friendlyName);

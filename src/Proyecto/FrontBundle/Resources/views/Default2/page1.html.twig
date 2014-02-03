@@ -10,7 +10,7 @@
 				<p style="text-align:center">
 					<a title="{{page.title|title}}" rel="lightbox" 
 					href="{%if  media is not null%}{{ media.getWebPath | apply_filter('my_thumb3') }}{%endif%}">
-						<img alt="{{page.title|title}}"  src="{%if  media is not null%}{{ media.getWebPath | apply_filter('my_thumb2') }}{%endif%}" class="imagen-pagina">
+						<img alt="{{page.title|title}}"  src="{%if  media is not null%}{{ media.getWebPath | apply_filter('my_thumb2') }}{%endif%}" class="imagen-pagina" width="470" height="392">
 					</a>
 				</p>
 			</div>
@@ -20,7 +20,7 @@
 				<div class="art-row">
 				{%for element in galleryResources%}
 						<div class="art-cell">
-							<a title="First artwork" href="#">
+							<a title="{{element.getFriendlyName}}" href="{{path('proyecto_front_resource',{'galerianombre': gallery.getFriendlyName, 'idgaleria' : gallery.getId, 'recursonombre' :element.getFriendlyName , 'idrecurso' :element.getId})}}">
 								<img alt="First test artwork" src="{{element.getWebPath | apply_filter('front_gallery')}}" />
 							</a>
 						</div>
@@ -66,7 +66,7 @@
 			{%if gallery  is null or page.scheme==1 %}
 			<a title="{{page.title|title}}" rel="lightbox" 
 			href="{%if  media is not null%}{{ media.getWebPath | apply_filter('my_thumb3') }}{%endif%}">
-				<img alt="{{page.title|title}}"  src="{%if  media is not null%}{{ media.getWebPath | apply_filter('my_thumb2') }}{%endif%}">
+				<img alt="{{page.title|title}}"  src="{%if  media is not null%}{{ media.getWebPath | apply_filter('my_thumb2') }}{%endif%}" width="470" height="392">
 			</a>
 			{%else%}
 			<div class="art-content">
@@ -76,7 +76,7 @@
 					{%endif%}
 					{%if loop.index % 5 == 0 %}</div><div class="art-row">{%endif%}
 						<div class="art-cell">
-							<a title="First artwork" href="#">
+							<a title="{{element.getFriendlyName}}" href="{{path('proyecto_front_resource',{'galerianombre': gallery.getFriendlyName, 'idgaleria' : gallery.getId, 'recursonombre' :element.getFriendlyName , 'idrecurso' :element.getId})}}">
 								<img alt="First test artwork" src="{{element.getWebPath | apply_filter('front_gallery')}}" />
 							</a>
 						</div>

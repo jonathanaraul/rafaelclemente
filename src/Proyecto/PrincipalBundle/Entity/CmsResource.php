@@ -94,7 +94,12 @@ class CmsResource
      * @ORM\Column(name="date_updated", type="datetime", nullable=true)
      */
     private $dateUpdated;
-
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="friendly_name", type="string", length=255, nullable=false)
+     */
+    private $friendlyName;
 
 	/**
 	 * @Assert\File(maxSize="6000000")
@@ -342,6 +347,29 @@ class CmsResource
     public function getDateUpdated()
     {
         return $this->dateUpdated;
+    }
+
+    /**
+     * Set friendlyName
+     *
+     * @param string $friendlyName
+     * @return CmsResource
+     */
+    public function setFriendlyName($friendlyName)
+    {
+        $this->friendlyName = $friendlyName;
+    
+        return $this;
+    }
+
+    /**
+     * Get friendlyName
+     *
+     * @return string 
+     */
+    public function getFriendlyName()
+    {
+        return $this->friendlyName;
     }
 	
 		/**

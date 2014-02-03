@@ -531,6 +531,12 @@ a, a:link, a:hover, a:active, a:visited{
 
 @media screen and (max-width:970px){
 
+    .galeria-normal{
+        display: none;
+    }
+    .galeria-mobile{
+        display: block;
+    }
     .menu-hidden{
         #display: table-cell;
         #width: 10%;

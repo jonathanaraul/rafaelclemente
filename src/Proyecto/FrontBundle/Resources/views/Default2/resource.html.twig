@@ -1,0 +1,64 @@
+{% extends "ProyectoFrontBundle:Helpers2:body.html.twig" %}
+
+{%block contenido%}
+<input type="hidden" id="tipopagina" value="page0">
+	<div class="content">
+		<div class="content-left">
+			<!--IMAGEN DE PAGINA-->
+			<div id="contenidoImagen">
+				<p style="text-align:center;">
+					<a title="{{media.name|title}}" rel="lightbox" 
+				href="{%if  media is not null%}{{ media.getWebPath | apply_filter('my_thumb3') }}{%endif%}">
+						<img alt="{{media.name|title}}"  src="{%if  media is not null%}{{ media.getWebPath | apply_filter('my_thumb2') }}{%endif%}" class="imagen-pagina" width="470" height="392">
+					</a>
+				</p>
+			</div>
+			<div class="art-content-pag galeria-normal" style="padding-top: 20px;float: right;">
+				{%if prev is not null%}
+				<span class="artwork-previous">
+                      <a title="PREV" href="{{prev}}">PREV</a>            
+                 </span>
+                 {%endif%}
+                 {%if next is not null%}
+                <span class="artwork-next">
+                    <a title="NEXT" href="{{next}}">NEXT</a>
+                </span>
+                {%endif%}
+			</div>
+			<div class="contenidoOculto">
+				{%if page is not null%}
+					<h3 class="titulo-pagina">{{page.name|upper}}</h3>
+					<h4>{{page.subtitle|upper}}</h4>
+					<h4>{{page.year}}</h4>
+					<div class="top-margin">
+						{{page.content|raw}}
+					</div>
+				{%endif%}
+				{%if prev is not null%}
+					<span class="artwork-previous galeria-mobile" style="text-align: right;">
+	                      <a title="PREV" href="{{prev}}">PREV</a>            
+	                 </span>
+	            {%endif%}
+	            {%if next is not null%}
+	                <span class="artwork-next galeria-mobile" style="text-align: right;">
+	                    <a title="NEXT" href="{{next}}">NEXT</a>
+	                </span>
+				{%endif%}
+				<div class="content-line"></div>
+			</div>
+		</div>
+		<div class="content-right">
+			{%if page is not null%}
+				<h3 class="titulo-pagina">{{page.name|upper}}</h3>
+				<h4>{{page.subtitle}}</h4>
+				<h4>{{page.year}}</h4>
+				<div class="top-margin">
+					{{page.content|raw}}
+				</div>
+			{%endif%}
+		</div>
+	</div>
+	<div class="page-holder">
+		<div class="content-line"></div>
+	</div>
+{%endblock%}

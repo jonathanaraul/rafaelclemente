@@ -1,8 +1,8 @@
 {% extends "ProyectoPrincipalBundle:Helpers:baseInterna.html.twig" %}
 {%block js%}
 <script type="text/javascript">
-var eliminarPagina = '{{path('proyecto_principal_page_delete')}}';
-var cambiarStatusPagina = '{{path('proyecto_principal_page_status')}}';
+var eliminarTextoRecurso = '{{path('proyecto_principal_text_resource_delete')}}';
+var cambiarStatusTextoRecurso = '{{path('proyecto_principal_text_resource_status')}}';
 
 </script>
 {%endblock%}
@@ -25,12 +25,6 @@ var cambiarStatusPagina = '{{path('proyecto_principal_page_status')}}';
 						</div>
 					</div>
 					<div class="form-row">
-						<label for="published">{% trans %}Especial{% endtrans %}:</label>
-						<div class="content">
-							{{ form_widget(form.special, { 'attr': {'class': 'theme_toggle'} }) }}
-						</div>
-					</div>
-					<div class="form-row">
 						<label for="published">{% trans %}Publicado{% endtrans %}:</label>
 						<div class="content">
 							{{ form_widget(form.published, { 'attr': {'class': 'theme_toggle'} }) }}
@@ -39,7 +33,7 @@ var cambiarStatusPagina = '{{path('proyecto_principal_page_status')}}';
 				</fieldset>
 				<ul class="sf_admin_actions">
 					<li>
-						<input class="sf_admin_action_reset_filter" value="{% trans %}Mostrar todo{% endtrans %}" type="button" onclick="document.location.href='{{path('proyecto_principal_page_list')}}';">
+						<input class="sf_admin_action_reset_filter" value="{% trans %}Mostrar todo{% endtrans %}" type="button" onclick="document.location.href='{{path('proyecto_principal_text_resource_list')}}';">
 					</li>
 					<li>
 						<input type="submit" name="filter" value="{% trans %}Filtro{% endtrans %}" >
@@ -59,26 +53,23 @@ var cambiarStatusPagina = '{{path('proyecto_principal_page_status')}}';
 					<th id="sf_admin_list_th_page_id">
 						{{ knp_pagination_sortable(pagination, 'Id', 'n.id') }}
 						</th>
-					<th id="sf_admin_list_th_name">
-						{{ knp_pagination_sortable(pagination, 'Nombre'|trans, 'n.name') }}
-					</th>
-					<th id="sf_admin_list_th_parent_page_id">
-						{{ knp_pagination_sortable(pagination, 'Nombre Amigable'|trans, 'n.friendlyName') }}
-					</th>
 					<th id="sf_admin_list_th_media_id">
 						{{ knp_pagination_sortable(pagination, 'Imagen'|trans, 'n.resource') }}
 					</th>
+					<th id="sf_admin_list_th_name">
+						{{ knp_pagination_sortable(pagination, 'Nombre'|trans, 'n.name') }}
+					</th>
+				
 					<th id="sf_admin_list_th_published">
 						{{ knp_pagination_sortable(pagination, 'Publicado'|trans, 'n.published') }}
-						
-						</th>
+					</th>
 					<th id="sf_admin_list_th_sf_actions">{% trans %}Acciones{% endtrans %}</th>
 				</tr>
 			</thead>
 
 			<tbody>
 				{%for object in objects%}
-					{% include 'ProyectoPrincipalBundle:Page:List-Element.html.twig' with {'object': object} %}
+					{% include 'ProyectoPrincipalBundle:TextResource:List-Element.html.twig' with {'object': object} %}
 				{%endfor%}
 			</tbody>
 			<tfoot>
@@ -99,10 +90,7 @@ var cambiarStatusPagina = '{{path('proyecto_principal_page_status')}}';
 		
 		<ul class="sf_admin_actions">
 			<li>
-				<input class="sf_admin_action_create" value="{% trans %}Añadir{% endtrans %}" type="button" onclick="document.location.href='{{path('proyecto_principal_page_create')}}';">
-			</li>
-			<li>
-				<input class="sf_admin_action_rank" value="{% trans %}Determinar orden{% endtrans %}" type="button" onclick="document.location.href='{{path('proyecto_principal_page_rank')}}';">
+				<input class="sf_admin_action_create" value="{% trans %}Añadir{% endtrans %}" type="button" onclick="document.location.href='{{path('proyecto_principal_text_resource_create')}}';">
 			</li>
 		</ul>
 	</div>
@@ -118,7 +106,7 @@ jQuery('.eliminar').click(function() {
 	
 	jQuery.ajax({
 		type : "POST",
-		url : eliminarPagina,
+		url : eliminarTextoRecurso,
 		data : data,
 		dataType : "json",
 		success : function(data) {
@@ -146,7 +134,7 @@ jQuery('.eliminar').click(function() {
  	}
 	jQuery.ajax({
 		type : "POST",
-		url : cambiarStatusPagina,
+		url : cambiarStatusTextoRecurso,
 		data : data,
 		dataType : "json",
 		success : function(data) {

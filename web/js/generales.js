@@ -33,7 +33,7 @@ function ajustaDimensiones(){
 
 	var dimension = $( window ).width();
 	var tipoPagine = $('#tipopagina').val();
-
+	console.log('La dimension es '+dimension);
 
 	if(dimension <= 566){
 		var nuevoTamanio = dimension*0.83;

@@ -161,6 +161,35 @@ proyecto_principal_gallery_status:
       _method: POST
       _locale:  es|en|fr|de|ch
 
+proyecto_principal_text_resource_list:
+    pattern:  /{_locale}/text/resouce/list
+    defaults: { _controller: ProyectoPrincipalBundle:TextResource:list }
+    requirements:
+        _locale:  es|en|fr|de|ch
+proyecto_principal_text_resource_create:
+    pattern:  /{_locale}/text/resouce/create
+    defaults: { _controller: ProyectoPrincipalBundle:TextResource:create }
+    requirements:
+        _locale:  es|en|fr|de|ch
+proyecto_principal_text_resource_edit:
+    pattern:  /{_locale}/text/resouce/edit/{id}
+    defaults: { _controller: ProyectoPrincipalBundle:TextResource:edit, id: '1' }
+    requirements:
+        _locale:  es|en|fr|de|ch
+proyecto_principal_text_resource_delete:
+    pattern:  /{_locale}/text/resouce/delete
+    defaults: { _controller: ProyectoPrincipalBundle:TextResource:delete }
+    requirements:
+      _method: POST
+      _locale:  es|en|fr|de|ch
+proyecto_principal_text_resource_status:
+    pattern:  /{_locale}/text/resouce/status
+    defaults: { _controller: ProyectoPrincipalBundle:TextResource:status }
+    requirements:
+      _method: POST
+      _locale:  es|en|fr|de|ch
+
+
 proyecto_principal_link_list:
     pattern:  /{_locale}/link/list
     defaults: { _controller: ProyectoPrincipalBundle:Link:list }

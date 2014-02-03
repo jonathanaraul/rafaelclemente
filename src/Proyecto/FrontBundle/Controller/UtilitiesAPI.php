@@ -5,6 +5,8 @@ namespace Proyecto\FrontBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\SecurityContext;
 use Proyecto\PrincipalBundle\Entity\CmsGalleryResource;
+use Proyecto\PrincipalBundle\Entity\CmsTextResource;
+
 
 use JMS\SecurityExtraBundle\Annotation\Secure;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -29,6 +31,42 @@ class UtilitiesAPI extends Controller {
 	const TIPO_CARTELERA = 1;
 	const TIPO_TALLERES = 2;
 
+	public static function  findTextResource($resource, $class){
+		//$locale = UtilitiesAPI::getLocale($class);
+		$em = $class->getDoctrine()->getManager();
+		$locale = UtilitiesAPI::getLocale($class);
+
+		$sql = 'SELECT d  FROM ProyectoPrincipalBundle:CmsTextResource d
+   	 					  WHERE 
+   	 					  		d.resource = :resource and
+   	 					  		d.lang      = :locale and
+   	 						    d.published = :published';
+	
+
+		
+		$query = $em -> createQuery($sql ) 
+		 	   -> setParameter('resource', $resource)
+    		   -> setParameter('locale', $locale)
+			   -> setParameter('published', 1);
+
+		$array = $query -> getResult();
+		if($array!=null)
+		$array = $array[count($array)-1];
+		else $array = null;
+		return $array;
+	}
+	public static function setFriendlyNameEntity($entity,$class){
+
+    	$em = $class->getDoctrine()->getManager();
+   		$objects = $em->getRepository('ProyectoPrincipalBundle:'.$entity) -> findAll();
+
+   		for ($i=0; $i < count($objects) ; $i++) { 
+   			$objects[$i]->setFriendlyName(UtilitiesAPI::getFriendlyName($objects[$i]->getName(),$class));
+   		}
+		//var_dump($objects);
+		//exit;
+		$em->flush();
+	}
 	public static function getGalleryResources($gallery, $class){
 		//$locale = UtilitiesAPI::getLocale($class);
 		$em = $class->getDoctrine()->getManager();
@@ -143,8 +181,12 @@ class UtilitiesAPI extends Controller {
 		
 		$request = $class->getRequest();
 		$locale = $request->getLocale();
+
 		if($locale=='es')return 0;
-		else return 1;
+		else if($locale=='en')return 1;
+		else if($locale=='fr')return 2;
+		else if($locale=='de')return 3;
+		else if($locale=='ch')return 4;
 		
 	}
 
