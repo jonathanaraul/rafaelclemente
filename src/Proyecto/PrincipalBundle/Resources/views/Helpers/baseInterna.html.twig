@@ -30,7 +30,6 @@
 					</a>
 				{%endif%}
 			</td>
-			{#
 			<td class="lang">
 				{%if app.request.locale == 'fr'%}
 					<b>
@@ -44,7 +43,33 @@
 					</a>
 				{%endif%}
 			</td>
-				#}
+			<td class="lang">
+				{%if app.request.locale == 'de'%}
+					<b>
+				{%else%}
+					<a href="{{path('proyecto_principal_homepage', {'_locale': 'de'})}}">
+				{%endif%}
+					DE
+				{%if app.request.locale == 'de'%}
+				</b>
+				{%else%}
+					</a>
+				{%endif%}
+			</td>
+			<td class="lang">
+				{%if app.request.locale == 'ch'%}
+					<b>
+				{%else%}
+					<a href="{{path('proyecto_principal_homepage', {'_locale': 'ch'})}}">
+				{%endif%}
+					CH
+				{%if app.request.locale == 'ch'%}
+				</b>
+				{%else%}
+					</a>
+				{%endif%}
+			</td>
+				
 			<td class="small_dots"><img src="{{asset('images/cms_yeslogo_small_dots.jpg')}}" alt="Cms_yeslogo_small_dots"></td>
 			<td id="small_letter"><img id="small_font" src="{{asset('images/cms_yeslogo_small_letter.jpg')}}" alt="Cms_yeslogo_small_letter"></td>
 			<td id="big_letter"><img id="big_font" src="{{asset('images/cms_yeslogo_big_letter.jpg')}}" alt="Cms_yeslogo_big_letter"></td>

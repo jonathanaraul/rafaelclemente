@@ -31,6 +31,19 @@ class UtilitiesAPI extends Controller {
 	const TIPO_CARTELERA = 1;
 	const TIPO_TALLERES = 2;
 
+	public static function getLocale($class){
+		
+		$request = $class->getRequest();
+		$locale = $request->getLocale();
+
+		if($locale=='es')return 0;
+		else if($locale=='en')return 1;
+		else if($locale=='fr')return 2;
+		else if($locale=='de')return 3;
+		else if($locale=='ch')return 4;
+		
+	}
+
 	public static function  findTextResource($resource, $class){
 		//$locale = UtilitiesAPI::getLocale($class);
 		$em = $class->getDoctrine()->getManager();
@@ -177,18 +190,7 @@ class UtilitiesAPI extends Controller {
 	
 	return $listado;
 	}
-	public static function getLocale($class){
-		
-		$request = $class->getRequest();
-		$locale = $request->getLocale();
 
-		if($locale=='es')return 0;
-		else if($locale=='en')return 1;
-		else if($locale=='fr')return 2;
-		else if($locale=='de')return 3;
-		else if($locale=='ch')return 4;
-		
-	}
 
 	public static function getFriendlyName($title,$class){
 		$friendlyName = strtolower($title);
@@ -197,6 +199,11 @@ class UtilitiesAPI extends Controller {
 		$friendlyName =  str_replace("í", "i", $friendlyName);
 		$friendlyName =  str_replace("ó", "o", $friendlyName);
 		$friendlyName =  str_replace("ú", "u", $friendlyName);
+		$friendlyName =  str_replace("ä", "a", $friendlyName);
+		$friendlyName =  str_replace("ë", "e", $friendlyName);
+		$friendlyName =  str_replace("ï", "i", $friendlyName);
+		$friendlyName =  str_replace("ö", "o", $friendlyName);
+		$friendlyName =  str_replace("ü", "u", $friendlyName);
 		$friendlyName =  str_replace("'", "", $friendlyName);
 		$friendlyName =  str_replace('"', "", $friendlyName);
 		$friendlyName =  str_replace("ñ", "n", $friendlyName);
@@ -215,7 +222,7 @@ class UtilitiesAPI extends Controller {
 		$friendlyName =  str_replace("   ", " ", $friendlyName);
 		$friendlyName =  str_replace("  ", " ", $friendlyName);
 		$friendlyName =  str_replace(" ", "-", $friendlyName);
-		
+
 		return $friendlyName;
 	}
 	public static function sendMail($nombreEvento,$datosUsuario,$class)

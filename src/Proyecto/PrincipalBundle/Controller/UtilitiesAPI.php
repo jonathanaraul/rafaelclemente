@@ -12,7 +12,19 @@ use Proyecto\PrincipalBundle\Entity\Sistema;
 use Proyecto\PrincipalBundle\Entity\Proyecto;
 
 class UtilitiesAPI extends Controller {
+
+	public static function getLocale($class){
 		
+		$request = $class->getRequest();
+		$locale = $request->getLocale();
+
+		if($locale=='es')return 0;
+		else if($locale=='en')return 1;
+		else if($locale=='fr')return 2;
+		else if($locale=='de')return 3;
+		else if($locale=='ch')return 4;
+		
+	}
 	public static function getGalleryResources($gallery,$class){
 		$locale = UtilitiesAPI::getLocale($class);
 	
@@ -139,14 +151,7 @@ class UtilitiesAPI extends Controller {
 		
 		return $recordCount + 1;
 	}
-	public static function getLocale($class){
-		
-		$request = $class->getRequest();
-		$locale = $request->getLocale();
-		if($locale=='es')return 0;
-		else return 1;
-		
-	}
+
 	public static function getConfig($type,$class){
 
 		$array =  array( );
@@ -421,6 +426,11 @@ class UtilitiesAPI extends Controller {
 		$friendlyName =  str_replace("í", "i", $friendlyName);
 		$friendlyName =  str_replace("ó", "o", $friendlyName);
 		$friendlyName =  str_replace("ú", "u", $friendlyName);
+		$friendlyName =  str_replace("ä", "a", $friendlyName);
+		$friendlyName =  str_replace("ë", "e", $friendlyName);
+		$friendlyName =  str_replace("ï", "i", $friendlyName);
+		$friendlyName =  str_replace("ö", "o", $friendlyName);
+		$friendlyName =  str_replace("ü", "u", $friendlyName);
 		$friendlyName =  str_replace("'", "", $friendlyName);
 		$friendlyName =  str_replace('"', "", $friendlyName);
 		$friendlyName =  str_replace("ñ", "n", $friendlyName);
@@ -439,7 +449,7 @@ class UtilitiesAPI extends Controller {
 		$friendlyName =  str_replace("   ", " ", $friendlyName);
 		$friendlyName =  str_replace("  ", " ", $friendlyName);
 		$friendlyName =  str_replace(" ", "-", $friendlyName);
-		
+
 		return $friendlyName;
 	}
 	/*
