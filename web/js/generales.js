@@ -14,7 +14,50 @@ $( document ).ready(function() {
   	ajustaDimensiones();
   //}
 });
+$('.siguiente').live("click", function() {
+	$('.art-cell').remove();
+	$('#loader').css('display','block');
+	$('.art-content-pag').empty();
 
+	var pagina = $(this).attr('pagina');
+	var galeria = $(this).attr('galeria');
+	var data = 'pagina='+pagina+'&galeria='+galeria;
+
+	$.post(direccionActualizaGaleria, data, function(data) {
+		
+		var obj = JSON.parse(data);
+		$('#loader').remove();
+
+		$('.art-row').append(obj.htmlRecursos);
+		$('.art-content-pag').append(obj.htmlPaginacion);
+		
+		//console.dir(obj);
+		return false;
+
+	});
+
+});
+
+$('.expo-paginacion').live("click", function() {
+	$('.ex-cont').remove();
+	$('.ex-navigation').remove();
+	$('#loader').css('display','block');
+	
+
+	var pagina = $(this).attr('pagina');
+	var data = 'pagina='+pagina;
+
+	$.post(direccionActualizaExposiciones, data, function(data) {
+		
+		var obj = JSON.parse(data);
+		$('#loader').remove();
+		$('.ex-container').append(obj.htmlRecursos);
+		
+		return false;
+
+	});
+
+});
 $('#botonReservaciones').live("click", function() {
 	var prueba = true;
 	$.each($(".form-reservacion"), function(indice, valor) {

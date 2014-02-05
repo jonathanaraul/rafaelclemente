@@ -358,6 +358,8 @@ a, a:link, a:hover, a:active, a:visited{
 
 .ex-container{
     position: relative;
+    height: 458px;
+    width: 294px;
 }
 
 .ex-cont{

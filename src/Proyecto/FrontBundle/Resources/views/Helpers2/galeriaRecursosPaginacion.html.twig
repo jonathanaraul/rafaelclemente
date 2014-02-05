@@ -1,0 +1,6 @@
+{%if paginator.prev is not null%}
+	<span class="art-next p-2 pa-1 siguiente" pagina="{{paginator.prev}}" galeria="{{paginator.gallery}}">PREV</span>
+{%endif%}
+{%if paginator.next is not null%}
+	<span class="art-next p-2 pa-1 siguiente" pagina="{{paginator.next}}" galeria="{{paginator.gallery}}">NEXT</span>
+{%endif%}

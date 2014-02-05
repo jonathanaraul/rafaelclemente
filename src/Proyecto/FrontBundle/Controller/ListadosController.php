@@ -16,7 +16,52 @@ use Proyecto\PrincipalBundle\Entity\CmsPage;
 
 class ListadosController extends Controller {
 
-	const tamanio = 3;
+	const tamanio = 4;
+
+	public static function getGalleryResources($gallery, $class){
+		//$locale = UtilitiesAPI::getLocale($class);
+		$em = $class->getDoctrine()->getManager();
+
+		$query = $em -> createQuery('SELECT r
+    								 FROM ProyectoPrincipalBundle:CmsGalleryResource d,
+    								      ProyectoPrincipalBundle:CmsResource r
+   	 								 WHERE d.gallery      = :gallery
+   	 								  and  d.resource = r.id
+   	 								  and  r.published = :published
+    								 ORDER BY d.rank ASC') 
+    		   
+    		   -> setParameter('gallery', $gallery)
+    		   -> setParameter('published', 1);
+		$array = $query -> getResult();
+
+		$numeroPagina = 0;
+
+		$paginator = $class -> get('knp_paginator');
+		$pagination = $paginator -> paginate($query, $class -> getRequest() -> query -> get('page', $numeroPagina), ListadosController::tamanio
+		);
+
+		//$array = UtilitiesAPI::devuelveRecursosExistentes($array,$class);
+		$array['resources'] = $pagination -> getItems();
+		var_dump($array['resources']);
+		exit;
+		
+
+		$array['izquierda'] =  $numeroPagina - 1;
+		$array['derecha'] =  $numeroPagina + 1;
+		
+		$dataPaginacion = $pagination->getPaginationData();
+		
+		if($array['derecha'] > $dataPaginacion['pageRange']) $array['derecha'] =0;
+		
+		for($i=0;$i<count($array['articles']);$i++){
+			$array['images'][$i] = $class -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsResource') -> find($array['articles'][$i]->getMedia()); 
+			$array['articles'][$i]->setContent( substr ( $array['articles'][$i]->getContent() , 0, 300 ) .'...');
+												   }
+		return $array;
+
+
+		return $array;
+	}
 	public function noticiasAction() {
 			
 		$peticion = $this -> getRequest();
@@ -35,130 +80,7 @@ class ListadosController extends Controller {
 			return $respuesta;
 		}
 	}
-	public function carteleraAction() {
-					
-		$peticion = $this -> getRequest();
-		$doctrine = $this -> getDoctrine();
-		$post = $peticion -> request;
-		$fecha = $post -> get("valor");
-		$type = UtilitiesAPI::TIPO_CARTELERA;
-		
-		if(!isset($fecha)){
-			$fecha =  UtilitiesAPI::fechaInicioFin(UtilitiesAPI::fechaHoy($this),$this);
-			return $this -> render('ProyectoFrontBundle:Default:generico.html.twig',  ListadosController::contenidoGenerico($fecha,$type,$this));
-		}
-		else{
-			$fecha =  UtilitiesAPI::fechaInicioFin($fecha,$this);
-			$html = $this -> renderView('ProyectoFrontBundle:Default:generico.html.twig', ListadosController::contenidoGenerico($fecha,$type,$this));
-			$respuesta = new response(json_encode(array('variable'=>$html)));
-			$respuesta -> headers -> set('content_type', 'aplication/json');
-			return $respuesta;
-		}
-	}
-	public function talleresAction() {
-					
-		$peticion = $this -> getRequest();
-		$doctrine = $this -> getDoctrine();
-		$post = $peticion -> request;
-		$fecha = $post -> get("valor");
-		$type = UtilitiesAPI::TIPO_TALLERES;
-		
-		if(!isset($fecha)){
-			$fecha =  UtilitiesAPI::fechaInicioFin(UtilitiesAPI::fechaHoy($this),$this);
-			return $this -> render('ProyectoFrontBundle:Default:generico.html.twig',  ListadosController::contenidoGenerico($fecha,$type,$this));
-		}
-		else{
-			$fecha =  UtilitiesAPI::fechaInicioFin($fecha,$this);
-			$html = $this -> renderView('ProyectoFrontBundle:Default:generico.html.twig', ListadosController::contenidoGenerico($fecha,$type,$this));
-			$respuesta = new response(json_encode(array('variable'=>$html)));
-			$respuesta -> headers -> set('content_type', 'aplication/json');
-			return $respuesta;
-		}
-	}
-	public function calendarioAction() {
-			
-		$peticion = $this -> getRequest();
-		$doctrine = $this -> getDoctrine();
-		$post = $peticion -> request;
-		$fecha = $post -> get("valor");
-		$type = array(UtilitiesAPI::TIPO_CARTELERA,UtilitiesAPI::TIPO_TALLERES ) ;
-		
-		if(!isset($fecha)){
-			$fecha =  UtilitiesAPI::fechaInicioFin(UtilitiesAPI::fechaHoy($this),$this);
-			return $this -> render('ProyectoFrontBundle:Default:generico.html.twig',  ListadosController::contenidoCalendario($fecha,$type,$this));
-		}
-		else{
-			$fecha =  UtilitiesAPI::fechaInicioFin($fecha,$this);
-			$html = $this -> renderView('ProyectoFrontBundle:Default:generico.html.twig', ListadosController::contenidoCalendario($fecha,$type,$this));
-			$respuesta = new response(json_encode(array('variable'=>$html)));
-			$respuesta -> headers -> set('content_type', 'aplication/json');
-			return $respuesta;
-		}		
 
-	}
-	public function contenidoCalendario($fecha,$type,$class){	
-		$em = $class -> getDoctrine() -> getEntityManager();	
-		
-		$dql = "SELECT n
-		        FROM ProyectoPrincipalBundle:CmsDate n, 
-		             ProyectoPrincipalBundle:CmsArticle a
-		        WHERE n.date >= :fecha1 
-		          and n.date <= :fecha2 
-		          and n.article = a.id
-		          and a.published = :published
-		          and a.lang = :lang
-		          and (a.type = :type1 or a.type = :type2)
-		        ORDER by n.date ASC";
-		
-		$query = $em -> createQuery($dql);
-		
-		$query -> setParameter('fecha1', $fecha['inicio']);
-		$query -> setParameter('fecha2', $fecha['fin']);
-		$query -> setParameter('type1', $type[0]);
-		$query -> setParameter('type2', $type[1]);
-		$query -> setParameter('published', 1);
-		$query -> setParameter('lang', UtilitiesAPI::getLocale($this));
-		
-		$array['articles'] = $query -> getResult();
-
-		for($i=0;$i<count($array['articles']);$i++){
-				$array['images'][$i] = $class -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsResource') -> find($array['articles'][$i]->getArticle()->getMedia()); 
-				$array['articles'][$i]->getArticle()->setContent( substr ( $array['articles'][$i]->getArticle()->getContent() , 0, 300 ) .'...');
-         }
-
-		return $array;
-	}
-	public function contenidoGenerico($fecha,$type,$class){	
-		$em = $class -> getDoctrine() -> getEntityManager();	
-		
-		$dql = "SELECT n
-		        FROM ProyectoPrincipalBundle:CmsDate n, 
-		             ProyectoPrincipalBundle:CmsArticle a
-		        WHERE n.date >= :fecha1 
-		          and n.date <= :fecha2 
-		          and n.article = a.id
-		          and a.published = :published
-		          and a.lang = :lang
-		          and a.type = :type1
-		        ORDER by n.date ASC";
-		
-		$query = $em -> createQuery($dql);
-		
-		$query -> setParameter('fecha1', $fecha['inicio']);
-		$query -> setParameter('fecha2', $fecha['fin']);
-		$query -> setParameter('type1', $type);
-		$query -> setParameter('published', 1);
-		$query -> setParameter('lang', UtilitiesAPI::getLocale($this));
-		
-		$array['articles'] = $query -> getResult();
-
-		for($i=0;$i<count($array['articles']);$i++){
-				$array['images'][$i] = $class -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsResource') -> find($array['articles'][$i]->getArticle()->getMedia()); 
-				$array['articles'][$i]->getArticle()->setContent( substr ( $array['articles'][$i]->getArticle()->getContent() , 0, 450 ) .'...');
-         }
-
-		return $array;
-	}
 	public function contenidoNoticias($numeroPagina,$class){
 			
 		$em = $class -> getDoctrine() -> getEntityManager();	

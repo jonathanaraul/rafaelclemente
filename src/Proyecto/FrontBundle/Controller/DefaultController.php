@@ -20,6 +20,9 @@ use Proyecto\PrincipalBundle\Entity\CmsResource;
 
 class DefaultController extends Controller {
 
+	const tamanioGaleria = 11;
+	const tamanioPagina = 3;
+
 	public function indexAction() {
 
 	 return $this->redirect($this->generateUrl('proyecto_front_homepage',array('_locale' => 'es')));
@@ -34,6 +37,64 @@ class DefaultController extends Controller {
 		$array = array_merge($firstArray, $secondArray);
 		return $this -> render('ProyectoFrontBundle:Default2:inicio.html.twig', $array);
 	}
+	public function actualizaGaleriaAction(){
+		$peticion = $this -> getRequest();
+		$doctrine = $this -> getDoctrine();
+		$post = $peticion -> request;
+		$em = $this -> getDoctrine() -> getManager();
+
+		//INICIALIZAR VARIABLES
+
+		$numeroPagina = $post -> get("pagina");
+		$galeria = $post -> get("galeria");
+
+		$secondArray = array();
+		//$numeroPagina = 0;
+		$secondArray['gallery'] = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsGallery') -> find($galeria);
+		$secondArray['galleryResources'] = UtilitiesAPI::getGalleryResources($galeria, $this);
+		$secondArray['paginator'] = array('next'=>null,'prev'=>null,
+										      'numeroPagina'=>$numeroPagina,
+											  'tamanio'=>DefaultController::tamanioGaleria,
+											  'gallery'=>$galeria); 
+
+		if(count($secondArray['galleryResources'])>DefaultController::tamanioGaleria){
+			
+			if($numeroPagina>0)
+				$secondArray['paginator']['prev'] = $numeroPagina - 1;
+
+			$limiteSuperior = ($numeroPagina  * DefaultController::tamanioGaleria) + DefaultController::tamanioGaleria;
+
+			if(count($secondArray['galleryResources'])>$limiteSuperior)
+				$secondArray['paginator']['next'] = $numeroPagina + 1;
+
+			$secondArray['galleryResources'] = UtilitiesAPI::recortaArray($secondArray['galleryResources'],$secondArray['paginator'], $this);
+
+		}
+		$htmlRecursos = $this -> renderView('ProyectoFrontBundle:Helpers2:galeriaRecursos.html.twig', $secondArray);
+		$htmlPaginacion = $this -> renderView('ProyectoFrontBundle:Helpers2:galeriaRecursosPaginacion.html.twig', $secondArray);
+
+		$estado = true;
+		$respuesta = new response(json_encode(array('htmlRecursos' => $htmlRecursos,'htmlPaginacion' => $htmlPaginacion)));
+		$respuesta -> headers -> set('content_type', 'aplication/json');
+		return $respuesta;
+	}
+	public function actualizaExposicionesAction() {
+			
+		$peticion = $this -> getRequest();
+		$doctrine = $this -> getDoctrine();
+		$post = $peticion -> request;
+		$numeroPagina = $post -> get("pagina");
+
+		$secondArray = array();
+
+		$secondArray['exhibitions'] = UtilitiesAPI::getExhibitions($numeroPagina,DefaultController::tamanioPagina,$this);
+
+		$html = $this -> renderView('ProyectoFrontBundle:Helpers2:exposiciones.html.twig', $secondArray);
+		$respuesta = new response(json_encode(array('htmlRecursos'=>$html)));
+		$respuesta -> headers -> set('content_type', 'aplication/json');
+		return $respuesta;
+		
+	}
 	public function pageAction($id,$friendlyname) {
 		
 		$firstArray = UtilitiesAPI::getDefaultContent('contacto', $this);
@@ -46,11 +107,28 @@ class DefaultController extends Controller {
 		$secondArray['exhibitions'] = null;
 		
 		if(is_null($secondArray['gallery'])==false){
+			$numeroPagina = 0;
 			$secondArray['galleryResources'] = UtilitiesAPI::getGalleryResources($secondArray['gallery']->getId(), $this);
+			$secondArray['paginator'] = array('next'=>null,'prev'=>null,
+										      'numeroPagina'=>$numeroPagina,
+											  'tamanio'=>DefaultController::tamanioGaleria,
+											  'gallery'=>$secondArray['gallery']->getId()); 
+
+			if(count($secondArray['galleryResources'])>15){
+				if($numeroPagina>0)
+					$secondArray['paginator']['prev'] = $numeroPagina - 1;
+
+				$limiteSuperior = ($numeroPagina  * DefaultController::tamanioGaleria) + DefaultController::tamanioGaleria;
+
+				if(count($secondArray['galleryResources'])>$limiteSuperior)
+					$secondArray['paginator']['next'] = $numeroPagina + 1;
+
+				$secondArray['galleryResources'] = UtilitiesAPI::recortaArray($secondArray['galleryResources'],$secondArray['paginator'], $this);
+			}
 		}
 		
 		if($secondArray['page']->getScheme()==1){
-			$secondArray['exhibitions'] = UtilitiesAPI::getExhibitions($this);
+			$secondArray['exhibitions'] = UtilitiesAPI::getExhibitions(1,DefaultController::tamanioPagina,$this);
 		}
 
 		$template  = $secondArray['page']->getTemplate();

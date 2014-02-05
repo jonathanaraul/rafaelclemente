@@ -31,6 +31,20 @@ class UtilitiesAPI extends Controller {
 	const TIPO_CARTELERA = 1;
 	const TIPO_TALLERES = 2;
 
+	public static function recortaArray($array,$paginacion,$class){
+
+		$helper =  array( );
+		$indice = $paginacion['numeroPagina'] * $paginacion['tamanio'];
+		//if($indice >0) $indice--;
+
+		for($i=0;($i<$paginacion['tamanio']&& $indice<count($array));$i++){
+			$helper[$i] = $array[$indice];
+			$indice++;
+		}
+
+		return $helper;
+	}
+
 	public static function getLocale($class){
 		
 		$request = $class->getRequest();
@@ -116,7 +130,7 @@ class UtilitiesAPI extends Controller {
 
 		return $helper;
 	}
-	public static function getExhibitions($class){
+	public static function getExhibitions($pagina,$limite,$class){
 		$locale = UtilitiesAPI::getLocale($class);
 	
 		$em = $class->getDoctrine()->getManager();
@@ -129,7 +143,19 @@ class UtilitiesAPI extends Controller {
     		   -> setParameter('locale', $locale)
 			   -> setParameter('published', 1);
 
-		$array = $query -> getResult();
+		$paginator = $class -> get('knp_paginator');
+		$pagination = $paginator -> paginate($query, $class -> getRequest() -> query -> get('page', $pagina), $limite);
+
+		$array['articles'] = $pagination -> getItems();
+		$array['izquierda'] =  $pagina - 1;
+		$array['derecha'] =  $pagina + 1;
+		
+		$dataPaginacion = $pagination->getPaginationData();
+		
+		if($array['derecha'] > $dataPaginacion['pageRange']) $array['derecha'] =0;
+
+		
+
 		
 		return $array;
 	}

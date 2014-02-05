@@ -1,4 +1,13 @@
 {% extends "ProyectoFrontBundle:Helpers2:body.html.twig" %}
+{%block js%}
+	{%if gallery  is not null %}
+	var direccionActualizaGaleria = '{{path('proyecto_front_actualiza_galeria')}}';
+	{%endif%}
+	{%if page.scheme != 0 %}
+	var direccionActualizaExposiciones = '{{path('proyecto_front_actualiza_exposiciones')}}';
+	{%endif%}
+{%endblock%}
+
 
 {%block contenido%}
 <input type="hidden" id="tipopagina" value="page0">
@@ -18,16 +27,10 @@
 			<!--GALERIA DE IMAGENES-->
 			<div class="art-content">
 				<div class="art-row">
-				{%for element in galleryResources%}
-						<div class="art-cell">
-							<a title="{{element.getFriendlyName}}" href="{{path('proyecto_front_resource',{'galerianombre': gallery.getFriendlyName, 'idgaleria' : gallery.getId, 'recursonombre' :element.getFriendlyName , 'idrecurso' :element.getId})}}">
-								<img alt="{{element.getFriendlyName}}" src="{{element.getWebPath | apply_filter('front_gallery')}}" width="90" height="90"/>
-							</a>
-						</div>
-				{%endfor%}
+					{% include 'ProyectoFrontBundle:Helpers2:galeriaRecursos.html.twig' with { 'galleryResources': galleryResources} %}
 				</div>
-				<div class="art-content-pag" style="display:none">
-					<span class="art-next p-2 pa-1">NEXT</span>
+				<div class="art-content-pag">
+					{% include 'ProyectoFrontBundle:Helpers2:galeriaRecursosPaginacion.html.twig' with { 'paginator': paginator} %}
 				</div>
 			</div>
 			{%endif%}
@@ -39,25 +42,7 @@
 				</div>
 				{%else%}
 					<div class="ex-container">
-						{%for element in exhibitions%}
-						<div class="ex-cont">
-							<p class="name">
-								{{element.name|title}}
-							</p>
-							<p class="date">
-								{{element.date|date("Y/m/d")}}
-							</p>
-							<p class="name">
-								{{element.place|title}}
-							</p>
-							<div class="desc">
-								{{element.content|raw}}
-							</div>
-						</div>
-						{%endfor%}
-						<div class="ex-navigation" style="display:none;">
-							<span class="ex-next p-2 pa-4">NEXT</span>
-						</div>
+						{% include 'ProyectoFrontBundle:Helpers2:exposiciones.html.twig' with { 'exhibitions': exhibitions} %}
 					</div>
 				{%endif%}
 				<div class="content-line"></div>
@@ -71,25 +56,7 @@
 			</div>
 			{%else%}
 			<div class="ex-container">
-				{%for element in exhibitions%}
-				<div class="ex-cont">
-					<p class="name">
-						{{element.name|title}}
-					</p>
-					<p class="date">
-						{{element.date|date("Y/m/d")}}
-					</p>
-					<p class="name">
-						{{element.place|title}}
-					</p>
-					<div class="desc">
-						{{element.content|raw}}
-					</div>
-				</div>
-				{%endfor%}
-				<div class="ex-navigation" style="display:none;">
-					<span class="ex-next p-2 pa-4">NEXT</span>
-				</div>
+				{% include 'ProyectoFrontBundle:Helpers2:exposiciones.html.twig' with { 'exhibitions': exhibitions} %}
 			</div>
 			{%endif%}
 		</div>

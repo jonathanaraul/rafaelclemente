@@ -19,66 +19,7 @@ $(document).ready(function(){
 		obj.append(layer);
 	}
     
-    function artNavigation(){
-        $('.art-paging .art-next, .art-paging .art-prev').live('click', function(event){
-            var selected = $(this).attr('class').split(' ')[1].split('-')[1];
-            $(this).attr('class').split(' ')[2]
-            var selectedPage = $(this).attr('class').split(' ')[2].split('-')[1];
-            var target = $(".art-content");
-            $.ajax({
-                type: "POST",
-                url: HOST+"artwork/getArtworks",
-                data: {p_id: selected, page_id: selectedPage},
-                beforeSend: function(){
-                    createLayer($('.content-left'), 'layer');
-                },
-                success: function (data){
-                    target.empty().html(data).fadeIn();
-                    $('#layer').remove();
-                }
-            });
-        });
-    }
-    
-    function exNavigation(){
-        $('.ex-next, .ex-prev').live('click', function(event){
-            var selected = $(this).attr('class').split(' ')[1].split('-')[1];
-            var selectedPage = $(this).attr('class').split(' ')[2].split('-')[1];
-            var target = $(".ex-container");
-            $.ajax({
-                type: "POST",
-                url: HOST+"exhibition/getExhibitions",
-                data: {p_id: selected, page_id: selectedPage},
-                beforeSend: function(){
-                    createLayer($('.ex-container'), 'ex-layer');
-                },
-                success: function (data){
-                    target.empty().html(data).fadeIn();
-                    $('#layer').remove();
-                }
-            });
-        });
-    }
-    
-    function pressNavigation(){
-        $('.art-paging .press-next, .art-paging .press-prev').live('click', function(event){
-            var selected = $(this).attr('class').split(' ')[1].split('-')[1];
-            var selectedPage = $(this).attr('class').split(' ')[2].split('-')[1];
-            var target = $(".art-content");
-            $.ajax({
-                type: "POST",
-                url: HOST+"press/getPresss",
-                data: {p_id: selected, page_id: selectedPage},
-                beforeSend: function(){
-                    createLayer($('.content-left'), 'layer');
-                },
-                success: function (data){
-                    target.empty().html(data).fadeIn();
-                    $('#layer').remove();
-                }
-            });
-        });
-    }
+   
     
     function showLangs(){
         $('.langs-rel').hover(function(){

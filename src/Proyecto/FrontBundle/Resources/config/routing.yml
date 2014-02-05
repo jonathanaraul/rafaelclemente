@@ -7,6 +7,18 @@ proyecto_front_index:
     pattern:  /
     defaults: { _controller: ProyectoFrontBundle:Default:index }
 
+proyecto_front_actualiza_galeria:
+    pattern:  /{_locale}/actualiza/galeria
+    defaults: { _controller: ProyectoFrontBundle:Default:actualizaGaleria }
+    requirements:
+      _method: POST
+      _locale:  es|en|fr|de|ch
+proyecto_front_actualiza_exposiciones:
+    pattern:  /{_locale}/actualiza/exposiciones
+    defaults: { _controller: ProyectoFrontBundle:Default:actualizaExposiciones }
+    requirements:
+      _method: POST
+      _locale:  es|en|fr|de|ch
 proyecto_front_article:
     pattern:  /{_locale}/article/{id}
     defaults: { _controller: ProyectoFrontBundle:Default:article }
