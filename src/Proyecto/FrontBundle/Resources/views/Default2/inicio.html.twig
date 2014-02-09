@@ -5,7 +5,7 @@
 		<div id="main-page-slider-cont">
 			<div id="main-page-slider">
 				{%for element in gallery%}
-					<img alt="{{element.name}}" src="{{ element.getWebPath | apply_filter('my_thumb2') }}" class="imagen-inicio"/>
+					<img alt="{{element.name}}" src="{{asset(''~ element.getWebPath~ '')}}" class="imagen-inicio" width="470"/>
 				{%endfor%}
 			</div>
 		</div>

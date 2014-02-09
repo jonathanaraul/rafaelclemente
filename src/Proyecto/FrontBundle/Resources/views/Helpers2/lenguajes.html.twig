@@ -5,7 +5,7 @@
 		{%elseif app.request.locale == 'en'%}EN
 		{%elseif app.request.locale == 'fr'%}FR
 		{%elseif app.request.locale == 'de'%}DE
-		{%elseif app.request.locale == 'ch'%}CH
+		{%elseif app.request.locale == 'ch'%}中文
 		{%endif%}
 		<div class="langs-rest">
 			{%if app.request.locale != 'es'%}
@@ -30,7 +30,7 @@
 			{%endif%}
 			{%if app.request.locale != 'ch'%}
 			<p>
-				<a href="{{path('proyecto_front_homepage', {'_locale': 'ch'})}}">CH</a>
+				<a href="{{path('proyecto_front_homepage', {'_locale': 'ch'})}}">中文</a>
 			</p>
 			{%endif%}
 		</div>
