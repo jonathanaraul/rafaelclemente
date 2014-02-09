@@ -27,7 +27,7 @@
 			<!--GALERIA DE IMAGENES-->
 			<div class="art-content">
 				<div class="art-row">
-					{% include 'ProyectoFrontBundle:Helpers2:galeriaRecursos.html.twig' with { 'galleryResources': galleryResources} %}
+					{% include 'ProyectoFrontBundle:Helpers2:galeriaRecursos.html.twig' with { 'idpage': idpage,'galleryResources': galleryResources} %}
 				</div>
 				<div class="art-content-pag">
 					{% include 'ProyectoFrontBundle:Helpers2:galeriaRecursosPaginacion.html.twig' with { 'paginator': paginator} %}
@@ -56,7 +56,7 @@
 			{%else%}
 			<div class="art-content">
 				<div class="art-row">
-					{% include 'ProyectoFrontBundle:Helpers2:galeriaRecursos.html.twig' with { 'galleryResources': galleryResources} %}
+					{% include 'ProyectoFrontBundle:Helpers2:galeriaRecursos.html.twig' with {'idpage': idpage, 'galleryResources': galleryResources} %}
 				</div>
 				<div class="art-content-pag">
 					{% include 'ProyectoFrontBundle:Helpers2:galeriaRecursosPaginacion.html.twig' with { 'paginator': paginator} %}

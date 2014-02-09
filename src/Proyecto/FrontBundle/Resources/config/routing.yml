@@ -24,17 +24,17 @@ proyecto_front_article:
     defaults: { _controller: ProyectoFrontBundle:Default:article }
     requirements:
         _locale:  es|en|fr|de|ch
+proyecto_front_resource:
+    pattern:  /{_locale}/{idpage}/{galerianombre}/{idgaleria}/{recursonombre}/{idrecurso}
+    defaults: { _controller: ProyectoFrontBundle:Default:resource, idpage: '1' }
+    requirements:
+        _locale:  es|en|fr|de|ch
 proyecto_front_page:
     pattern:  /{_locale}/{id}/{friendlyname}
     defaults: { _controller: ProyectoFrontBundle:Default:page }
     requirements:
         _locale:  es|en|fr|de|ch
 
-proyecto_front_resource:
-    pattern:  /{_locale}/{galerianombre}/{idgaleria}/{recursonombre}/{idrecurso}
-    defaults: { _controller: ProyectoFrontBundle:Default:resource }
-    requirements:
-        _locale:  es|en|fr|de|ch
 proyecto_front_cerrarsesion:
     pattern:  /logout
     defaults: { _controller: ProyectoFrontBundle:Default:inicio }

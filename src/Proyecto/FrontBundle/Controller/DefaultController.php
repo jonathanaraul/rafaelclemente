@@ -203,14 +203,13 @@ class DefaultController extends Controller {
 		return $this -> render('ProyectoFrontBundle:Default:article.html.twig', $array);
 	}
 	
-	public function resourceAction($galerianombre,$idgaleria,$recursonombre,$idrecurso){
+	public function resourceAction($idpage,$galerianombre,$idgaleria,$recursonombre,$idrecurso){
 
 		
 		$firstArray = UtilitiesAPI::getDefaultContent('contacto', $this);
 		$secondArray = array();
 		$secondArray['page'] = UtilitiesAPI::findTextResource($idrecurso, $this);
-		$secondArray['idpage'] = null;
-
+		$secondArray['idpage'] = $idpage;
 
 		$secondArray['media'] = $this -> getDoctrine() -> getRepository('ProyectoPrincipalBundle:CmsResource') -> find($idrecurso);
 		$galleryResources = UtilitiesAPI::getGalleryResources($idgaleria,$this);
